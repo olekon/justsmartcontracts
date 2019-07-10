@@ -107,7 +107,9 @@ class ContractsList extends React.Component {
                                 <Card 
                                     size='small' 
                                     onClick={() => this.props.onChangeContract(contract.name)} 
-                                    className={this.props.activeContract.address == contract.address ? styles.selectedContract : ''}
+                                    className={this.props.activeContract && this.props.activeContract.address == contract.address ? 
+                                        styles.selectedContract : 
+                                        ''}
                                     key={contract.address}
                                 > 
                                     <Card.Meta
