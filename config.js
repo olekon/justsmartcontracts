@@ -1,7 +1,7 @@
 module.exports = {
     //network selected by default if user's active network wasn't saved
     network: {
-        defaultNodeKey: 'Ropsten_Infura'
+        defaultNodeKey: 'Mainnet_Infura'
     },
 
     //defines which elements will be loaded from storage
