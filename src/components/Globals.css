@@ -1,0 +1,38 @@
+/* Colors */
+.backgroundPrimary {
+    background-color: #1890ff;   
+}
+
+.backgroundDark {
+    background-color: #003a8c; 
+}
+
+.textColorTitleLight {
+    color: #ffffff;
+}
+.textColorPrimaryLight {
+    color: #d8d8d8;
+}
+.textColorSecondaryLight {
+    color: #a5a5a5;
+}
+
+.textColorTitleDark {
+    color: #000000;
+}
+.textColorPrimaryDark {
+    color: #595959;
+}
+.textColorSecondaryDark {
+    color: #a5a5a5;
+}
+
+
+/* Containers */
+.staticInfo {
+    composes: textColorPrimaryDark;
+    margin: 30px 50px 50px 50px;
+    width: 60%;
+    font-size: 16px;
+    text-align: justify;
+}

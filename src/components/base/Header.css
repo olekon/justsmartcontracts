@@ -1,0 +1,28 @@
+.root {
+
+}
+
+.links {
+
+}
+
+.navlink {
+    composes: textColorTitleLight from '../Globals.css';
+    margin: 0px 20px 0px 20px; 
+    font-size: 20px;    
+}
+
+.headerLogo {
+    composes: textColorTitleLight from '../Globals.css';
+    font-size: 26px;
+}
+
+.headerLogo a {
+    color: inherit;
+    font-size: inherit;
+    text-decoration: none;
+}
+
+.headerLogo a:visited {
+    text-decoration: none;
+}

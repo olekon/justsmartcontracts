@@ -1,0 +1,14 @@
+.header {
+    composes: backgroundPrimary from '../Globals.css';
+    height: 60px;
+}
+
+.content {
+    min-height: 800px;
+}
+
+.footer {
+    background-color: #003a8c;
+    height: 100 px;
+    
+}
