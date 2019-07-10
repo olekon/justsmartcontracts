@@ -101,7 +101,7 @@ class Center extends React.Component {
                             onEditNode={this.editCustomNode}
                         />
                     </Col>
-                    <Col>
+                    <Col offset={gridConfig.NetworkSelectSpan}>
                         <Menu
                             onClick={this.handleMenuClick}
                             theme="light"
