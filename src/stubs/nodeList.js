@@ -4,7 +4,7 @@ let nodeList = [
         nodes : [
             {
                 name : "Infura",
-                key  : "mainnet_Infura",
+                key  : "Mainnet_Infura",
                 endpoint : "https://mainnet.infura.io/v3/66da5cb67dd949f585d950b0c588c06e",
                 id : "1",
             },
