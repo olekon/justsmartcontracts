@@ -3,12 +3,12 @@ import {storiesOf} from '@storybook/react';
 import {withState} from '@dump247/storybook-state';
 import {action, decorate, configureActions} from '@storybook/addon-actions';
 
-import AddressInput from '../components/AddressInput.jsx';
-import EtherInput from '../components/EtherInput.jsx';
-import BoolInput from '../components/BoolInput.jsx';
-import ContractInput from '../components/ContractInput.jsx';
-import CustomInput from '../components/CustomInput.jsx';
-import EventsInput, {Item as EventsInputItem} from '../components/EventInputs.jsx';
+import AddressInput from '../components/common/AddressInput.jsx';
+import EtherInput from '../components/common/EtherInput.jsx';
+import BoolInput from '../components/common/BoolInput.jsx';
+import ContractInput from '../components/common/ContractInput.jsx';
+import CustomInput from '../components/common/CustomInput.jsx';
+import EventsInput, {Item as EventsInputItem} from '../components/common/EventInputs.jsx';
 
 import contractList from '../stubs/contractListStub.js';
 

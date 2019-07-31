@@ -4,10 +4,10 @@ import {storiesOf} from '@storybook/react';
 import {withState} from '@dump247/storybook-state';
 import {action, configureActions} from '@storybook/addon-actions';
 
-import FormattedValue from '../components/FormattedValue.jsx';
-import SignedTransactionView from '../components/SignedTransactionView.jsx';
+import FormattedValue from '../components/common/FormattedValue.jsx';
+import SignedTransactionView from '../components/common/SignedTransactionView.jsx';
 import errorCodes from '../scripts/errorCodes.js';
-import * as message from '../components/errorMessage.js';
+import * as message from '../components/common/errorMessage.js';
 
 storiesOf('FormattedValue', module) 
     .add('different types', () => (
