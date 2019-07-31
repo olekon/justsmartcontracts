@@ -23,7 +23,7 @@ const Terms = props => (
         We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will try to provide at least 30 days notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.
         By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, please stop using the Service.
         <Title level={2}>Licensing</Title>
-        <Paragraph>MIT License Copyright © 2019 Oleg Kondrakhanov, Alexei Kuzmin</Paragraph>
+        <Paragraph>MIT License Copyright © 2019 Oleg Kondrakhanov, Alexey Kuzmin</Paragraph>
 
         <Paragraph>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
         furnished to do so, subject to the following conditions: </Paragraph>
