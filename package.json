@@ -7,6 +7,7 @@
   "license": "ISC",
   "scripts": {
     "dev": "webpack-dev-server --hot --open",
+    "devs": "webpack-dev-server --hot --open --https",
     "sb": "start-storybook -p 9001 -c .storybook",
     "build": "webpack"
   },
