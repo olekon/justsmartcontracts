@@ -167,7 +167,7 @@ storiesOf('EventsInput', module)
     );
 
 storiesOf('NetworkIdSelect', module)
-    .add('default', withState({value: 1}) (({store}) => (
+    .add('default', withState({value: '3'}) (({store}) => (
             <NetworkIdSelect
                 onChange={value => store.set({value})}
                 value={store.state.value}
