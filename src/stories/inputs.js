@@ -8,6 +8,7 @@ import EtherInput from '../components/common/EtherInput.jsx';
 import BoolInput from '../components/common/BoolInput.jsx';
 import ContractInput from '../components/common/ContractInput.jsx';
 import CustomInput from '../components/common/CustomInput.jsx';
+import NetworkIdSelect from '../components/common/NetworkIdSelect.jsx';
 import EventsInput, {Item as EventsInputItem} from '../components/common/EventInputs.jsx';
 
 import contractList from '../stubs/contractListStub.js';
@@ -16,7 +17,7 @@ const sampleAddress = '0x5A0b54D5dc17e0AadC383d2db43B0a0D3E029c4c';
 const sampleAddresses = ['0x5A0b54D5dc17e0AadC383d2db43B0a0D3E029c4c', '0x5A0b54D5dc17e0AadC383d2db43B0a0D3E029c4d'];
 const sampleEventAbi = contractList.find(item => item.name == 'Token').abi.find(item => item.name == 'Transfer' && item.type == 'event');
 
-const fromJsonDecorator = decorate([args => args.map(arg=>JSON.stringify(arg, null, '\t'))]);
+const fromJsonDecorator = decorate([args => args.map(arg => JSON.stringify(arg, null, '\t'))]);
 
 storiesOf('EtherInput', module)
     .add('default', () => (
@@ -162,5 +163,15 @@ storiesOf('EventsInput', module)
             button='Fetch'
             inputs={sampleEventAbi.inputs}
         />
+    )
+    );
+
+storiesOf('NetworkIdSelect', module)
+    .add('default', withState({value: 1}) (({store}) => (
+            <NetworkIdSelect
+                onChange={value => store.set({value})}
+                value={store.state.value}
+            />
+        )
     )
     );
