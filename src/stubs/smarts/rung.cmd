@@ -1,0 +1,1 @@
+call ganache-cli -m "artwork oak spatial example child bunker fold raise car butter fabric model" -i 999
