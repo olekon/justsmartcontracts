@@ -69,6 +69,11 @@ class EventsGrid extends React.Component {
             dataIndex: 'blockNumber',
             key: 'blockNumber',
             render: value => <FormattedValue type='' value={value} />
+        }, {
+            title: 'TxHash',
+            dataIndex: 'transactionHash',
+            key: 'transactionHash',
+            render: value => <FormattedValue type='' value={value} />
         }];
 
         return (
