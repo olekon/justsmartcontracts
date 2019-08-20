@@ -1,19 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {Layout, Collapse, Row, Col} from 'antd';
+import {Row, Col} from 'antd';
 
 import ContractView from './ContractView.jsx';
 import ContractList from './ContractsList.jsx';
+import ErrorBoundary from '../base/ErrorBoundary.jsx';
 
 import Web3Provider from '../../scripts/web3provider.js';
-import * as storage from '../../scripts/storage.js';
 import * as contractLogic from '../../scripts/contractLogic.js';
 
 import {gridConfig} from '../layout.js';
 import * as message from '../common/errorMessage.js';
 
-const Sider = Layout.Sider;
-const Content = Layout.Content;
 
 /**
  * Renders stored contracts in side panel with selected contract in content panel
@@ -104,11 +101,13 @@ class ContractBrowser extends React.Component {
                 </Col>
                 
                 <Col span={gridConfig.ContractViewSpan}>
+                    <ErrorBoundary>
                     <ContractView 
                         web3Provider={this.state.web3Provider} 
                         contract={this.state.activeContract} 
                         key={this.state.activeContract ? this.state.activeContract.address : 'empty'}
                     />
+                    </ErrorBoundary>
                 </Col>
             </Row>
         );
