@@ -27,7 +27,7 @@ export const validateEthAddress = address => web3utils.toChecksumAddress(address
 /**
  * Returns web3 method object identifier - hash of contract's address and encodedABI 
  */
-export const getMethodId = method => 
+export const getMethodId = method =>
     web3utils.sha3(method._parent._address + method._method.name + method.arguments.join(''));
 
 
@@ -40,7 +40,7 @@ export const checkParamErrors = method => {
     try {
         method.encodeABI();
         return null;
-    } catch(e) {
+    } catch (e) {
         return e;
     }
 }
@@ -119,6 +119,17 @@ export const unsignTransaction = (signedTx) => {
     };
 };
 
+/**
+ * Checks if type is array
+ * @param {*} type - ABI type like 'address', 'uint256', 'uint16[]', etc. or 'eth'
+ */
+export const isArrayType = type => type.endsWith(']');
+
+/**
+ * Extracts array single item type
+ * @param {*} arrayType ABI array type 
+ */
+export const getArrayItemType = arrayType => arrayType.slice(0, -2);
 
 /**
  * Returns default value for Solidity type
@@ -134,6 +145,10 @@ export const getDefaultValue = type => {
         case 'ether':
             return 0;
         default:
-            return '';
+            if (isArrayType(type)) {
+                return [];
+            } else {
+                return '';
+            }
     }
 }
