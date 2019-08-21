@@ -5,7 +5,7 @@ import BoolInput from './BoolInput.jsx';
 import AddressInput from './AddressInput.jsx';
 import EtherInput from './EtherInput.jsx';
 import CustomInput from './CustomInput.jsx';
-import {getDefaultValue} from '../../scripts/utils.js';
+import {getDefaultValue, isArrayType, getArrayType} from '../../scripts/utils.js';
 
 
 /**
@@ -35,12 +35,8 @@ class FunctionInputs extends React.Component {
                 if (this.props.onClick) {
                     const {ETH: ethValue, ...paramValues} = values;
 
-                    //pass inputed values straight to onClick handler, also parse array-strings  
                     this.props.onClick(
-                        Object.keys(paramValues).map(key =>
-                            this.getInputParamType(key).endsWith(']') ?
-                                paramValues[key].split(/, ?/) :
-                                paramValues[key]),
+                        Object.keys(paramValues).map(key => paramValues[key]),
                         ethValue
                     );
                 }

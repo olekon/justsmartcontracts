@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import BoolInput from './BoolInput.jsx';
 import AddressInput from './AddressInput.jsx';
 import EtherInput from './EtherInput.jsx';
+import ArrayInput from './ArrayInput.jsx';
 import {Input} from 'antd';
+import {isArrayType, getArrayItemType} from '../../scripts/utils.js';
 
 /**
  * Input of specified type. One of BoolInput, AddressInput, EtherInput, Input.
@@ -22,7 +24,7 @@ class CustomInput extends React.Component {
     }
 
     onInputChange(e) {
-        if(this.props.onChange) {
+        if (this.props.onChange) {
             this.props.onChange(e.target.value);
         }
     }
@@ -39,7 +41,11 @@ class CustomInput extends React.Component {
             case 'ether':
                 return <EtherInput onChange={onChange} {...restProps} />
             default:
-                return <Input autoComplete='off' onChange={this.onInputChange} {...restProps} />
+                if (isArrayType(type)) {
+                    return (<ArrayInput type={getArrayItemType(type)} onChange={onChange} {...restProps} />);
+                } else {
+                    return <Input autoComplete='off' onChange={this.onInputChange} {...restProps} />
+                }
         }
     }
 }
