@@ -1,0 +1,14 @@
+module.exports = {
+    sampleAddresses: [
+        '0x813835c36c9684ca2479e73dbe21a24914ddd874',
+        '0x0a219f645f88d0d7e4d6241a3ddda5ea51df80f2',
+        '0xe5c2be4d54c663d19078924ab2c222c313c5a889',
+        '0xc25715c30caf38fac9fb7ec7b06a6b315f6ce20e',
+        '0x7905ff543c37096ab78028864d4597d909b7b15c',
+        '0x6af34eae227506c7d931249567fc0395c48b7e3f',
+        '0x590d3d8487c8e699bff82fbc01d074337fc2336e',
+        '0xb8712b303aa6d875d7ea0be0b721e106c1033600',
+        '0x10913f3a653393170b7b905798a216189dfffc2a',
+        '0x260155e60a93c6584e589fd85d3a3038ddd7afd4' 
+    ]
+}
