@@ -56,6 +56,7 @@ const ArrayInput = (props) => {
             </span>
             {value.map((item, index)=>(
                 <CustomInput 
+                    key={index}
                     type={type}
                     value={item}
                     onChange={(newItem)=>handleItemChange(newItem, index)}/>
