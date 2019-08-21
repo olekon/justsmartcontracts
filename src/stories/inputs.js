@@ -2,6 +2,7 @@ import React from 'react';
 import {storiesOf} from '@storybook/react';
 import {withState} from '@dump247/storybook-state';
 import {action, decorate, configureActions} from '@storybook/addon-actions';
+import sampleData from './data.js';
 
 import AddressInput from '../components/common/AddressInput.jsx';
 import EtherInput from '../components/common/EtherInput.jsx';
@@ -13,8 +14,8 @@ import EventsInput, {Item as EventsInputItem} from '../components/common/EventIn
 
 import contractList from '../stubs/contractListStub.js';
 
-const sampleAddress = '0x5A0b54D5dc17e0AadC383d2db43B0a0D3E029c4c';
-const sampleAddresses = ['0x5A0b54D5dc17e0AadC383d2db43B0a0D3E029c4c', '0x5A0b54D5dc17e0AadC383d2db43B0a0D3E029c4d'];
+const sampleAddress = sampleData.sampleAddresses[0];
+const sampleAddresses = sampleData.sampleAddresses;
 const sampleEventAbi = contractList.find(item => item.name == 'Token').abi.find(item => item.name == 'Transfer' && item.type == 'event');
 
 const fromJsonDecorator = decorate([args => args.map(arg => JSON.stringify(arg, null, '\t'))]);
