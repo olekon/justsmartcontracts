@@ -5,19 +5,14 @@ let nodeList = [
             {
                 name : "Infura",
                 key  : "Mainnet_Infura",
-                endpoint : "https://mainnet.infura.io/v3/66da5cb67dd949f585d950b0c588c06e",
+                endpoint : "https://justsmartcontracts.dev/jscapi/eth/main",
+                //endpoint : "http://localhost:3000/eth/main",
                 id : "1",
             },
             {
-                name : "Mew",
+                name : "MEW",
                 key  : "Mainnet_mew",
                 endpoint : "https://mainnet.infura.io/mew",
-                id : "1",
-            },
-            {
-                name : "JSC",
-                key  : "Mainnet_Back",
-                endpoint : "http://localhost:3000/eth/main",
                 id : "1",
             }
         ]
@@ -28,13 +23,8 @@ let nodeList = [
             {
                 name : "Infura",
                 key  : "Ropsten_Infura",
-                endpoint : "https://ropsten.infura.io/v3/66da5cb67dd949f585d950b0c588c06e",
-                id : "3",
-            },
-            {
-                name : "JSC",
-                key  : "Ropsten_Back",
-                endpoint : "http://localhost:3000/eth/rop",
+                endpoint : "https://justsmartcontracts.dev/jscapi/eth/rop",
+                //endpoint : "http://localhost:3000/eth/rop",
                 id : "3",
             }
         ]
@@ -45,7 +35,7 @@ let nodeList = [
             {
                 name : "Infura",
                 key  : "Rinkeby_Infura",
-                endpoint : "https://rinkeby.infura.io/v3/66da5cb67dd949f585d950b0c588c06e",
+                endpoint : "https://justsmartcontracts.dev/jscapi/eth/rin",
                 id : "4",
             }
         ]
