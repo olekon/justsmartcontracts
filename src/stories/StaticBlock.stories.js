@@ -3,9 +3,9 @@ import {storiesOf} from '@storybook/react';
 
 import StaticBlock from '../components/common/StaticBlock';
 
-const termsUrl = 'http://localhost:3000/static/terms'; 
+const termsUrl = 'https://justsmartcontracts.dev/jscapi/static/terms';
 
 storiesOf('StaticBlock', module)
-.add('Terms.md', () => (
-    <StaticBlock query={termsUrl} />
-));
+    .add('Terms.md', () => (
+        <StaticBlock query={termsUrl} />
+    ));
