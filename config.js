@@ -28,5 +28,9 @@ module.exports = {
     contacts: {
         email: 'contact@justsmartcontracts.dev',
         github: 'https://github.com/olekon/justsmartcontracts'
+    },
+
+    server: {
+        url: 'https://justsmartcontracts.dev/jscapi/'
     }
 }
