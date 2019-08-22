@@ -3,8 +3,8 @@ import Transaction from 'ethereumjs-tx';
 
 /**
  * Converts eth address to a shorter string deleting the middle
- * @param {Eth address to shorten} address 
- * @param {number of hex characters to keep in the beginning and the end of string} charsToKeep 
+ * @param {*} address Eth address to shorten 
+ * @param {*} charsToKeep number of hex characters to keep in the beginning and the end of string 
  */
 export const shortenEthAddress = (address, charsToKeep) =>
     address.slice(0, 2 + charsToKeep) + '...' + address.slice(-charsToKeep);
@@ -12,14 +12,14 @@ export const shortenEthAddress = (address, charsToKeep) =>
 
 /**
  * Checks if string is checksummed ethereum address
- * @param {string to check} address 
+ * @param {*} address string to check
  */
 export const isEthAddress = address => web3utils.isHexStrict(address) && address.length == 42;
 
 
 /**
  * Returns checksummed eth address 
- * @param {ETH address} address 
+ * @param {*} address ETH address 
  */
 export const validateEthAddress = address => web3utils.toChecksumAddress(address);
 
@@ -34,7 +34,7 @@ export const getMethodId = method =>
 /**
  * Checks if method arguments are correct by calling internal encodeABI method.
  * Returns null if there are no errors. Otherwise returns error text
- * @param {} method 
+ * @param {*} method 
  */
 export const checkParamErrors = method => {
     try {
@@ -48,8 +48,8 @@ export const checkParamErrors = method => {
 
 /**
  * Converts native Ethereum event object to a short form, keeps only 'returnValues', 'blockNumber' and tx hash
- * @param {event object, item of array returned from getPastEvents} event 
- * @param {name of unique key property in shortened object} keyProperty 
+ * @param {*} event event object, item of array returned from getPastEvents
+ * @param {*} keyProperty name of unique key property in shortened object
  */
 export const shortenEvent = (event, keyProperty = 'key') =>
     //First keep only non-numeric returnValues (remove duplicate numeric)
@@ -68,22 +68,22 @@ export const shortenEvent = (event, keyProperty = 'key') =>
 
 /**
  * Retrieves contract's Ether balance
- * @param {Web3 contract object} contract 
+ * @param {*} contract Web3 contract object
  */
 export const getEtherBalance = contract => contract.web3.eth.getBalance(contract._address);
 
 
 /**
  * Converts any wei value into a ether value.
- * @param {ether value in wei} wei 
- * @param {ether unit representing return value, 'wei'/'gwei'/'ether'} unit
+ * @param {*} wei ether value in wei
+ * @param {*} unit ether unit representing return value, 'wei'/'gwei'/'ether'
  */
 export const convertFromWei = (wei, unit) => web3utils.fromWei(wei, unit);
 
 /**
  * Converts any ether value value into wei.
- * @param {ether value} value 
- * @param {ether unit representing input value} unit 
+ * @param {*} value ether value
+ * @param {*} unit ether unit representing input value
  */
 export const convertToWei = (value, unit) =>
     web3utils.toWei(
@@ -94,14 +94,14 @@ export const convertToWei = (value, unit) =>
 
 /**
  * Converts given value to HEX.
- * @param {Number or String to convert to HEX} value 
+ * @param {*} value Number or String to convert to HEX
  */
 export const toHex = value => web3utils.toHex(value);
 
 const fromBuffer = buffer => '0x' + buffer.toString('hex');
 /**
  * Converts signed transaction to unsigned, returns transaction and signature verification
- * @param {signed transaction, optionally prefixed with 0x} signedTx 
+ * @param {*} signedTx signed transaction, optionally prefixed with 0x
  */
 export const unsignTransaction = (signedTx) => {
     const tx = new Transaction(signedTx);
@@ -133,7 +133,7 @@ export const getArrayItemType = arrayType => arrayType.slice(0, -2);
 
 /**
  * Returns default value for Solidity type
- * @param {Solidity type or 'ether'} type 
+ * @param {*} type Solidity type or 'ether'
  */
 export const getDefaultValue = type => {
     switch (type) {
