@@ -80,7 +80,6 @@ class ContractOperationsView extends React.Component {
         try {
             return this.props.contract.methods[methodName](...inputs);
         } catch (e) {
-            console.log(e);
             return null;
         }
     }

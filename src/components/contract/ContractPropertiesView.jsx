@@ -82,9 +82,9 @@ class ContractPropertiesView extends React.Component {
                 this.setState({data: results[0], eth: results[1]});
             })
             .catch(error => {
-                if (!error.isCanceled) {
-                    console.log(error);
-                }
+                // if (!error.isCanceled) {
+                //     console.log(error);
+                // }
             });
     }
 

@@ -101,7 +101,6 @@ class TransactionParams extends React.Component {
             })
             .catch(error => {
                 showEstimateGasError();
-                console.log(error);
                 this.setState({gas: 0});
             });
     }
