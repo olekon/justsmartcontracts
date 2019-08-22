@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 /**
  * Provides component with ability to download a text file 
- * @param {Component to wrap} WrappedComponent 
- * @param {name of the event to attach Download function} onDownloadEvent 
+ * @param {*} WrappedComponent Component to wrap 
+ * @param {*} onDownloadEvent name of the event prop to attach Download function 
  * Props:
  *  getContent - function that returns content for downlodable file: ()=>content
  *  getFileName - function that returns file name for downloaded file ()=>filename
@@ -15,8 +15,6 @@ function withDownload(WrappedComponent, onDownloadEvent) {
         constructor(props) {
             super(props);
             this.handleDownload = this.handleDownload.bind(this);
-
-
         }
 
         handleDownload() {
