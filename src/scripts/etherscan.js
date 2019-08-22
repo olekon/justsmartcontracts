@@ -45,4 +45,4 @@ export const getTxHashUrl = (networkId, txHash) => getRootUrl(networkId) + `/tx/
  * @param {*} address 
  */
 export const getApiAbiUrl = (networkId, address) =>
-    config.server.url + `etherscan/abi/${getConfig(networkId).api}/${address}`;
+    config.server.url + `/etherscan/abi/${getConfig(networkId).api}/${address}`;
