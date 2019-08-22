@@ -31,6 +31,7 @@ module.exports = {
     },
 
     server: {
-        url: 'https://justsmartcontracts.dev/jscapi/'
+        //url: 'https://justsmartcontracts.dev/jscapi'
+        url: 'http://localhost:3000'
     }
 }
