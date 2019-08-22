@@ -3,6 +3,7 @@
  */
 
 import config from '../../config';
+import urljoin from 'url-join';
 
 /**
  * Returns pair of values {domain, api} that corresponds to etherscan subdomain and backend api sub-route
@@ -37,7 +38,7 @@ export const getRootUrl = networkId => `https://${getConfig(networkId).domain}.i
  * @param {*} networkId 
  * @param {*} txHash 
  */
-export const getTxHashUrl = (networkId, txHash) => getRootUrl(networkId) + `/tx/${txHash}`;
+export const getTxHashUrl = (networkId, txHash) => urljoin(getRootUrl(networkId), `/tx/${txHash}`);
 
 /**
  * Returns url of api that gets contract ABI 
@@ -45,4 +46,4 @@ export const getTxHashUrl = (networkId, txHash) => getRootUrl(networkId) + `/tx/
  * @param {*} address 
  */
 export const getApiAbiUrl = (networkId, address) =>
-    config.server.url + `/etherscan/abi/${getConfig(networkId).api}/${address}`;
+    urljoin(config.server.url, `/etherscan/abi/${getConfig(networkId).api}/${address}`);
