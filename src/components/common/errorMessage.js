@@ -1,17 +1,11 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import {notification} from 'antd';
+import {getTxHashUrl} from '../../scripts/etherscan.js';
 import errorText from '../../scripts/errorText.js';
 import errorCodes from '../../scripts/errorCodes.js';
 
-const getExplorerLink = (networkId, txHash) => {
-    const domain = networkId == 3 ? 'ropsten.etherscan' :
-        networkId == 4 ? 'rinkeby.etherscan' :
-            networkId == 5 ? 'goerli.etherscan' :
-                networkId == 42 ? 'kovan.etherscan' :
-                    'etherscan';
-
-    return (<a href={`https://${domain}.io/tx/${txHash}`} target='_blank'>Check Etherscan</a>);
-}
+const getExplorerLink = (networkId, txHash) => 
+    (<a href={getTxHashUrl(networkId, txHash)} target='_blank'>Check Etherscan</a>);
 
 const getAdditionalText = (errorCode, data) => {
     switch (errorCode) {
