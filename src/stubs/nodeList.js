@@ -8,7 +8,7 @@ let nodeList = [
                 name: "Infura",
                 key: "Mainnet_Infura",
                 //endpoint : "https://justsmartcontracts.dev/jscapi/eth/main",
-                endpoint: config.server.url + '/eth/main',
+                endpoint: config.server.url + '/eth/mainnet',
                 id: "1",
             },
             {
