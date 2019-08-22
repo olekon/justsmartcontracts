@@ -3,6 +3,7 @@ import {Form, Icon, Input, Button} from 'antd';
 import AddressInput from '../common/AddressInput.jsx';
 import ContractInput from '../common/ContractInput.jsx';
 import NetworkIdSelect from '../common/NetworkIdSelect.jsx';
+import AbiQueryButton from '../common/AbiQueryButton.jsx';
 
 const FormItem = Form.Item;
 
@@ -24,7 +25,9 @@ class ContractForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleFromAddressChanged = this.handleFromAddressChanged.bind(this);
         this.handleFileLoad = this.handleFileLoad.bind(this);
-        this.handleNetworkChanged = this.handleNetworkChanged.bind(this)
+        this.handleNetworkChanged = this.handleNetworkChanged.bind(this);
+        this.handleEtherscanAbiResponse = this.handleEtherscanAbiResponse.bind(this);
+        this.getEtherscanAbiOptions = this.getEtherscanAbiOptions.bind(this);
     }
 
     componentDidMount() {
@@ -35,7 +38,7 @@ class ContractForm extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.props.onAddContract(values.name, this.state.address, this.state.networkId, values.abi);
+                this.props.onAddContract(values.name, values.address, this.state.networkId, values.abi);
             }
         });
     }
@@ -55,11 +58,26 @@ class ContractForm extends React.Component {
     handleFileLoad(truffleObject) {
         this.props.form.setFieldsValue({
             abi: JSON.stringify(truffleObject.abi, null, '\t')
-        })
-        /*this.setState({
-            abi: JSON.stringify(truffleObject.abi, null, '\t'),
-            bytecode: truffleObject.bytecode
-        });*/
+        });
+    }
+
+    getEtherscanAbiOptions() {
+        return {
+            address: this.props.form.getFieldsValue(['address']).address,
+            networkId: this.state.networkId
+        };
+    }
+
+    handleEtherscanAbiResponse(response) {
+        if (response.status == 1) {
+            this.props.form.setFieldsValue(
+                {abi: response.result}
+            );
+        } else {
+            this.props.form.setFieldsValue(
+                {abi: ''}
+            );
+        }
     }
 
     render() {
@@ -67,23 +85,35 @@ class ContractForm extends React.Component {
         return (
             <Form onSubmit={this.handleSubmit}>
                 <FormItem label="Name">
-                    {getFieldDecorator('name', {})(
+                    {getFieldDecorator('name', {
+                        rules: [{required: true, message: 'Please input the name'}]
+                    })(
                         <Input autoComplete='off' />
                     )}
                 </FormItem>
                 <FormItem label="Address">
-                    <AddressInput value={this.state.address} onChange={this.handleFromAddressChanged} />
+                    {/* <AddressInput value={this.state.address} onChange={this.handleFromAddressChanged} /> */}
+                    {getFieldDecorator('address', {
+                        rules: [{required: true, message: 'Please input the address'}]
+                    })(
+                        <AddressInput />
+                    )}
                 </FormItem>
                 <FormItem label="Network id">
-                    {/* {getFieldDecorator('networkId', {initialValue: 1})(
-                        <Input autoComplete='off'/>                        
-                    )} */}
                     <NetworkIdSelect value={this.state.networkId} onChange={this.handleNetworkChanged} />
                 </FormItem>
                 <FormItem label="ABI">
-                    {getFieldDecorator('abi', {})(
-                        <Input autoComplete='off' />
+                    {getFieldDecorator('abi', {
+                        rules: [{required: true, message: 'Please input the ABI'}]
+                    })(
+                        <Input.TextArea rows={8} placeholder='ABI/JSON Interface' autoComplete='off' />
                     )}
+                    <AbiQueryButton
+                        getOptions={this.getEtherscanAbiOptions}
+                        onResponse={this.handleEtherscanAbiResponse}
+                    >
+                        Check Etherscan
+                    </AbiQueryButton>
                 </FormItem>
                 <FormItem label="dropAbi">
                     <ContractInput
