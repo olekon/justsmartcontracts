@@ -94,7 +94,7 @@ class ContractForm extends React.Component {
                 <FormItem label="Address">
                     {/* <AddressInput value={this.state.address} onChange={this.handleFromAddressChanged} /> */}
                     {getFieldDecorator('address', {
-                        rules: [{required: true, message: 'Please input the address'}]
+                        rules: [{required: true, pattern:/^0x[a-fA-F0-9]{40}$/, message: 'Please input the address'}]
                     })(
                         <AddressInput />
                     )}
