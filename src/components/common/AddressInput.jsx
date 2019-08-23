@@ -33,7 +33,7 @@ class AddressInput extends React.Component {
 
 
     render() {
-        const {value, onChange, addonAfter, ...restProps} = this.props;
+        const {value, onChange, addonBefore, ...restProps} = this.props;
         const icon = utils.isEthAddress(this.props.value)
             ? (<Blockies seed={this.props.value.toLowerCase()} size={7} scale={3} />)
             : (<Icon type='minus-square'></Icon>);
