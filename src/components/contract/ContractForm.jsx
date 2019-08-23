@@ -115,7 +115,7 @@ class ContractForm extends React.Component {
                         Check Etherscan
                     </AbiQueryButton>
                 </FormItem>
-                <FormItem label="dropAbi">
+                <FormItem label="Or load build file">
                     <ContractInput
                         text='Select truffle-compiled file'
                         onLoad={this.handleFileLoad}
