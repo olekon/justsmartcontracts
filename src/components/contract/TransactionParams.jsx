@@ -246,9 +246,10 @@ class TransactionParams extends React.Component {
                     <Button
                         disabled={this.state.mode == offlineMode}
                         type='primary'
-                        onClick={this.handleSignClick}>
+                        onClick={this.handleSignClick}
+                    >
                         Sign
-                            </Button>
+                    </Button>
                     <DownloadButton
                         getContent={this.getDownloadFileContent}
                         getFileName={this.getDownloadFileName}
