@@ -5,7 +5,7 @@ import {Row, Col} from 'antd';
 const req = require.context('../src/stories', true);
 
 addDecorator(story => (
-    <Row><Col span={10}>{story()}</Col></Row>
+    <Row><Col span={12}>{story()}</Col></Row>
 ));
 
 function loadStories() {
