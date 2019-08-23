@@ -8,7 +8,7 @@ import EtherInput from './EtherInput.jsx';
 
 const defaultAddress = getDefaultValue('address');
 const defaultEther = getDefaultValue('ether');
-const defaultNumber = 0;
+const defaultNumber = '0';
 
 /**
  * Form to edit standard transaction fields: from, to, gas, nonce, etc.
