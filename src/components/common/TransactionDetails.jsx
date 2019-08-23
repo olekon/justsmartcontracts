@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Form} from 'antd';
+import {Form, Row, Col, Input} from 'antd';
 import {fromJS} from 'immutable';
 import {getDefaultValue, isEthAddress} from '../../scripts/utils.js';
 import AddressInput from './AddressInput.jsx';
@@ -13,7 +13,7 @@ const defaultNumber = 0;
 /**
  * Form to edit standard transaction fields: from, to, gas, nonce, etc.
  * Props: 
- * tx - standard Ethereum unsigned tx object {from, to, gas, nonce}
+ * tx - standard Ethereum unsigned tx object {from, to, gas, nonce}. Numbers should be 10-base strings or numbers
  * onChange - event, fires when any of trnasction fields get changed (tx)=>{}
  * readonly - true if edit is not allowed, default: false.  
  */
@@ -28,9 +28,11 @@ const TransactionDetails = props => {
 
     const handleChange = (field, value) => {
         const tx = fromJS(props.tx);
-        props.onChange(
-            tx.setIn([field], value)
-        );
+        if (props.onChange) {
+            props.onChange(
+                tx.setIn([field], value).toJS()
+            );
+        }
     }
 
     return (
@@ -40,12 +42,14 @@ const TransactionDetails = props => {
                     <AddressInput
                         value={props.tx.from || defaultAddress}
                         onChange={(value, isEthAddress) => handleChange('from', value)}
+                        disabled={props.readonly}
                     />
                 </Form.Item></Col>
                 <Col {...colLayout}><Form.Item label='Nonce'>
                     <Input
                         value={props.tx.nonce || defaultNumber}
                         onChange={e => handleChange('nonce', e.target.value)}
+                        disabled={props.readonly}
                     />
                 </Form.Item></Col>
             </Row>
@@ -55,12 +59,14 @@ const TransactionDetails = props => {
                     <AddressInput
                         value={props.tx.to || defaultAddress}
                         onChange={(value, isEthAddress) => handleChange('to', value)}
+                        disabled={props.readonly}
                     />
                 </Form.Item></Col>
                 <Col {...colLayout}><Form.Item label='ETH Value'>
                     <EtherInput
                         value={props.tx.value || defaultEther}
                         onChange={value => handleChange('value', value)}
+                        disabled={props.readonly}
                     />
                 </Form.Item></Col>
             </Row>
@@ -68,38 +74,26 @@ const TransactionDetails = props => {
             <Row {...rowLayout}>
                 <Col {...colLayout}><Form.Item label='Gas Price'>
                     <EtherInput
-                        value={props.tx.gas || defaultNumber}
+                        value={props.tx.gasPrice || defaultNumber}
                         onChange={value => handleChange('gasPrice', value)}
+                        disabled={props.readonly}
                     />
                 </Form.Item></Col>
                 <Col {...colLayout}><Form.Item label='Gas'>
                     <Input
                         value={props.tx.gas || props.tx.gasLimit || defaultNumber}
                         onChange={e => handleChange('gas', e.target.value)}
+                        disabled={props.readonly}
                     />
                 </Form.Item></Col>
             </Row>
             <Form.Item label='Data'>
-                <Input.TextArea 
-                    rows={5} 
+                <Input.TextArea
+                    rows={5}
                     value={props.tx.data}
                     onChange={e => handleChange('data', e.target.value)}
+                    disabled={props.readonly}
                 />
-            </Form.Item>
-            <Form.Item>
-                <Button
-                    disabled={this.state.mode == offlineMode}
-                    type='primary'
-                    onClick={this.handleSignClick}
-                >
-                    Sign
-                    </Button>
-                <DownloadButton
-                    getContent={this.getDownloadFileContent}
-                    getFileName={this.getDownloadFileName}
-                >
-                    Download
-                    </DownloadButton>
             </Form.Item>
         </Form>
     );
@@ -107,7 +101,7 @@ const TransactionDetails = props => {
 
 TransactionDetails.propType = {
     tx: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired,
+    onChange: PropTypes.func,
     readonly: PropTypes.bool
 }
 
