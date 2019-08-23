@@ -57,6 +57,7 @@ class EtherInput extends React.Component {
     }
 
     render() {
+        const {value, onChange, addonAfter, defaultMode, ...restProps} = this.props;
         const selectAfter = (
             <Select defaultValue={this.state.mode} onSelect={this.handleModeChange}>
                 <Select.Option value={modeWei}>{modeWei}</Select.Option>
@@ -70,6 +71,7 @@ class EtherInput extends React.Component {
                 onChange={this.handleValueChange}
                 addonAfter={selectAfter}
                 autoComplete='off'
+                {...restProps}
             />
         );
     }
