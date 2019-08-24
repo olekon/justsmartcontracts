@@ -2,6 +2,7 @@ import React from 'react';
 import {Layout, Tabs, Menu, Row, Col} from 'antd';
 import ContractBrowser from '../contract/ContractBrowser.jsx';
 import Deploy from '../contract/Deploy.jsx';
+import LoadTransactionView from '../contract/LoadTransactionView.jsx';
 import NetworkSelect from '../settings/NetworkSelect.jsx';
 import * as contractLogic from '../../scripts/contractLogic.js';
 
@@ -110,6 +111,7 @@ class Center extends React.Component {
                         >
                             <Menu.Item key="browser"> Browser </Menu.Item>
                             <Menu.Item key="deploy">Deploy</Menu.Item>
+                            <Menu.Item key="load">Load Transaction</Menu.Item>
                         </Menu>
                     </Col>
                 </Row>
@@ -123,6 +125,10 @@ class Center extends React.Component {
                     {this.state.activeMenuKey === "deploy" ? <Deploy
                         networkId={node.networkId}
                         endpoint={node.endpoint}
+                    /> : null
+                    }
+                    {this.state.activeMenuKey === "load" ? <LoadTransactionView
+                        networkId={node.networkId}
                     /> : null
                     }
                 </div>
