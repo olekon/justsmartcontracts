@@ -28,4 +28,12 @@ storiesOf('TransactionDetails', module)
             tx={sampleTx}
             readonly={true}
         />
-    ));
+    ))
+    .add('edit mode, empty tx', withState({tx: {}})(
+        ({store}) => (
+            <TransactionDetails
+                tx={store.state.tx}
+                onChange={tx => store.set({tx})}
+            />
+        ))
+    );
