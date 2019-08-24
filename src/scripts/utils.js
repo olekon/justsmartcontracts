@@ -120,6 +120,21 @@ export const unsignTransaction = (signedTx) => {
 };
 
 /**
+ * Converts hex fields 'gas','gasPrice','nonce','value' of transaction to decimals string
+ * @param {*} tx transaction object
+ */
+export const unhexTransaction = tx => {
+    const hexFields = ['nonce', 'gas', 'gasPrice', 'value', 'gasLimit'];
+    let hexTx = tx;
+    hexFields.forEach(value=>{
+        if(web3utils.isHexStrict(tx[value])) {
+            hexTx[value] = web3utils.hexToNumberString(tx[value]);
+        }
+    });
+    return hexTx;
+};
+
+/**
  * Checks if type is array
  * @param {*} type - ABI type like 'address', 'uint256', 'uint16[]', etc. or 'eth'
  */
@@ -143,7 +158,7 @@ export const getDefaultValue = type => {
             return '0x0';
         case 'eth':
         case 'ether':
-            return 0;
+            return '0';
         default:
             if (isArrayType(type)) {
                 return [];
