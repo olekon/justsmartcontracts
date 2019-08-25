@@ -105,18 +105,26 @@ const fromBuffer = buffer => '0x' + buffer.toString('hex');
  */
 export const unsignTransaction = (signedTx) => {
     const tx = new Transaction(signedTx);
-    return {
-        tx: {
-            from: fromBuffer(tx.from),
-            to: fromBuffer(tx.to),
-            value: fromBuffer(tx.value),
-            gas: fromBuffer(tx.gas),
-            gasPrice: fromBuffer(tx.gasPrice),
-            data: fromBuffer(tx.data),
-            nonce: fromBuffer(tx.nonce),
-        },
-        verified: tx.verifySignature()
-    };
+    try {
+        return {
+            tx: {
+                from: fromBuffer(tx.from),
+                to: fromBuffer(tx.to),
+                value: fromBuffer(tx.value),
+                gas: fromBuffer(tx.gas),
+                gasPrice: fromBuffer(tx.gasPrice),
+                data: fromBuffer(tx.data),
+                nonce: fromBuffer(tx.nonce),
+            },
+            verified: tx.verifySignature()
+        };
+    } catch(e) {
+        return {
+            tx: {},
+            verified: false,
+            error: e.message
+        }
+    }
 };
 
 /**
