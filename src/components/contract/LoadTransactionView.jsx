@@ -3,7 +3,7 @@ import TransactionDetails from '../common/TransactionDetails.jsx';
 import ContractInput from '../common/ContractInput.jsx';
 import {Button} from 'antd';
 import {sign} from '../common/sign.js';
-import {unhexTransaction} from '../../scripts/utils.js';
+import {unhexTransaction, hexTransaction} from '../../scripts/utils.js';
 
 /**
  * Component can load transaction from file to sign it. 
@@ -36,7 +36,7 @@ class LoadTransactionView extends React.Component {
     handleSignButton() {
         sign(Object.assign(
             {},
-            {...this.state.tx},
+            {...(hexTransaction(this.state.tx))},
             {chainId: this.props.networkId}
         ));
     }
