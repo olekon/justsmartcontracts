@@ -77,6 +77,7 @@ const TransactionDetails = props => {
                         value={props.tx.gasPrice || defaultNumber}
                         onChange={value => handleChange('gasPrice', value)}
                         disabled={props.readonly}
+                        defaultMode='gwei'
                     />
                 </Form.Item></Col>
                 <Col {...colLayout}><Form.Item label='Gas'>
