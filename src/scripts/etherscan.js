@@ -12,12 +12,22 @@ import urljoin from 'url-join';
 const getConfig = (networkId) => {
     switch (networkId) {
         case '1':
-        case 1: return {domain: 'etherscan', api: 'mainnet'};
-        case 3: return {domain: 'ropsten.etherscan', api: 'ropsten'};
-        case 4: return {domain: 'rinkeby.etherscan', api: 'rinkeby'};
-        case 5: return {domain: 'goerli.etherscan', api: 'goerli'};
-        case 42: return {domain: 'kovan.etherscan', api: 'kovan'};
-        default: return {domain: '', api: ''};
+        case 1:
+            return {domain: 'etherscan', api: 'mainnet'};
+        case '3':
+        case 3:
+            return {domain: 'ropsten.etherscan', api: 'ropsten'};
+        case '4':
+        case 4:
+            return {domain: 'rinkeby.etherscan', api: 'rinkeby'};
+        case '5':
+        case 5:
+            return {domain: 'goerli.etherscan', api: 'goerli'};
+        case '42':
+        case 42:
+            return {domain: 'kovan.etherscan', api: 'kovan'};
+        default:
+            return {domain: '', api: ''};
     }
 }
 
