@@ -3,6 +3,7 @@ import {Layout, Tabs, Menu, Row, Col} from 'antd';
 import ContractBrowser from '../contract/ContractBrowser.jsx';
 import Deploy from '../contract/Deploy.jsx';
 import LoadTransactionView from '../contract/LoadTransactionView.jsx';
+import BroadcastTransactionView from '../contract/BroadcastTransactionView.jsx';
 import NetworkSelect from '../settings/NetworkSelect.jsx';
 import * as contractLogic from '../../scripts/contractLogic.js';
 
@@ -109,9 +110,10 @@ class Center extends React.Component {
                             mode="horizontal"
                             defaultSelectedKeys={["browser"]}
                         >
-                            <Menu.Item key="browser"> Browser </Menu.Item>
+                            <Menu.Item key="browser">Browser</Menu.Item>
                             <Menu.Item key="deploy">Deploy</Menu.Item>
                             <Menu.Item key="load">Load Transaction</Menu.Item>
+                            <Menu.Item key="broadcast">Broadcast Transaction</Menu.Item>
                         </Menu>
                     </Col>
                 </Row>
@@ -128,6 +130,10 @@ class Center extends React.Component {
                     /> : null
                     }
                     {this.state.activeMenuKey === "load" ? <LoadTransactionView
+                        networkId={node.networkId}
+                    /> : null
+                    }
+                    {this.state.activeMenuKey === "broadcast" ? <BroadcastTransactionView
                         networkId={node.networkId}
                     /> : null
                     }
