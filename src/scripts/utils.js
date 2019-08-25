@@ -135,6 +135,21 @@ export const unhexTransaction = tx => {
 };
 
 /**
+ * Converts non-hex fields 'gas','gasPrice','nonce','value' of transaction to hex string
+ * @param {*} tx transaction object
+ */
+export const hexTransaction = tx => {
+    const hexFields = ['nonce', 'gas', 'gasPrice', 'value', 'gasLimit'];
+    let hexTx = tx;
+    hexFields.forEach(value=>{
+        if(!web3utils.isHexStrict(tx[value])) {
+            hexTx[value] = web3utils.toHex(tx[value]);
+        }
+    });
+    return hexTx;
+};
+
+/**
  * Checks if type is array
  * @param {*} type - ABI type like 'address', 'uint256', 'uint16[]', etc. or 'eth'
  */
