@@ -9,11 +9,17 @@ const modeEth = 'ether';
 
 
 /**
- * Input field for entering ether amount.
+ * Input field for entering ether amount. 
+ * 
  * Props:
- * value - initial value to display in wei
- * onChange - event handler that receives ether value in wei (eth)=>{}
- * defaultMode - mode for initial state: 'ether'/'gwei'/'wei'/
+ * * value - initial value to display in wei
+ * * onChange - event handler that receives ether value in wei (eth)=>{}
+ * * defaultMode - mode for initial state: 'ether'/'gwei'/'wei'/
+ * 
+ * **Notes**:
+ * This component has internal state that prevents it from turning into fully controlled.
+ * If new value is provided in props, it should be re-rendered. 
+ * Simplest way is to provide 'key' field equal to the new 'value' 
  */
 class EtherInput extends React.Component {
     constructor(props) {
