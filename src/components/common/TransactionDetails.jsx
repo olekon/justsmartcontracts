@@ -64,6 +64,7 @@ const TransactionDetails = props => {
                 </Form.Item></Col>
                 <Col {...colLayout}><Form.Item label='ETH Value'>
                     <EtherInput
+                        key={props.tx.value}
                         value={props.tx.value || defaultEther}
                         onChange={value => handleChange('value', value)}
                         disabled={props.readonly}
@@ -74,6 +75,7 @@ const TransactionDetails = props => {
             <Row {...rowLayout}>
                 <Col {...colLayout}><Form.Item label='Gas Price'>
                     <EtherInput
+                        key={props.tx.gasPrice}
                         value={props.tx.gasPrice || defaultNumber}
                         onChange={value => handleChange('gasPrice', value)}
                         disabled={props.readonly}
