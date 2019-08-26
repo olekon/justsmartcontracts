@@ -19,7 +19,7 @@ const modeEth = 'ether';
  * **Notes**:
  * This component has internal state that prevents it from turning into fully controlled.
  * If new value is provided in props, it should be re-rendered. 
- * Simplest way is to provide 'key' field equal to the new 'value' 
+ * Simplest way is to provide new 'key' field for this component or its parent 
  */
 class EtherInput extends React.Component {
     constructor(props) {
