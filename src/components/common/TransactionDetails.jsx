@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Form, Row, Col, Input} from 'antd';
 import {fromJS} from 'immutable';
-import {getDefaultValue, isEthAddress} from '../../scripts/utils.js';
+import {getDefaultValue} from '../../scripts/utils.js';
 import AddressInput from './AddressInput.jsx';
 import EtherInput from './EtherInput.jsx';
 
@@ -35,7 +35,17 @@ const TransactionDetails = props => {
         }
     }
 
-    return (
+    const handleIntFieldChange = (field, value) => {
+        const intRegexp = /^\d+$/;
+        if(intRegexp.test(value)) {
+            handleChange(field, value);
+        }
+    }
+    
+    const value = (props.tx.value || defaultEther).toString();
+    const gasPrice = (props.tx.gasPrice || defaultNumber).toString();
+
+    return (        
         <Form>
             <Row {...rowLayout}>
                 <Col {...colLayout}><Form.Item label='From Address'>
@@ -48,7 +58,7 @@ const TransactionDetails = props => {
                 <Col {...colLayout}><Form.Item label='Nonce'>
                     <Input
                         value={props.tx.nonce || defaultNumber}
-                        onChange={e => handleChange('nonce', e.target.value)}
+                        onChange={e => handleIntFieldChange('nonce', e.target.value)}
                         disabled={props.readonly}
                     />
                 </Form.Item></Col>
@@ -64,8 +74,7 @@ const TransactionDetails = props => {
                 </Form.Item></Col>
                 <Col {...colLayout}><Form.Item label='ETH Value'>
                     <EtherInput
-                        key={props.tx.value}
-                        value={props.tx.value || defaultEther}
+                        value={value}
                         onChange={value => handleChange('value', value)}
                         disabled={props.readonly}
                     />
@@ -75,8 +84,7 @@ const TransactionDetails = props => {
             <Row {...rowLayout}>
                 <Col {...colLayout}><Form.Item label='Gas Price'>
                     <EtherInput
-                        key={props.tx.gasPrice}
-                        value={props.tx.gasPrice || defaultNumber}
+                        value={gasPrice}
                         onChange={value => handleChange('gasPrice', value)}
                         disabled={props.readonly}
                         defaultMode='gwei'
@@ -85,7 +93,7 @@ const TransactionDetails = props => {
                 <Col {...colLayout}><Form.Item label='Gas'>
                     <Input
                         value={props.tx.gas || props.tx.gasLimit || defaultNumber}
-                        onChange={e => handleChange('gas', e.target.value)}
+                        onChange={e => handleIntFieldChange('gas', e.target.value)}
                         disabled={props.readonly}
                     />
                 </Form.Item></Col>
