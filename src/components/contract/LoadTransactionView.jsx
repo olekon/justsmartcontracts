@@ -17,7 +17,7 @@ class LoadTransactionView extends React.Component {
         super(props);
         this.state = {
             tx: {},
-           // key: 0, //a key to force rerender of TransactionDetails 
+            key: 0, //a key to force rerender of TransactionDetails 
         };
         this.handleTxLoad = this.handleTxLoad.bind(this);
         this.handleTxChange = this.handleTxChange.bind(this);
@@ -25,8 +25,8 @@ class LoadTransactionView extends React.Component {
     }
 
     handleTxLoad(tx) {
-        this.setState({tx: unhexTransaction(tx)});
-        //this.setState((state) => ({tx: unhexTransaction(tx), key: state.key + 1}));
+        //this.setState({tx: unhexTransaction(tx)});
+        this.setState((state) => ({tx: unhexTransaction(tx), key: state.key + 1}));
     }
 
     handleTxChange(tx) {
@@ -51,7 +51,7 @@ class LoadTransactionView extends React.Component {
                 />
                 <TransactionDetails
                     tx={this.state.tx}
-                   // key={this.state.key}
+                    key={this.state.key}
                     onChange={this.handleTxChange}
                 />
                 <Button onClick={this.handleSignButton}>Sign</Button>
