@@ -135,6 +135,7 @@ class Center extends React.Component {
                     }
                     {this.state.activeMenuKey === "broadcast" ? <BroadcastTransactionView
                         networkId={node.networkId}
+                        endpoint={node.endpoint}
                     /> : null
                     }
                 </div>
