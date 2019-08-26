@@ -22,7 +22,13 @@ class Web3Provider {
     //     this.web3 = new Web3(new Web3.providers.HttpProvider(endpoint));
     // }
 
-  
+    /**
+     * Wrap for web3.eth.sendSignedTransaction. Returns promise
+     * @param {*} signedTx signed transaction data in HEX format 
+     */
+    sendSignedTx(signedTx) {
+        return this.web3.eth.sendSignedTransaction(signedTx);
+    }
 }
 
 export default Web3Provider;    
