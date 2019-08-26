@@ -103,9 +103,9 @@ const fromBuffer = buffer => '0x' + buffer.toString('hex');
  * Converts signed transaction to unsigned, returns transaction and signature verification
  * @param {*} signedTx signed transaction, optionally prefixed with 0x
  */
-export const unsignTransaction = (signedTx) => {
-    const tx = new Transaction(signedTx);
+export const unsignTransaction = (signedTx) => {    
     try {
+        const tx = new Transaction(signedTx);
         return {
             tx: {
                 from: fromBuffer(tx.from),
