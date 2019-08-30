@@ -22,6 +22,15 @@ To build the bundle, execute
 
 `npm run build`
 
+### Using local API server
+You may want to use local backend application (API server). In that case please visit its [repository](https://github.com/olekon/justsmartcontracts-api) and follow launch instructions. 
+
+Then open this project's `config.js` file and locate `server` section. Set url to your local API server, for example
+
+    server: {        
+        url: 'http://localhost:3000'
+    } 
+
 ## Contributing
 Please see the [CONTRIBUTING.md](./CONTRIBUTING.md) file for details
 
