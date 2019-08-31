@@ -5,6 +5,8 @@ import Deploy from '../contract/Deploy.jsx';
 import LoadTransactionView from '../contract/LoadTransactionView.jsx';
 import BroadcastTransactionView from '../contract/BroadcastTransactionView.jsx';
 import NetworkSelect from '../settings/NetworkSelect.jsx';
+import ErrorBoundary from './ErrorBoundary.jsx';
+
 import * as contractLogic from '../../scripts/contractLogic.js';
 
 import * as nodeLogic from '../../scripts/nodeLogic.js';
@@ -37,13 +39,13 @@ class Center extends React.Component {
         });
 
         const networkId = nodeLogic.getNetworkId(nodeKey);
-        let contractList = contractLogic.getContractList(); 
-        let contracts = contractList.filter(contract=>contract.networkId === networkId);
+        let contractList = contractLogic.getContractList();
+        let contracts = contractList.filter(contract => contract.networkId === networkId);
 
-      
+
         const activeContract = contracts.length > 0 ? contracts[0] : null;
         contractLogic.saveActiveContract(activeContract);
-        
+
     }
 
     handleMenuClick(e) {
@@ -92,53 +94,55 @@ class Center extends React.Component {
         const node = this.getNodeInfo(this.state.activeNodeKey);
         return (
             <>
-                <Row>
-                    <Col span={gridConfig.NetworkSelectSpan}>
-                        <NetworkSelect
-                            activeNodeKey={this.state.activeNodeKey}
-                            nodeList={this.state.nodeList}
-                            onChangeActiveNode={this.changeNode}
-                            onDeleteNode={this.deleteNode}
-                            onAddNewNode={this.addCustomNode}
-                            onEditNode={this.editCustomNode}
-                        />
-                    </Col>
-                    <Col offset={gridConfig.NetworkSelectSpan}>
-                        <Menu
-                            onClick={this.handleMenuClick}
-                            theme="light"
-                            mode="horizontal"
-                            defaultSelectedKeys={["browser"]}
-                        >
-                            <Menu.Item key="browser">Browser</Menu.Item>
-                            <Menu.Item key="deploy">Deploy</Menu.Item>
-                            <Menu.Item key="load">Load Transaction</Menu.Item>
-                            <Menu.Item key="broadcast">Broadcast Transaction</Menu.Item>
-                        </Menu>
-                    </Col>
-                </Row>
-                <div>
-                    {this.state.activeMenuKey === "browser" ? <ContractBrowser
-                        networkId={node.networkId}
-                        endpoint={node.endpoint}
-                        visible={this.state.activeMenuKey === "browser"}
-                    /> : null
-                    }
-                    {this.state.activeMenuKey === "deploy" ? <Deploy
-                        networkId={node.networkId}
-                        endpoint={node.endpoint}
-                    /> : null
-                    }
-                    {this.state.activeMenuKey === "load" ? <LoadTransactionView
-                        networkId={node.networkId}
-                    /> : null
-                    }
-                    {this.state.activeMenuKey === "broadcast" ? <BroadcastTransactionView
-                        networkId={node.networkId}
-                        endpoint={node.endpoint}
-                    /> : null
-                    }
-                </div>
+                <ErrorBoundary>
+                    <Row>
+                        <Col span={gridConfig.NetworkSelectSpan}>
+                            <NetworkSelect
+                                activeNodeKey={this.state.activeNodeKey}
+                                nodeList={this.state.nodeList}
+                                onChangeActiveNode={this.changeNode}
+                                onDeleteNode={this.deleteNode}
+                                onAddNewNode={this.addCustomNode}
+                                onEditNode={this.editCustomNode}
+                            />
+                        </Col>
+                        <Col offset={gridConfig.NetworkSelectSpan}>
+                            <Menu
+                                onClick={this.handleMenuClick}
+                                theme="light"
+                                mode="horizontal"
+                                defaultSelectedKeys={["browser"]}
+                            >
+                                <Menu.Item key="browser">Browser</Menu.Item>
+                                <Menu.Item key="deploy">Deploy</Menu.Item>
+                                <Menu.Item key="load">Load Transaction</Menu.Item>
+                                <Menu.Item key="broadcast">Broadcast Transaction</Menu.Item>
+                            </Menu>
+                        </Col>
+                    </Row>
+                    <div>
+                        {this.state.activeMenuKey === "browser" ? <ContractBrowser
+                            networkId={node.networkId}
+                            endpoint={node.endpoint}
+                            visible={this.state.activeMenuKey === "browser"}
+                        /> : null
+                        }
+                        {this.state.activeMenuKey === "deploy" ? <Deploy
+                            networkId={node.networkId}
+                            endpoint={node.endpoint}
+                        /> : null
+                        }
+                        {this.state.activeMenuKey === "load" ? <LoadTransactionView
+                            networkId={node.networkId}
+                        /> : null
+                        }
+                        {this.state.activeMenuKey === "broadcast" ? <BroadcastTransactionView
+                            networkId={node.networkId}
+                            endpoint={node.endpoint}
+                        /> : null
+                        }
+                    </div>
+                </ErrorBoundary>
             </>
         );
     }
