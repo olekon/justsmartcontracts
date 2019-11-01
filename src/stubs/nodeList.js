@@ -7,15 +7,14 @@ let nodeList = [
         nodes: [
             {
                 name: "Infura",
-                key: "Mainnet_Infura",
-                //endpoint : "https://justsmartcontracts.dev/jscapi/eth/main",
+                key: "Mainnet_Infura",                
                 endpoint: urljoin(config.server.url, 'eth/mainnet'),
                 id: "1",
             },
             {
                 name: "MEW",
                 key: "Mainnet_mew",
-                endpoint: "https://mainnet.infura.io/mew",
+                endpoint: "https://api.myetherapi.com/eth",
                 id: "1",
             }
         ]
@@ -26,8 +25,13 @@ let nodeList = [
             {
                 name: "Infura",
                 key: "Ropsten_Infura",
-                //endpoint : "https://justsmartcontracts.dev/jscapi/eth/rop",
                 endpoint: urljoin(config.server.url, '/eth/ropsten'),
+                id: "3",
+            },
+            {
+                name: "MEW",
+                key: "Ropsten_mew",
+                endpoint: "https://api.myetherapi.com/rop",
                 id: "3",
             }
         ]
@@ -38,7 +42,6 @@ let nodeList = [
             {
                 name: "Infura",
                 key: "Rinkeby_Infura",
-                //endpoint : "https://justsmartcontracts.dev/jscapi/eth/rin",
                 endpoint: urljoin(config.server.url, '/eth/rinkeby'),
                 id: "4",
             }
@@ -50,7 +53,6 @@ let nodeList = [
             {
                 name: "Infura",
                 key: "Kovan_Infura",
-                //endpoint : "https://justsmartcontracts.dev/jscapi/eth/kovan",
                 endpoint: urljoin(config.server.url, '/eth/kovan'),
                 id: "42",
             }
@@ -62,7 +64,6 @@ let nodeList = [
             {
                 name: "Infura",
                 key: "Goerli_Infura",
-                //endpoint : "https://justsmartcontracts.dev/jscapi/eth/goerli",
                 endpoint: urljoin(config.server.url, '/eth/goerli'),
                 id: "5",
             }
