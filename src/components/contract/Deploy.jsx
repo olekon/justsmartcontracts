@@ -66,14 +66,13 @@ class Deploy extends React.Component {
         try {
             const abi = JSON.parse(this.state.abi);
             const ctor = abi.find(item => item.type == 'constructor');
-            return ctor
-                ? <FunctionInputs
-                    inputs={ctor.inputs}
-                    ethInput={ctor.payable}
-                    button='Generate'
-                    onClick={this.handleInputsClick}
-                />
-                : null;
+
+            return <FunctionInputs
+                inputs={ctor ? ctor.inputs : []}
+                ethInput={ctor ? ctor.payable : false}
+                button='Generate'
+                onClick={this.handleInputsClick}
+            />
         } catch (e) {
             //in case 'abi' is not a json return null
             return null;
