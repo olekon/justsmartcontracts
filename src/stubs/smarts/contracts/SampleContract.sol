@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.5.8;
 
 contract SampleContract {
 
@@ -34,7 +34,7 @@ contract SampleContract {
         uintData = initialData;
     }
 
-    function getSomeValues(address key) public view returns (uint256, bool, string) {
+    function getSomeValues(address key) public view returns (uint256, bool, string memory) {
         return (mapData[key], boolData, stringData);
     }
 
@@ -49,14 +49,14 @@ contract SampleContract {
         emit MapDataSet(msg.sender, key, value);
     }
 
-    function setMapDataArray(address[] keys, uint256[] values) public {
+    function setMapDataArray(address[] memory keys, uint256[] memory values) public {
         for(uint256 i = 0; i < values.length; ++i) {
             mapData[keys[i]] = values[i]; 
         }
         emit MapDataSetArray(msg.sender, keys, values);
     }
 
-    function setStringData(string value) public {
+    function setStringData(string memory value) public {
         stringData = value;
         emit StringDataSet(msg.sender, value);
     }
@@ -76,8 +76,8 @@ contract SampleContract {
         emit EtherPaid(msg.sender, param, msg.value);
     }
 
-    function withdrawTo(address to) public {
-        require(owner == msg.sender, 'owner only');        
+    function withdrawTo(address payable to) public {
+        require(owner == msg.sender, 'owner only');
         emit EtherSent(to, address(this).balance);
         to.transfer(address(this).balance);
     }
