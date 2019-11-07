@@ -51,20 +51,24 @@ export const checkParamErrors = method => {
  * @param {*} event event object, item of array returned from getPastEvents
  * @param {*} keyProperty name of unique key property in shortened object
  */
-export const shortenEvent = (event, keyProperty = 'key') =>
+export const shortenEvent = (event, keyProperty = 'key') => {
     //First keep only non-numeric returnValues (remove duplicate numeric)
     //Then attach 'key' property - txHash+logIndex
-    Object.keys(event.returnValues)
-        .filter(key => isNaN(parseInt(key)))
+    const keys = Object.keys(event.returnValues);
+    const uniqueKeys = keys.filter(key => isNaN(parseInt(key)));
+    const eventParams = uniqueKeys.length * 2 == keys.length ?
+        uniqueKeys : keys;
+
+    return eventParams
         .reduce(
-            (obj, key) => ({...obj, [key]: event.returnValues[key]}),
+            (obj, key) => ({...obj, [key.toString()]: event.returnValues[key]}),
             {
                 [keyProperty]: event.transactionHash + event.logIndex,
                 blockNumber: event.blockNumber,
                 transactionHash: event.transactionHash
             }
         );
-
+}
 
 /**
  * Retrieves contract's Ether balance
@@ -103,7 +107,7 @@ const fromBuffer = buffer => '0x' + buffer.toString('hex');
  * Converts signed transaction to unsigned, returns transaction and signature verification
  * @param {*} signedTx signed transaction, optionally prefixed with 0x
  */
-export const unsignTransaction = (signedTx) => {    
+export const unsignTransaction = (signedTx) => {
     try {
         const tx = new Transaction(signedTx);
         return {
@@ -118,7 +122,7 @@ export const unsignTransaction = (signedTx) => {
             },
             verified: tx.verifySignature()
         };
-    } catch(e) {
+    } catch (e) {
         return {
             tx: {},
             verified: false,
@@ -134,8 +138,8 @@ export const unsignTransaction = (signedTx) => {
 export const unhexTransaction = tx => {
     const hexFields = ['nonce', 'gas', 'gasPrice', 'value', 'gasLimit'];
     let hexTx = tx;
-    hexFields.forEach(value=>{
-        if(web3utils.isHexStrict(tx[value])) {
+    hexFields.forEach(value => {
+        if (web3utils.isHexStrict(tx[value])) {
             hexTx[value] = web3utils.hexToNumberString(tx[value]);
         }
     });
@@ -149,8 +153,8 @@ export const unhexTransaction = tx => {
 export const hexTransaction = tx => {
     const hexFields = ['nonce', 'gas', 'gasPrice', 'value', 'gasLimit'];
     let hexTx = tx;
-    hexFields.forEach(value=>{
-        if(!web3utils.isHexStrict(tx[value])) {
+    hexFields.forEach(value => {
+        if (!web3utils.isHexStrict(tx[value])) {
             hexTx[value] = web3utils.toHex(tx[value]);
         }
     });

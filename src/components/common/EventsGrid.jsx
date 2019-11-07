@@ -36,7 +36,8 @@ class EventsGrid extends React.Component {
 
 
     render() {
-        const eventArgs = this.props.events.map(event => shortenEvent(event));
+        const rowKey = "__rowKey";
+        const eventArgs = this.props.events.map(event => shortenEvent(event, rowKey));
 
         const getFilterProps = (column, type) => (
             type == 'uint256'
@@ -55,10 +56,10 @@ class EventsGrid extends React.Component {
                 : {}
         );
 
-        const columns = this.props.event.inputs.map(input => ({
-            title: input.name,
-            dataIndex: input.name,
-            key: input.name,
+        const columns = this.props.event.inputs.map((input, index) => ({
+            title: input.name || `Param ${index}`,
+            dataIndex: input.name || index,
+            key: input.name || index,
             ...getFilterProps(input.name, input.type),
             render: value => (<FormattedValue type={input.type} value={value} mode={this.getUintMode(input.name)}/>)
         }));
@@ -77,7 +78,7 @@ class EventsGrid extends React.Component {
         }];
 
         return (
-            <Table dataSource={eventArgs} columns={columns.concat(systemColumns)} size='small' scroll={{x: true}}></Table >
+            <Table dataSource={eventArgs} rowKey={rowKey} columns={columns.concat(systemColumns)} size='small' scroll={{x: true}}></Table >
         );
     }
 }
