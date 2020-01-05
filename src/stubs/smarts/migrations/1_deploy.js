@@ -5,7 +5,6 @@ module.exports = async function(deployer, network, accounts) {
     const oneEther = 1000000000000000000;
 
     const contract = await SampleContract.new(3);
-    console.log(`Contract ${contract.address}`);
 
     await contract.setMapData(accounts[1], 10);
     await contract.setMapData(accounts[2], 100);
@@ -27,4 +26,6 @@ module.exports = async function(deployer, network, accounts) {
     await contract.withdrawTo(accounts[0]);
 
     await contract.pay(64, {from: accounts[9], value: 2 * oneEther});
+
+    console.log(`Deployed contract is ${contract.address}`);
 }
