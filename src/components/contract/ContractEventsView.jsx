@@ -1,5 +1,5 @@
 import React from 'react';
-import {Collapse, Form, Input, Row, Col} from 'antd';
+import { Collapse, Form, Input, Row, Col, Spin } from 'antd';
 import EventInputs from '../common/EventInputs.jsx';
 import EventsGrid from '../common/EventsGrid.jsx';
 
@@ -18,7 +18,8 @@ class Item extends React.Component {
         this.state = {
             fromBlock: '',
             toBlock: '',
-            events: null
+            events: null,
+            loading: false,
         };
 
         this.handleFromBlockChange = this.handleFromBlockChange.bind(this);
@@ -28,13 +29,14 @@ class Item extends React.Component {
 
     handleFetchClick(filter) {
         if (this.props.onFetch) {
+            this.setState({ loading: true });
             this.props.onFetch(
                 this.props.event.name,
                 filter,
                 this.state.fromBlock,
                 this.state.toBlock
             ).then(events => {
-                this.setState({events})
+                this.setState({ events, loading: false });
             });
         }
     }
@@ -79,11 +81,13 @@ class Item extends React.Component {
                         <EventInputs button='Fetch' inputs={indexedInputs} onClick={this.handleFetchClick} />
                     </Col>
                 </Row>
+                <Spin spinning={this.state.loading}>
                 {
                     this.state.events
                         ? <EventsGrid events={this.state.events} event={this.props.event} />
                         : null
                 }
+                </Spin>
             </>
         );
     }
