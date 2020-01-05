@@ -34,6 +34,10 @@ contract SampleContract {
         uintData = initialData;
     }
 
+    function pureFunction(uint256 a, uint256 b) public pure returns (uint256) {
+        return a + b;
+    }
+
     function getSomeValues(address key) public view returns (uint256, bool, string memory) {
         return (mapData[key], boolData, stringData);
     }
