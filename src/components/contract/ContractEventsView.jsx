@@ -11,6 +11,7 @@ const defaultFromBlock = 0;
  * Props:
  * event - event entry of the ABI array,
  * onFetch - Fetch button handler (inputs)
+ * networkId - network id (optional)
  */
 class Item extends React.Component {
     constructor(props) {
@@ -84,7 +85,7 @@ class Item extends React.Component {
                 <Spin spinning={this.state.loading}>
                 {
                     this.state.events
-                        ? <EventsGrid events={this.state.events} event={this.props.event} />
+                        ? <EventsGrid networkId={this.props.networkId} events={this.state.events} event={this.props.event} />
                         : null
                 }
                 </Spin>
@@ -129,7 +130,7 @@ class ContractEventsView extends React.Component {
             <Collapse>
                 {events.map((event, index) => (
                     <Collapse.Panel header={event.name} key={event.name + index}>
-                        <Item event={event} onFetch={this.fetchEvents} />
+                        <Item event={event} networkId={this.props.contract.chainId} onFetch={this.fetchEvents} />
                     </Collapse.Panel>
                 ))}
             </Collapse>
