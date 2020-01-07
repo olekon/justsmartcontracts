@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import {Table, Radio, Icon} from 'antd';
 import {shortenEvent} from '../../scripts/utils.js';
 import FormattedValue from './FormattedValue.jsx';
+import EtherescanLink from './EtherscanLink.jsx';
 import {Map} from 'immutable';
+import EtherscanLink from './EtherscanLink.jsx';
 
 
 /** 
@@ -11,6 +13,7 @@ import {Map} from 'immutable';
  * Props:
  * events - array of event objects as returned from getPastEvents
  * event - entry of the ABI array 
+ * networkId - network id (optional)
 */
 class EventsGrid extends React.Component {
     constructor(props) {
@@ -74,7 +77,8 @@ class EventsGrid extends React.Component {
             title: 'TxHash',
             dataIndex: 'transactionHash',
             key: 'transactionHash',
-            render: value => <FormattedValue type='' value={value} />
+            //render: value => <FormattedValue type='' value={value} />
+            render: value => <EtherscanLink networkId={this.props.networkId} type='' txHash={value} />
         }];
 
         return (
