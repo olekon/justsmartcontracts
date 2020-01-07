@@ -51,6 +51,13 @@ export const getRootUrl = networkId => `https://${getConfig(networkId).domain}.i
 export const getTxHashUrl = (networkId, txHash) => urljoin(getRootUrl(networkId), `/tx/${txHash}`);
 
 /**
+ * Returns etherscan url to check specific address
+ * @param {*} networkId 
+ * @param {*} address
+ */
+export const getAddressUrl = (networkId, address) => urljoin(getRootUrl(networkId), `/address/${address}`);
+
+/**
  * Returns url of api that gets contract ABI 
  * @param {*} networkId 
  * @param {*} address 
