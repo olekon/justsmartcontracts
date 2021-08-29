@@ -17,8 +17,7 @@ class NodeFrom extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
+    handleSubmit(values) {        
         this.props.onSubmit(this.state.nodeName, this.state.endpoint, this.state.id);
     }
 
@@ -43,7 +42,7 @@ class NodeFrom extends React.Component {
     render() {
         const buttonText = this.state.prevNodeKey ? 'Save' : 'Add';
         return(
-            <Form onSubmit={this.handleSubmit}>
+            <Form onFinish={this.handleSubmit}>
                 <FormItem label="Name">
                     <Input 
                         placeholder="my node"

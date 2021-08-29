@@ -29,20 +29,15 @@ class FunctionInputs extends React.Component {
         return item ? item.type : this.props.inputs[0].type;
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        this.formRef.current.validateFields((err, values) => {
-            if (!err) {
-                if (this.props.onClick) {
-                    const { ETH: ethValue, ...paramValues } = values;
+    handleSubmit(values) {        
+        if (this.props.onClick) {
+            const { ETH: ethValue, ...paramValues } = values;
 
-                    this.props.onClick(
-                        Object.keys(paramValues).map((key) => paramValues[key]),
-                        ethValue
-                    );
-                }
-            }
-        });
+            this.props.onClick(
+                Object.values(paramValues),
+                ethValue
+            );
+        }
     }
 
     render() {
@@ -56,7 +51,7 @@ class FunctionInputs extends React.Component {
         return (
             <Form
                 layout="horizontal"
-                onSubmit={this.handleSubmit}
+                onFinish={this.handleSubmit}
                 ref={this.formRef}
             >
                 {' '}

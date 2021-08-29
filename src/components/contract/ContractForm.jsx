@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Icon, Input, Button} from 'antd';
+import { Form, Icon, Input, Button } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import AddressInput from '../common/AddressInput.jsx';
 import ContractInput from '../common/ContractInput.jsx';
@@ -40,18 +40,13 @@ class ContractForm extends React.Component {
         this.formRef.current.validateFields();
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        this.formRef.current.validateFields((err, values) => {
-            if (!err) {
-                this.props.onAddContract(
-                    values.name,
-                    values.address,
-                    this.state.networkId,
-                    values.abi
-                );
-            }
-        });
+    handleSubmit(values) {
+        this.props.onAddContract(
+            values.name,
+            values.address,
+            this.state.networkId,
+            values.abi
+        );
     }
 
     handleFromAddressChanged(value, isEthAddress) {
@@ -89,7 +84,7 @@ class ContractForm extends React.Component {
 
     render() {
         return (
-            <Form onSubmit={this.handleSubmit} ref={this.formRef}>
+            <Form onFinish={this.handleSubmit} ref={this.formRef}>
                 <FormItem
                     label="Name"
                     rules={[
