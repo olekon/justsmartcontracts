@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Modal} from 'antd';
-
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import NodeForm from './NodeForm.jsx';
 import {Popconfirm, TreeSelect} from 'antd';
 const TreeNode = TreeSelect.TreeNode;
@@ -123,19 +123,22 @@ class NetworkSelect extends React.Component {
                 {text}
                 <Button 
                     type="default"
-                    name="deleteButton" 
-                    icon="delete"
+                    name="deleteButton"                     
                     size="small"
                     style={{ float: "right" }} 
                     onClick={e => this.deleteNode(e, nodeKey)}
-                />
+                >
+                    <DeleteOutlined />
+                </Button>
                 <Button 
                     type="default" 
-                    icon="edit"
                     size="small"
                     style={{ float: "right" }} 
-                    onClick={e => this.handleEditButtonClick(e, nodeKey)}/>
-                </>
+                    onClick={e => this.handleEditButtonClick(e, nodeKey)}
+                >
+                    <EditOutlined />
+                </Button>
+            </>
         )
     }
 

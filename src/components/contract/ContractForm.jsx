@@ -1,5 +1,6 @@
 import React from 'react';
 import {Form, Icon, Input, Button} from 'antd';
+import { FormInstance } from 'antd/lib/form';
 import AddressInput from '../common/AddressInput.jsx';
 import ContractInput from '../common/ContractInput.jsx';
 import NetworkIdSelect from '../common/NetworkIdSelect.jsx';
@@ -20,82 +21,112 @@ class ContractForm extends React.Component {
 
         this.state = {
             address: '',
-            networkId: '1'
-        }
+            networkId: '1',
+        };
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleFromAddressChanged = this.handleFromAddressChanged.bind(this);
+        this.handleFromAddressChanged = this.handleFromAddressChanged.bind(
+            this
+        );
         this.handleFileLoad = this.handleFileLoad.bind(this);
         this.handleNetworkChanged = this.handleNetworkChanged.bind(this);
-        this.handleEtherscanAbiResponse = this.handleEtherscanAbiResponse.bind(this);
+        this.handleEtherscanAbiResponse = this.handleEtherscanAbiResponse.bind(
+            this
+        );
         this.getEtherscanAbiOptions = this.getEtherscanAbiOptions.bind(this);
+        this.formRef = React.createRef();
     }
 
     componentDidMount() {
-        const [form] = Form.useForm();
-        form.validateFields();
+        this.formRef.current.validateFields();
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        const [form] = Form.useForm();
-        form.validateFields((err, values) => {
+        this.formRef.current.validateFields((err, values) => {
             if (!err) {
-                this.props.onAddContract(values.name, values.address, this.state.networkId, values.abi);
+                this.props.onAddContract(
+                    values.name,
+                    values.address,
+                    this.state.networkId,
+                    values.abi
+                );
             }
         });
     }
 
     handleFromAddressChanged(value, isEthAddress) {
         this.setState({
-            address: value
+            address: value,
         });
     }
 
     handleNetworkChanged(value) {
         this.setState({
-            networkId: value
+            networkId: value,
         });
     }
 
     handleFileLoad(truffleObject) {
         this.props.form.setFieldsValue({
-            abi: JSON.stringify(truffleObject.abi, null, '\t')
+            abi: JSON.stringify(truffleObject.abi, null, '\t'),
         });
     }
 
     getEtherscanAbiOptions() {
         return {
             address: this.props.form.getFieldsValue(['address']).address,
-            networkId: this.state.networkId
+            networkId: this.state.networkId,
         };
     }
 
     handleEtherscanAbiResponse(response) {
         if (response.status == 1) {
-            this.props.form.setFieldsValue(
-                {abi: response.result}
-            );
+            this.props.form.setFieldsValue({ abi: response.result });
         } else {
-            this.props.form.setFieldsValue(
-                {abi: ''}
-            );
+            this.props.form.setFieldsValue({ abi: '' });
         }
     }
 
     render() {
         return (
-            <Form onSubmit={this.handleSubmit}>
-                <FormItem label="Name" name="name" rules={[{required: true, message: 'Please input the name'}]}>
-                    <Input autoComplete='off' />
+            <Form onSubmit={this.handleSubmit} ref={this.formRef}>
+                <FormItem
+                    label="Name"
+                    rules={[
+                        { required: true, message: 'Please input the name' },
+                    ]}
+                >
+                    <Input autoComplete="off" />
                 </FormItem>
-                <FormItem label="Address" name="address" rules={[{required: true, pattern:/^0x[a-fA-F0-9]{40}$/, message: 'Please input the address'}]}>
+                <FormItem
+                    label="Address"
+                    rules={[
+                        {
+                            required: true,
+                            pattern: /^0x[a-fA-F0-9]{40}$/,
+                            message: 'Please input the address',
+                        },
+                    ]}
+                >
                     <AddressInput />
                 </FormItem>
                 <FormItem label="Network id">
-                    <NetworkIdSelect value={this.state.networkId} onChange={this.handleNetworkChanged} />
+                    <NetworkIdSelect
+                        value={this.state.networkId}
+                        onChange={this.handleNetworkChanged}
+                    />
                 </FormItem>
-                <FormItem label="ABI" name="abi" rules={[{required: true, message: 'Please input the ABI'}]}>
-                    <Input.TextArea rows={8} placeholder='ABI/JSON Interface' autoComplete='off' />
+                <FormItem
+                    label="ABI"
+                    rules={[
+                        { required: true, message: 'Please input the ABI' },
+                    ]}
+                >
+                    <Input.TextArea
+                        rows={8}
+                        placeholder="ABI/JSON Interface"
+                        autoComplete="off"
+                    />
                     <AbiQueryButton
                         getOptions={this.getEtherscanAbiOptions}
                         onResponse={this.handleEtherscanAbiResponse}
@@ -105,16 +136,18 @@ class ContractForm extends React.Component {
                 </FormItem>
                 <FormItem label="Or load build file">
                     <ContractInput
-                        text='Select truffle-compiled file'
+                        text="Select truffle-compiled file"
                         onLoad={this.handleFileLoad}
                     />
                 </FormItem>
 
                 <Form.Item>
-                    <Button type="primary" htmlType="submit">Add</Button>
+                    <Button type="primary" htmlType="submit">
+                        Add
+                    </Button>
                 </Form.Item>
             </Form>
-        )
+        );
     }
 }
 

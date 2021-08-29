@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Button, List, Card, Modal} from 'antd';
+import {DeleteOutlined} from "@ant-design/icons";
 import Blockies from 'react-blockies';
 import {shortenEthAddress} from '../../scripts/utils.js'
 import ContractForm from './ContractForm.jsx';
@@ -76,12 +77,13 @@ class ContractsList extends React.Component {
                 {contract.name}
                 <Button 
                     type="default"
-                    name="deleteButton" 
-                    icon="delete"
+                    name="deleteButton"                     
                     size="small"
                     style={{ float: "right" }} 
                     onClick={e => this.handleDeleteButton(e, contract.networkId, contract.name)}
-                />
+                >
+                    <DeleteOutlined />
+                </Button>
             </>
         )
     }

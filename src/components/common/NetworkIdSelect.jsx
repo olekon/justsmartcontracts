@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Select, Input, Icon} from 'antd';
-
+import { Select, Input } from 'antd';
+import { EditOutlined } from '@ant-design/icons';
 import styles from './NetworkIdSelect.css';
 
-const {Option} = Select;
+const { Option } = Select;
 /**
  * Input for Ethereum network id, a list of preordered ids and field for manual input
  * Props:
@@ -16,11 +16,11 @@ class NetworkIdSelect extends React.Component {
         super(props);
 
         this.idPresets = [
-            {id: '1', label: 'Mainnet'},
-            {id: '3', label: 'Ropsten'},
-            {id: '4', label: 'Rinkeby'},
-            {id: '5', label: 'Goerli'},
-            {id: '42', label: 'Kovan'}
+            { id: '1', label: 'Mainnet' },
+            { id: '3', label: 'Ropsten' },
+            { id: '4', label: 'Rinkeby' },
+            { id: '5', label: 'Goerli' },
+            { id: '42', label: 'Kovan' },
         ];
 
         this.state = {
@@ -33,7 +33,7 @@ class NetworkIdSelect extends React.Component {
 
     handleIdSelect(id) {
         this.setState({
-            inputEnabled: this.isCustomId(id)
+            inputEnabled: this.isCustomId(id),
         });
         this.props.onChange(id);
     }
@@ -46,26 +46,31 @@ class NetworkIdSelect extends React.Component {
     }
 
     isCustomId(id) {
-        return this.idPresets.map(item => item.id).indexOf(id) == -1;
+        return this.idPresets.map((item) => item.id).indexOf(id) == -1;
     }
 
     render() {
-        const selectedValue = this.isCustomId(this.props.value) ? '0' : this.props.value;
-        const selectPresets = this.idPresets.map(item =>
-            (
-                <Option value={item.id}>{item.label}</Option>
-            )
-        );
+        const selectedValue = this.isCustomId(this.props.value)
+            ? '0'
+            : this.props.value;
+        const selectPresets = this.idPresets.map((item) => (
+            <Option value={item.id}>{item.label}</Option>
+        ));
         const selectAfter = (
             <Select
                 defaultValue={selectedValue}
                 onSelect={this.handleIdSelect}
                 className={styles.idList}
             >
-                {this.idPresets.map(item => (
-                    <Option key={item.id} value={item.id}>{item.label}</Option>
+                {this.idPresets.map((item) => (
+                    <Option key={item.id} value={item.id}>
+                        {item.label}
+                    </Option>
                 ))}
-                <Option value='0'><Icon type='edit' />Custom</Option>
+                <Option value="0">
+                    <EditOutlined />
+                    Custom
+                </Option>
             </Select>
         );
 
@@ -75,8 +80,7 @@ class NetworkIdSelect extends React.Component {
                 addonAfter={selectAfter}
                 value={this.props.value}
                 disabled={!this.state.inputEnabled}
-            >
-            </Input>
+            ></Input>
         );
     }
 }

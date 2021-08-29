@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Upload, Icon} from 'antd';
-
+import { Upload } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 
 /**
  * Upload dragger that accepts files with json content.
- * 
+ *
  * Props
  * * onLoad - function that recevies contract object from the truffle file
  * * text - text inside the dragger area
@@ -34,7 +34,8 @@ class ContractInput extends React.Component {
     }
 
     render() {
-        const text = this.props.text == '' ? null : (<div>{this.props.text}</div>);
+        const text =
+            this.props.text == '' ? null : <div>{this.props.text}</div>;
         return (
             <Upload.Dragger
                 accept={this.props.accept}
@@ -42,7 +43,7 @@ class ContractInput extends React.Component {
                 beforeUpload={this.handleBeforeUpload}
                 showUploadList={false}
             >
-                <Icon type='upload'></Icon>
+                <UploadOutlined />
                 {text}
             </Upload.Dragger>
         );

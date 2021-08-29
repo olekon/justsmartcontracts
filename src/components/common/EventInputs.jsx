@@ -1,9 +1,10 @@
 import React, {useReducer} from 'react';
 import PropTypes from 'prop-types';
-import {Switch, Button, Row, Col, Icon, Form} from 'antd';
+import { Switch, Button, Form } from 'antd';
+import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
 import CustomInput from './CustomInput.jsx';
-import {getDefaultValue} from '../../scripts/utils.js';
-import {fromJS} from 'immutable';
+import { getDefaultValue } from '../../scripts/utils.js';
+import { fromJS } from 'immutable';
 
 const defaultActive = false;
 
@@ -17,37 +18,45 @@ const defaultActive = false;
  * onRemoveValue - event handler, fires when '-' button pressed - () => {}
  * onActivate - event handler, fires when Switch is toggled (activated) => {}
  */
-const Item = props => {
-    const {name, type, values, onValueChange, onAddValue, onRemoveValue, onActivate, ...inputProps} = props;
+const Item = (props) => {
+    const {
+        name,
+        type,
+        values,
+        onValueChange,
+        onAddValue,
+        onRemoveValue,
+        onActivate,
+        ...inputProps
+    } = props;
     return (
         <>
             <span>
                 <Switch
-                    size='small'
+                    size="small"
                     defaultChecked={defaultActive}
-                    onChange={(checked) => props.onActivate && props.onActivate(checked)}
+                    onChange={(checked) =>
+                        props.onActivate && props.onActivate(checked)
+                    }
                 />
             </span>
             <span>
-                <Button 
-                    size='small' 
-                    onClick={props.onAddValue}
-                >
-                    <Icon type='plus' />
+                <Button size="small" onClick={props.onAddValue}>
+                    <PlusOutlined />
                 </Button>
             </span>
             <span>
-                <Button 
-                    size='small' 
-                    disabled={values.length <= 1} 
+                <Button
+                    size="small"
+                    disabled={values.length <= 1}
                     onClick={() => props.onRemoveValue()}
                 >
-                    <Icon type='minus' />
+                    <MinusOutlined />
                 </Button>
             </span>
             {values.map((item, index) => (
                 <CustomInput
-                    size='small'
+                    size="small"
                     key={index}
                     type={type}
                     onChange={(value) => props.onValueChange(index, value)}
@@ -56,7 +65,7 @@ const Item = props => {
             ))}
         </>
     );
-}
+};
 
 
 /**
