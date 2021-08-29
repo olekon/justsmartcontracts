@@ -31,12 +31,14 @@ class ContractForm extends React.Component {
     }
 
     componentDidMount() {
-        this.props.form.validateFields();
+        const [form] = Form.useForm();
+        form.validateFields();
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.form.validateFields((err, values) => {
+        const [form] = Form.useForm();
+        form.validateFields((err, values) => {
             if (!err) {
                 this.props.onAddContract(values.name, values.address, this.state.networkId, values.abi);
             }
@@ -81,33 +83,19 @@ class ContractForm extends React.Component {
     }
 
     render() {
-        const {getFieldDecorator} = this.props.form;
         return (
             <Form onSubmit={this.handleSubmit}>
-                <FormItem label="Name">
-                    {getFieldDecorator('name', {
-                        rules: [{required: true, message: 'Please input the name'}]
-                    })(
-                        <Input autoComplete='off' />
-                    )}
+                <FormItem label="Name" name="name" rules={[{required: true, message: 'Please input the name'}]}>
+                    <Input autoComplete='off' />
                 </FormItem>
-                <FormItem label="Address">
-                    {/* <AddressInput value={this.state.address} onChange={this.handleFromAddressChanged} /> */}
-                    {getFieldDecorator('address', {
-                        rules: [{required: true, pattern:/^0x[a-fA-F0-9]{40}$/, message: 'Please input the address'}]
-                    })(
-                        <AddressInput />
-                    )}
+                <FormItem label="Address" name="address" rules={[{required: true, pattern:/^0x[a-fA-F0-9]{40}$/, message: 'Please input the address'}]}>
+                    <AddressInput />
                 </FormItem>
                 <FormItem label="Network id">
                     <NetworkIdSelect value={this.state.networkId} onChange={this.handleNetworkChanged} />
                 </FormItem>
-                <FormItem label="ABI">
-                    {getFieldDecorator('abi', {
-                        rules: [{required: true, message: 'Please input the ABI'}]
-                    })(
-                        <Input.TextArea rows={8} placeholder='ABI/JSON Interface' autoComplete='off' />
-                    )}
+                <FormItem label="ABI" name="abi" rules={[{required: true, message: 'Please input the ABI'}]}>
+                    <Input.TextArea rows={8} placeholder='ABI/JSON Interface' autoComplete='off' />
                     <AbiQueryButton
                         getOptions={this.getEtherscanAbiOptions}
                         onResponse={this.handleEtherscanAbiResponse}
@@ -130,4 +118,4 @@ class ContractForm extends React.Component {
     }
 }
 
-export default Form.create()(ContractForm);
+export default ContractForm;

@@ -50,9 +50,6 @@ class NodeFrom extends React.Component {
                         value={this.state.nodeName}
                         onChange={ (e) => this.handleChange(e, 'nodeName')}
                         required
-                        /*validationErrors={{
-                            isDefaultRequiredValue: 'Field is required'
-                        }}*/
                     />
                 </FormItem>
                 <FormItem label="Endpoint">
@@ -79,4 +76,4 @@ class NodeFrom extends React.Component {
     }
 }
 
-export default Form.create()(NodeFrom);
+export default NodeFrom;

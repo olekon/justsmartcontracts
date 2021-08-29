@@ -30,7 +30,8 @@ class FunctionInputs extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.form.validateFields((err, values) => {
+        const [form] = Form.useForm();
+        form.validateFields((err, values) => {
             if (!err) {
                 if (this.props.onClick) {
                     const {ETH: ethValue, ...paramValues} = values;
@@ -45,8 +46,6 @@ class FunctionInputs extends React.Component {
     }
 
     render() {
-        const {getFieldDecorator} = this.props.form;
-
         //Replace empty input names with 'ParamXX' 
         let inputs = this.props.inputs.map(
             (input, index) =>
@@ -56,21 +55,16 @@ class FunctionInputs extends React.Component {
         return (
             <Form layout='horizontal' onSubmit={this.handleSubmit}> {
                 inputs.map((input, index) =>
-                    <Form.Item key={input.name} label={`${input.name} (${input.type})`}>
-                        {getFieldDecorator(input.name, {initialValue: getDefaultValue(input.type)})(
-                            <CustomInput type={input.type}></CustomInput>
-                        )}
-
+                    <Form.Item key={input.name} label={`${input.name} (${input.type})`} name={input.name} initialValue={getDefaultValue(input.type)}>                        
+                        <CustomInput type={input.type}></CustomInput>                        
                     </Form.Item>
                 )
             }
                 {
                     this.props.ethInput
                         ? (
-                            <Form.Item label='ETH To Send'>
-                                {getFieldDecorator('ETH', {})(
-                                    <EtherInput defaultMode='ether' />
-                                )}
+                            <Form.Item label='ETH To Send' name='ETH'>
+                                <EtherInput defaultMode='ether' />
                             </Form.Item>
                         ) : null
                 }
@@ -100,4 +94,4 @@ FunctionInputs.defaultProps = {
     button: ''
 };
 
-export default Form.create({name: 'FunctionInputs'})(FunctionInputs);
+export default FunctionInputs;
