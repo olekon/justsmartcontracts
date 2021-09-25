@@ -146,7 +146,6 @@ class NetworkSelect extends React.Component {
         return (
             <>
             <TreeSelect
-                showSearch         
                 value={this.getNodeInfo(this.props.activeNodeKey).info}
                 dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
                 placeholder="Please select"

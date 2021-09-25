@@ -27,6 +27,7 @@ class ContractForm extends React.Component {
         this.handleFromAddressChanged = this.handleFromAddressChanged.bind(
             this
         );
+        this.handleSubmitFailed = this.handleSubmitFailed.bind(this);
         this.handleFileLoad = this.handleFileLoad.bind(this);
         this.handleNetworkChanged = this.handleNetworkChanged.bind(this);
         this.handleEtherscanAbiResponse = this.handleEtherscanAbiResponse.bind(
@@ -44,9 +45,13 @@ class ContractForm extends React.Component {
         this.props.onAddContract(
             values.name,
             values.address,
-            this.state.networkId,
+            values.networkId,
             values.abi
         );
+    }
+
+    handleSubmitFailed(data) {
+        console.log(data.errorFields);
     }
 
     handleFromAddressChanged(value, isEthAddress) {
@@ -62,30 +67,36 @@ class ContractForm extends React.Component {
     }
 
     handleFileLoad(truffleObject) {
-        this.props.form.setFieldsValue({
+        this.formRef.current.setFieldsValue({
             abi: JSON.stringify(truffleObject.abi, null, '\t'),
         });
     }
 
     getEtherscanAbiOptions() {
         return {
-            address: this.props.form.getFieldsValue(['address']).address,
+            address: this.formRef.current.getFieldsValue(['address']).address,
             networkId: this.state.networkId,
         };
     }
 
     handleEtherscanAbiResponse(response) {
         if (response.status == 1) {
-            this.props.form.setFieldsValue({ abi: response.result });
+            this.formRef.current.setFieldsValue({ abi: response.result });
         } else {
-            this.props.form.setFieldsValue({ abi: '' });
+            this.formRef.current.setFieldsValue({ abi: '' });
         }
     }
 
     render() {
         return (
-            <Form onFinish={this.handleSubmit} ref={this.formRef}>
+            <Form
+                name="contractForm"
+                onFinish={this.handleSubmit}
+                onFinishFailed={this.handleSubmitFailed}
+                ref={this.formRef}
+            >
                 <FormItem
+                    name="name"
                     label="Name"
                     rules={[
                         { required: true, message: 'Please input the name' },
@@ -94,6 +105,7 @@ class ContractForm extends React.Component {
                     <Input autoComplete="off" />
                 </FormItem>
                 <FormItem
+                    name="address"
                     label="Address"
                     rules={[
                         {
@@ -105,23 +117,27 @@ class ContractForm extends React.Component {
                 >
                     <AddressInput />
                 </FormItem>
-                <FormItem label="Network id">
-                    <NetworkIdSelect
-                        value={this.state.networkId}
-                        onChange={this.handleNetworkChanged}
-                    />
-                </FormItem>
                 <FormItem
-                    label="ABI"
-                    rules={[
-                        { required: true, message: 'Please input the ABI' },
-                    ]}
+                    label="Network id"
+                    name="networkId"
+                    initialValue={this.state.networkId}
                 >
-                    <Input.TextArea
-                        rows={8}
-                        placeholder="ABI/JSON Interface"
-                        autoComplete="off"
-                    />
+                    <NetworkIdSelect />
+                </FormItem>
+                <FormItem label="ABI">
+                    <FormItem
+                        name="abi"
+                        label="ABI"
+                        rules={[
+                            { required: true, message: 'Please input the ABI' },
+                        ]}
+                    >
+                        <Input.TextArea
+                            rows={8}
+                            placeholder="ABI/JSON Interface"
+                            autoComplete="off"
+                        />
+                    </FormItem>
                     <AbiQueryButton
                         getOptions={this.getEtherscanAbiOptions}
                         onResponse={this.handleEtherscanAbiResponse}

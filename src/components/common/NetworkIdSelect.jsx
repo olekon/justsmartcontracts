@@ -53,9 +53,7 @@ class NetworkIdSelect extends React.Component {
         const selectedValue = this.isCustomId(this.props.value)
             ? '0'
             : this.props.value;
-        const selectPresets = this.idPresets.map((item) => (
-            <Option value={item.id}>{item.label}</Option>
-        ));
+
         const selectAfter = (
             <Select
                 defaultValue={selectedValue}
@@ -87,8 +85,8 @@ class NetworkIdSelect extends React.Component {
 
 
 NetworkIdSelect.propTypes = {
-    value: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired
+    value: PropTypes.string,
+    onChange: PropTypes.func
 };
 
 
