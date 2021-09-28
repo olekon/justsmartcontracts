@@ -2,6 +2,7 @@
 /node_modules
 /src/stubs/smarts/build
 /.vscode
+/.idea
 /tmp
 ~*
 *.zip

@@ -28,7 +28,6 @@ class TransactionParams extends React.Component {
         //mode - online/offline
         this.state = {
             mode: onlineMode,
-            gasPrice: null,
             maxFeePerGas: '2000000000',
             maxPriorityFeePerGas: '1000000000',
             fromAddress: '',
@@ -39,7 +38,6 @@ class TransactionParams extends React.Component {
 
         this.handleSignClick = this.handleSignClick.bind(this);
         this.handleModeChange = this.handleModeChange.bind(this);
-        this.handleGasPriceChange = this.handleGasPriceChange.bind(this);
         this.handleMaxFeePerGasChange = this.handleMaxFeePerGasChange.bind(
             this
         );
@@ -71,12 +69,6 @@ class TransactionParams extends React.Component {
     componentDidMount() {
         //update estimated gas
         this.loadTxData(utils.getMethodId(this.props.tx));
-
-        //update initial gas price
-        this.props.tx._parent.web3.eth
-            .getGasPrice()
-            .then((gasPrice) => this.setState({ gasPrice }))
-            .catch((error) => this.setState({ gasPrice: '0' }));
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -130,7 +122,6 @@ class TransactionParams extends React.Component {
                 from: this.state.fromAddress,
                 nonce: utils.toHex(this.state.nonce),
                 data: this.props.tx.encodeABI(),
-                gasPrice: utils.toHex(this.state.gasPrice),
                 gas: utils.toHex(this.state.gas),
                 value: utils.toHex(this.props.ethValue || 0),
                 chainId: this.props.tx._parent.chainId,
@@ -185,12 +176,6 @@ class TransactionParams extends React.Component {
         }
     }
 
-    handleGasPriceChange(gasPrice) {
-        this.setState({
-            gasPrice,
-        });
-    }
-
     handleMaxFeePerGasChange(maxFeePerGas) {
         this.setState({
             maxFeePerGas,
@@ -232,7 +217,7 @@ class TransactionParams extends React.Component {
         };
 
         return (
-            <Form>
+            <Form layout="vertical">
                 <Form.Item>
                     <Radio.Group
                         defaultValue={onlineMode}
@@ -288,19 +273,6 @@ class TransactionParams extends React.Component {
                 </Row>
 
                 <Row {...rowLayout}>
-                    <Col {...colLayout}>
-                        <Form.Item label="Gas Price">
-                            {this.state.gasPrice == null ? (
-                                <Spin></Spin>
-                            ) : (
-                                <EtherInput
-                                    value={this.state.gasPrice}
-                                    defaultMode="gwei"
-                                    onChange={this.handleGasPriceChange}
-                                />
-                            )}
-                        </Form.Item>
-                    </Col>
                     <Col {...colLayout}>
                         <Form.Item label="Gas">
                             <Input

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Form, Row, Col, Input} from 'antd';
 import {fromJS} from 'immutable';
-import {getDefaultValue} from '../../scripts/utils.js';
+import {getDefaultValue, toHex} from '../../scripts/utils.js';
 import AddressInput from './AddressInput.jsx';
 import EtherInput from './EtherInput.jsx';
 
@@ -41,9 +41,14 @@ const TransactionDetails = props => {
             handleChange(field, value);
         }
     }
-    
+
+    const handleHexFieldChange = (field, value) => {
+        handleChange(field, toHex(value));
+    }
+
     const value = (props.tx.value || defaultEther).toString();
-    const gasPrice = (props.tx.gasPrice || defaultNumber).toString();
+    const maxFeePerGas = (props.tx.maxFeePerGas || defaultNumber).toString();
+    const maxPriorityFeePerGas = (props.tx.maxPriorityFeePerGas || defaultNumber).toString();
 
     return (        
         <Form>
@@ -82,14 +87,6 @@ const TransactionDetails = props => {
             </Row>
 
             <Row {...rowLayout}>
-                <Col {...colLayout}><Form.Item label='Gas Price'>
-                    <EtherInput
-                        value={gasPrice}
-                        onChange={value => handleChange('gasPrice', value)}
-                        disabled={props.readonly}
-                        defaultMode='gwei'
-                    />
-                </Form.Item></Col>
                 <Col {...colLayout}><Form.Item label='Gas'>
                     <Input
                         value={props.tx.gas || props.tx.gasLimit || defaultNumber}
@@ -97,6 +94,26 @@ const TransactionDetails = props => {
                         disabled={props.readonly}
                     />
                 </Form.Item></Col>
+            </Row>
+            <Row {...rowLayout}>
+                <Col {...colLayout}>
+                    <Form.Item label="Max Fee Per Gas">
+                        <EtherInput
+                            value={maxFeePerGas}
+                            defaultMode="gwei"
+                            onChange={value => handleHexFieldChange('maxFeePerGas', value)}
+                        />
+                    </Form.Item>
+                </Col>
+                <Col {...colLayout}>
+                    <Form.Item label="Max Priority Fee Per Gas">
+                        <EtherInput
+                            value={maxPriorityFeePerGas}
+                            defaultMode="gwei"
+                            onChange={value => handleHexFieldChange('maxPriorityFeePerGas', value)}
+                        />
+                    </Form.Item>
+                </Col>
             </Row>
             <Form.Item label='Data'>
                 <Input.TextArea
