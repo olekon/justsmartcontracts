@@ -1,10 +1,13 @@
+@import "../../common.scss";
+
 .header {
     composes: backgroundPrimary from '../Globals.scss';
     height: 60px;
 }
 
 .content {
-    min-height: 800px;
+    @include content;
+    min-height: 800px;    
 }
 
 .footer {

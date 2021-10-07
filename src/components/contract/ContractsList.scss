@@ -1,17 +1,22 @@
-@import "../../common.scss";
+@import '../../common.scss';
 
 .contractCard {
     cursor: pointer;
-}
-.selectedContract {
-    background-color: #e0e0e0;
+    opacity: 0.75;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    margin-bottom: 0.25rem;
+
+    &.selectedContract {
+        border-color: #a0a0a0;
+        background-color: #f0f0f0;
+        opacity: 1;
+    }
 }
 
 .addButton {
-    width: 94%;
-    margin-left: 3%;
-    margin-right: 3%;
-    margin-top: 2%;    
+    width: 100%;
+    margin-top: 1rem;
 }
 
 .cardMeta :global(.ant-card-meta-description) {

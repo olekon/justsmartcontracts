@@ -1,17 +1,16 @@
 import React from 'react';
-import {Layout, Tabs, Menu, Row, Col} from 'antd';
+import {Menu, Row, Col} from 'antd';
 import ContractBrowser from '../contract/ContractBrowser.jsx';
 import Deploy from '../contract/Deploy.jsx';
 import LoadTransactionView from '../contract/LoadTransactionView.jsx';
 import BroadcastTransactionView from '../contract/BroadcastTransactionView.jsx';
 import NetworkSelect from '../settings/NetworkSelect.jsx';
 import ErrorBoundary from './ErrorBoundary.jsx';
-
 import * as contractLogic from '../../scripts/contractLogic.js';
-
 import * as nodeLogic from '../../scripts/nodeLogic.js';
 import config from '../../../config.js';
 import {gridConfig} from '../layout.js';
+import styles from "./Center.scss";
 
 class Center extends React.Component {
     constructor(props) {
@@ -95,7 +94,7 @@ class Center extends React.Component {
         return (
             <>
                 <ErrorBoundary>
-                    <Row>
+                    <Row className={styles.header}>
                         <Col span={gridConfig.NetworkSelectSpan}>
                             <NetworkSelect
                                 activeNodeKey={this.state.activeNodeKey}
@@ -120,7 +119,7 @@ class Center extends React.Component {
                             </Menu>
                         </Col>
                     </Row>
-                    <div>
+                    <div className={styles.content}>
                         {this.state.activeMenuKey === "browser" ? <ContractBrowser
                             networkId={node.networkId}
                             endpoint={node.endpoint}

@@ -89,18 +89,18 @@ class ContractBrowser extends React.Component {
     render() {   
         return (
             <Row>
-                <Col span={gridConfig.ContractListSpan}>             
+                <Col span={gridConfig.ContractListSpan} style={{marginTop: "50px"}}>
                     <ContractList 
                         contracts={this.state.contractList.filter(contract=>contract.networkId===this.props.networkId)} 
                         web3Provider={this.state.web3Provider} 
                         onChangeContract = {this.changeContract}
                         onAddContract ={this.addContract}
                         onDeleteContract = {this.deleteContract}
-                        activeContract = {this.state.activeContract}
+                        activeContract = {this.state.activeContract}                        
                     />
                 </Col>
                 
-                <Col span={gridConfig.ContractViewSpan}>
+                <Col span={gridConfig.ContractViewSpan} offset="1">
                     <ErrorBoundary>
                     <ContractView 
                         web3Provider={this.state.web3Provider} 
