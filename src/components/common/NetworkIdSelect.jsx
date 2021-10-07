@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Select, Input } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
-import styles from './NetworkIdSelect.css';
+import styles from './NetworkIdSelect.scss';
 
 const { Option } = Select;
 /**

@@ -1,6 +1,6 @@
 import React from 'react';
 import StaticBlock from '../common/StaticBlock.jsx';
-import styles from '../Globals.css';
+import styles from '../Globals.scss';
 import config from '../../../config.js';
 import urlJoin from 'url-join';
 

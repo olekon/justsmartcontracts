@@ -1,7 +1,10 @@
-@import "../../app.scss";
+@import "../../common.scss";
 
+.contractCard {
+    cursor: pointer;
+}
 .selectedContract {
-    background-color: #f0f0f0;
+    background-color: #e0e0e0;
 }
 
 .addButton {
@@ -12,5 +15,5 @@
 }
 
 .cardMeta :global(.ant-card-meta-description) {
-    @include monofont;
+    @include monospace;
 }

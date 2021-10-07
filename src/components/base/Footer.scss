@@ -1,0 +1,17 @@
+.sectionHeader { 
+    composes: textColorPrimaryLight from '../Globals.scss';
+    font-size: 16px;    
+}
+
+.contactsLink {
+    composes: textColorSecondaryLight from '../Globals.scss';
+}
+
+.donationText {
+    composes: textColorSecondaryLight from '../Globals.scss';
+}
+
+.legalLink {
+    composes: textColorSecondaryLight from '../Globals.scss';
+    margin: 0px 20px 0px 0px;
+}

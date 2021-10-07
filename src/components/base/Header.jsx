@@ -2,8 +2,7 @@ import React from 'react';
 import {Layout, Row, Col} from 'antd';
 import {NavLink} from 'react-router-dom';
 
-import styles from './Header.css';
-//import logo from '../../../public/logo.png';
+import styles from './Header.scss';
 
 class Header extends React.Component {
     constructor(props) {

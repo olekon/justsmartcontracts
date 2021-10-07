@@ -7,13 +7,13 @@
 }
 
 .navlink {
-    composes: textColorTitleLight from '../Globals.css';
+    composes: textColorTitleLight from '../Globals.scss';
     margin: 0px 20px 0px 20px; 
     font-size: 20px;    
 }
 
 .headerLogo {
-    composes: textColorTitleLight from '../Globals.css';
+    composes: textColorTitleLight from '../Globals.scss';
     font-size: 26px;
 }
 

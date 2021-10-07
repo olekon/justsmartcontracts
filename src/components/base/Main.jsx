@@ -9,7 +9,7 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Center from './Center.jsx';
 
-import styles from './Main.css';
+import styles from './Main.scss';
 
 class Main extends React.Component {
     constructor(props) {

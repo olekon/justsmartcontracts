@@ -1,5 +1,5 @@
-$monospaceFont: 'Roboto Mono', monospace;
+@import "./common.scss";
 
-@mixin monofont {
-    font-family: $monospaceFont;
+:global(._monospace) {
+    @include monospace;
 }

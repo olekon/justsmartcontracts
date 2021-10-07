@@ -9,7 +9,7 @@ const addNewNodeKey = 'addNode';
 import * as nodeLogic from '../../scripts/nodeLogic.js';
 import * as message from '../common/errorMessage.js';
 
-import styles from './NetworkSelect.css';
+import styles from './NetworkSelect.scss';
 
 /**
  * List of stored endpoints  

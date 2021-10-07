@@ -2,7 +2,7 @@ import React from 'react';
 import {Layout, Row, Col, Typography, Divider} from 'antd';
 import {NavLink} from 'react-router-dom';
 import config from '../../../config.js';
-import styles from './Footer.css';
+import styles from './Footer.scss';
 
 const {Title, Text} = Typography;
 class Footer extends React.Component {
