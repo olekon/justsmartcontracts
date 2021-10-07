@@ -1,0 +1,5 @@
+$monospaceFont: 'Roboto Mono', monospace;
+
+@mixin monofont {
+    font-family: $monospaceFont;
+}

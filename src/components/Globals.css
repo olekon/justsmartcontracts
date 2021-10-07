@@ -27,7 +27,6 @@
     color: #a5a5a5;
 }
 
-
 /* Containers */
 .staticInfo {
     composes: textColorPrimaryDark;

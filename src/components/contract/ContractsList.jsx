@@ -6,13 +6,14 @@ import Blockies from 'react-blockies';
 import {shortenEthAddress} from '../../scripts/utils.js'
 import ContractForm from './ContractForm.jsx';
 
-import styles from './ContractsList.css';
+import styles from './ContractsList.scss';
 
 /**
  * List of stored contracts located in the side panel 
  */
-class ContractsList extends React.Component {
+class ContractsList extends React.Component {    
     constructor(props) {
+        console.log(styles);
         super(props);
         this.state = {
             modalVisible: false,
@@ -115,6 +116,7 @@ class ContractsList extends React.Component {
                                     key={contract.address}
                                 > 
                                     <Card.Meta
+                                        className={styles.cardMeta}
                                         avatar={<Blockies seed={contract.address.toLowerCase()} />}
                                         title={this.renderTitle(contract)}
                                         description={shortenEthAddress(contract.address, 4)}

@@ -28,7 +28,7 @@ class StaticBlock extends React.Component {
     render() {
         return (
             <div>
-                <ReactMarkdown source={this.state.info} />
+                <ReactMarkdown children={this.state.info} />
             </div>
         )
     }

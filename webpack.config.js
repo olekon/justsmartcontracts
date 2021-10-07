@@ -36,7 +36,7 @@ module.exports = {
             'crypto-browserify': false,
         },
     },
-    
+
     plugins: [
         // Work around for Buffer is undefined:
         // https://github.com/webpack/changelog-v5/issues/10
@@ -47,7 +47,7 @@ module.exports = {
             process: 'process/browser',
         }),
     ],
-    
+
     mode: 'development',
     entry: './src/app.jsx', // входная точка - исходный файл
     output: {
@@ -87,6 +87,33 @@ module.exports = {
                         },
                     },
                 ],
+            },
+            {
+                test: /\.scss$/,
+                exclude: /app\.scss$/,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            localIdentName:
+                                '[name]__[local]__[contenthash:base64:5]',
+                        },
+                    },
+                    {
+                        loader: 'sass-loader',
+                        // options: {
+                        //     modules: true,
+                        //     localIdentName:
+                        //         '[name]__[local]__[contenthash:base64:5]',
+                        // },
+                    },
+                ],
+            },
+            {
+                test: /app\.scss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
             },
             {
                 test: /\.less$/,
