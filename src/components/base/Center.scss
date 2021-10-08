@@ -1,12 +1,17 @@
-@import "../../common.scss";
+@import '../../common.scss';
 
 .header {
-    @include undoContent;
-    background: white;    
+    @include content;
+    background: white;
     padding-top: 0.25rem;
     padding-bottom: 0.5rem;
 }
 
 .content {
+    @include content;
     padding-top: 0.5rem;
+}
+
+.networkSelect {
+    margin: 0.5rem 0;
 }

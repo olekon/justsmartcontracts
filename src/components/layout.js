@@ -1,5 +1,5 @@
 export const gridConfig = {
-    NetworkSelectSpan: 3,    
+    NetworkSelectSpan: 4,    
     ContractListSpan: 4, 
     ContractViewSpan: 18,    
 };

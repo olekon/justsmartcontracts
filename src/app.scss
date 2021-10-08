@@ -3,3 +3,7 @@
 :global(._monospace) {
     @include monospace;
 }
+
+:global(.ant-modal-body) {
+    padding-top: 32px;
+}
