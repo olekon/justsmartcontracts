@@ -4,6 +4,7 @@ import { Input } from 'antd';
 import { MinusSquareOutlined } from '@ant-design/icons';
 import * as utils from '../../scripts/utils.js';
 import Blockies from 'react-blockies';
+import styles from "./AddressInput.scss";
 
 /**
  * Input for entering an Ethereum address. Validates and checksums its value.
@@ -44,13 +45,15 @@ class AddressInput extends React.Component {
         );
 
         return (
-            <Input
-                {...restProps}
-                value={this.props.value}
-                onChange={this.handleChange}
-                addonBefore={icon}
-                autoComplete="off"
-            />
+            <div className={styles.addressInput}>
+                <Input
+                    {...restProps}
+                    value={this.props.value}
+                    onChange={this.handleChange}
+                    addonBefore={icon}
+                    autoComplete="off"
+                />
+            </div>
         );
     }
 }

@@ -13,3 +13,8 @@ $monospaceFont: 'Roboto Mono', monospace;
     margin-left: -1.5rem;
     margin-right: -1.5rem;    
 }
+
+@mixin flexCenter {
+    display: flex;
+    align-items: center;
+}

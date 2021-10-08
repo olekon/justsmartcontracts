@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import Blockies from 'react-blockies';
 import { convertFromWei } from '../../scripts/utils.js';
+import styles from "./FormattedValue.scss";
+import classnames from "classnames";
 
 /**
  * Formats Solidity variable value depending on its type.
@@ -21,25 +23,25 @@ class FormattedValue extends React.Component {
         switch (this.props.type) {
             case 'bool':
                 return (
-                    <>
+                    <div className={styles.boolLabel}>
                         {this.props.value ? (
                             <CheckOutlined />
                         ) : (
                             <CloseOutlined />
                         )}
-                        <span>{this.props.value ? 'True' : 'False'}</span>
-                    </>
+                        <span class={styles.right}>{this.props.value ? 'True' : 'False'}</span>
+                    </div>
                 );
             case 'address':
                 return (
-                    <>
+                    <div className={styles.addressLabel}>
                         <Blockies
                             seed={this.props.value.toLowerCase()}
                             size={8}
                             scale={2}
                         />
-                        {this.props.value.toString()}
-                    </>
+                        <span class={styles.right}>{this.props.value.toString()}</span>
+                    </div>
                 );
             case 'uint256':
                 return (

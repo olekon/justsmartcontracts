@@ -4,7 +4,6 @@ import { Table, Radio } from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
 import { shortenEvent } from '../../scripts/utils.js';
 import FormattedValue from './FormattedValue.jsx';
-import EtherescanLink from './EtherscanLink.jsx';
 import { Map } from 'immutable';
 import EtherscanLink from './EtherscanLink.jsx';
 

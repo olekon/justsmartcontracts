@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { getTxHashUrl, getAddressUrl, getRootUrl } from '../../scripts/etherscan';
+import styles from "./EtherscanLink.scss";
 
 /**
  * Hyperlink to transaction, address, etc. on Etherscan website.
@@ -18,7 +19,7 @@ const EtherscanLink = ({ networkId = 1, txHash, address, children }) => {
     const text = txHash || txHash || address || url;
 
     return (
-        <a href={url} target='_blank'>
+        <a className={styles.etherscanLink} href={url} target='_blank' rel='noopener'>
             {children || text}
         </a>
     );

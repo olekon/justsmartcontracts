@@ -140,7 +140,7 @@ class ContractPropertiesView extends React.Component {
                             </PropertyCard>
                         )}
                     />
-                    <Button icon={<SyncOutlined />} onClick={this.update}>
+                    <Button style={{marginTop: "0.5rem"}} icon={<SyncOutlined />} onClick={this.update}>
                         Refresh
                     </Button>
                 </>
