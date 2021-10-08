@@ -29,7 +29,7 @@ class FormattedValue extends React.Component {
                         ) : (
                             <CloseOutlined />
                         )}
-                        <span class={styles.right}>{this.props.value ? 'True' : 'False'}</span>
+                        <span className={styles.right}>{this.props.value ? 'True' : 'False'}</span>
                     </div>
                 );
             case 'address':
@@ -40,7 +40,7 @@ class FormattedValue extends React.Component {
                             size={8}
                             scale={2}
                         />
-                        <span class={styles.right}>{this.props.value.toString()}</span>
+                        <span className={styles.right}>{this.props.value.toString()}</span>
                     </div>
                 );
             case 'uint256':

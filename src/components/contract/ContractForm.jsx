@@ -90,12 +90,16 @@ class ContractForm extends React.Component {
     render() {
         return (
             <Form
+                key={this.props.contract ? this.props.contract.address : ''}
                 name="contractForm"
                 onFinish={this.handleSubmit}
                 onFinishFailed={this.handleSubmitFailed}
                 ref={this.formRef}
             >
                 <FormItem
+                    initialValue={
+                        this.props.contract ? this.props.contract.name : ''
+                    }
                     name="name"
                     label="Name"
                     rules={[
@@ -107,6 +111,9 @@ class ContractForm extends React.Component {
                 <FormItem
                     name="address"
                     label="Address"
+                    initialValue={
+                        this.props.contract ? this.props.contract.address : ''
+                    }
                     rules={[
                         {
                             required: true,
@@ -120,14 +127,21 @@ class ContractForm extends React.Component {
                 <FormItem
                     label="Network id"
                     name="networkId"
-                    initialValue={this.state.networkId}
+                    initialValue={
+                        this.props.contract
+                            ? this.props.contract.networkId
+                            : this.state.networkId
+                    }
                 >
                     <NetworkIdSelect />
                 </FormItem>
-                <FormItem label="ABI">
+                <FormItem>
                     <FormItem
                         name="abi"
                         label="ABI"
+                        initialValue={
+                            this.props.contract ? JSON.stringify(this.props.contract.abi) : '[]'
+                        }
                         rules={[
                             { required: true, message: 'Please input the ABI' },
                         ]}
@@ -154,7 +168,7 @@ class ContractForm extends React.Component {
 
                 <Form.Item>
                     <Button type="primary" htmlType="submit">
-                        Add
+                        {this.props.contract ? "Edit" : "Add"}
                     </Button>
                 </Form.Item>
             </Form>

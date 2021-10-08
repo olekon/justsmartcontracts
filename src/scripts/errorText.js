@@ -12,5 +12,5 @@ export default {
     [errorCodes.errorEstimateGas]: 'Gas required exceeds allowance or always failing transaction',
     [errorCodes.errorArguments]: 'Invalid arguments',
     [errorCodes.nodeAlreadyExist]: 'Node with this name already exist',
-    [errorCodes.contractAlreadyExist]: 'Contract with this name already exist in this network'
+    [errorCodes.contractAlreadyExist]: 'Contract with this name and address already exists in this network'
 };

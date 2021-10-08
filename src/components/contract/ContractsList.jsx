@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, List, Card, Modal } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import Blockies from 'react-blockies';
 import { shortenEthAddress } from '../../scripts/utils.js';
 import ContractForm from './ContractForm.jsx';
@@ -16,10 +16,11 @@ class ContractsList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            contractToEdit: null,
             modalVisible: false,
             modalConfirmationVisible: false,
         };
-        this.showModal = this.showModal.bind(this);
+        this.startAddContract = this.startAddContract.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.handleAddButton = this.handleAddButton.bind(this);
         this.handleDeleteButton = this.handleDeleteButton.bind(this);
@@ -27,10 +28,12 @@ class ContractsList extends React.Component {
         this.showConfirmationModal = this.showConfirmationModal.bind(this);
         this.closeConfirmationModal = this.closeConfirmationModal.bind(this);
         this.onConfirmedDelete = this.onConfirmedDelete.bind(this);
+        this.startEdit = this.startEdit.bind(this);
     }
 
-    showModal() {
+    startAddContract() {
         this.setState({
+            contractToEdit: null,
             modalVisible: true,
         });
     }
@@ -55,7 +58,11 @@ class ContractsList extends React.Component {
 
     handleAddButton(name, address, networkId, abi) {
         this.closeModal();
-        this.props.onAddContract(name, address, networkId, abi);
+        if (this.state.contractToEdit) {
+            this.props.onEditContract(this.state.contractToEdit, name, address, networkId, abi);
+        } else {
+            this.props.onAddContract(name, address, networkId, abi);
+        }
     }
 
     handleDeleteButton(e, networkId, name) {
@@ -67,11 +74,15 @@ class ContractsList extends React.Component {
     }
 
     onConfirmedDelete() {
-        this.props.onDeleteContract(
-            this.state.deletingContract.id,
-            this.state.deletingContract.name
-        );
+        this.props.onDeleteContract(this.state.deletingContract.id, this.state.deletingContract.name);
         this.closeConfirmationModal();
+    }
+
+    startEdit(contract) {
+        this.setState({
+            contractToEdit: contract,
+            modalVisible: true,
+        });
     }
 
     renderTitle(contract) {
@@ -80,16 +91,19 @@ class ContractsList extends React.Component {
                 {contract.name}
                 <Button
                     type="default"
+                    name="editButton"
+                    size="small"
+                    style={{ float: 'right' }}
+                    onClick={(e) => this.startEdit(contract)}
+                >
+                    <EditOutlined />
+                </Button>
+                <Button
+                    type="default"
                     name="deleteButton"
                     size="small"
                     style={{ float: 'right' }}
-                    onClick={(e) =>
-                        this.handleDeleteButton(
-                            e,
-                            contract.networkId,
-                            contract.name
-                        )
-                    }
+                    onClick={(e) => this.handleDeleteButton(e, contract.networkId, contract.name)}
                 >
                     <DeleteOutlined />
                 </Button>
@@ -99,8 +113,7 @@ class ContractsList extends React.Component {
 
     render() {
         const isSelected = (contract) =>
-            this.props.activeContract &&
-            this.props.activeContract.address == contract.address;
+            this.props.activeContract && this.props.activeContract.address == contract.address;
 
         return (
             <>
@@ -112,16 +125,14 @@ class ContractsList extends React.Component {
                         footer={null}
                         maskClosable={false}
                     >
-                        <ContractForm onAddContract={this.handleAddButton} />
+                        <ContractForm onAddContract={this.handleAddButton} contract={this.state.contractToEdit} />
                     </Modal>
                 </div>
                 <List>
                     {this.props.contracts.map((contract) => (
                         <Card
                             size="small"
-                            onClick={() =>
-                                this.props.onChangeContract(contract.name)
-                            }
+                            onClick={() => this.props.onChangeContract(contract.name)}
                             className={classnames({
                                 [styles.selectedContract]: isSelected(contract),
                                 [styles.contractCard]: true,
@@ -130,26 +141,15 @@ class ContractsList extends React.Component {
                         >
                             <Card.Meta
                                 className={styles.cardMeta}
-                                avatar={
-                                    <Blockies
-                                        seed={contract.address.toLowerCase()}
-                                    />
-                                }
+                                avatar={<Blockies seed={contract.address.toLowerCase()} />}
                                 title={this.renderTitle(contract)}
-                                description={shortenEthAddress(
-                                    contract.address,
-                                    4
-                                )}
+                                description={shortenEthAddress(contract.address, 4)}
                             />
                         </Card>
                     ))}
                 </List>
                 <div>
-                    <Button
-                        type="primary"
-                        className={styles.addButton}
-                        onClick={this.showModal}
-                    >
+                    <Button type="primary" className={styles.addButton} onClick={this.startAddContract}>
                         Add contract
                     </Button>
                 </div>
@@ -159,7 +159,7 @@ class ContractsList extends React.Component {
                     onCancel={this.closeConfirmationModal}
                     maskClosable={false}
                 >
-                    <p>{'Sure?'}</p>
+                    <p>{`Really delete '${this.state.deletingContract? this.state.deletingContract.name: ""}'?`}</p>
                 </Modal>
             </>
         );
