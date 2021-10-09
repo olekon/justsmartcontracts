@@ -12,6 +12,14 @@
         background-color: #f0f0f0;
         opacity: 1;
     }
+
+    :global(.ant-card-extra) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: 0;
+        width: 100%;
+    }
 }
 
 .addButton {

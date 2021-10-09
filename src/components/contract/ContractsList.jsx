@@ -24,7 +24,7 @@ class ContractsList extends React.Component {
         this.closeModal = this.closeModal.bind(this);
         this.handleAddButton = this.handleAddButton.bind(this);
         this.handleDeleteButton = this.handleDeleteButton.bind(this);
-        this.renderTitle = this.renderTitle.bind(this);
+        this.renderCardControls = this.renderCardControls.bind(this);
         this.showConfirmationModal = this.showConfirmationModal.bind(this);
         this.closeConfirmationModal = this.closeConfirmationModal.bind(this);
         this.onConfirmedDelete = this.onConfirmedDelete.bind(this);
@@ -85,28 +85,23 @@ class ContractsList extends React.Component {
         });
     }
 
-    renderTitle(contract) {
+    renderCardControls(contract) {
         return (
             <>
-                {contract.name}
-                <Button
-                    type="default"
-                    name="editButton"
-                    size="small"
-                    style={{ float: 'right' }}
-                    onClick={(e) => this.startEdit(contract)}
-                >
-                    <EditOutlined />
-                </Button>
-                <Button
-                    type="default"
-                    name="deleteButton"
-                    size="small"
-                    style={{ float: 'right' }}
-                    onClick={(e) => this.handleDeleteButton(e, contract.networkId, contract.name)}
-                >
-                    <DeleteOutlined />
-                </Button>
+                <Blockies seed={contract.address.toLowerCase()} />
+                <div>
+                    <Button type="default" name="editButton" size="small" onClick={(e) => this.startEdit(contract)}>
+                        <EditOutlined />
+                    </Button>
+                    <Button
+                        type="default"
+                        name="deleteButton"
+                        size="small"
+                        onClick={(e) => this.handleDeleteButton(e, contract.networkId, contract.name)}
+                    >
+                        <DeleteOutlined />
+                    </Button>
+                </div>
             </>
         );
     }
@@ -138,11 +133,11 @@ class ContractsList extends React.Component {
                                 [styles.contractCard]: true,
                             })}
                             key={contract.address}
+                            extra={this.renderCardControls(contract)}
                         >
                             <Card.Meta
                                 className={styles.cardMeta}
-                                avatar={<Blockies seed={contract.address.toLowerCase()} />}
-                                title={this.renderTitle(contract)}
+                                title={contract.name}
                                 description={shortenEthAddress(contract.address, 4)}
                             />
                         </Card>
@@ -159,7 +154,7 @@ class ContractsList extends React.Component {
                     onCancel={this.closeConfirmationModal}
                     maskClosable={false}
                 >
-                    <p>{`Really delete '${this.state.deletingContract? this.state.deletingContract.name: ""}'?`}</p>
+                    <p>{`Really delete '${this.state.deletingContract ? this.state.deletingContract.name : ''}'?`}</p>
                 </Modal>
             </>
         );

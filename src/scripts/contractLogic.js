@@ -71,12 +71,14 @@ export const editContract = function (
     networkId,
     abiString
 ) {    
-    const current = getContract(contractList, contract.name, networkId);
+    console.log(networkId);
+    const current = getContract(contractList, contract.name, contract.networkId);
     current.name = name;
     current.address = address;
     current.networkId = networkId;
     current.abi = JSON.parse(abiString);
     storage.saveContracts(contractList);
+    console.log(current);
     return contractList;
 };
 

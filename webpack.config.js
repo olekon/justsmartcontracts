@@ -3,9 +3,7 @@ const fs = require('fs');
 const webpack = require('webpack');
 
 const lessToJs = require('less-vars-to-js');
-const themeVariables = lessToJs(
-    fs.readFileSync(path.join(__dirname, './ant-override.less'), 'utf8')
-);
+const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, './ant-override.less'), 'utf8'));
 
 module.exports = {
     resolve: {
@@ -82,38 +80,26 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             modules: true,
-                            localIdentName:
-                                '[name]__[local]__[contenthash:base64:5]',
+                            localIdentName: '[name]__[local]__[contenthash:base64:5]',
                         },
                     },
                 ],
             },
             {
-                test: /\.scss$/,
-                exclude: /app\.scss$/,
+                test: /\.scss$/,                
                 use: [
                     'style-loader',
                     {
                         loader: 'css-loader',
                         options: {
                             modules: true,
-                            localIdentName:
-                                '[name]__[local]__[contenthash:base64:5]',
+                            localIdentName: '[name]__[local]__[contenthash:base64:5]',
                         },
                     },
                     {
                         loader: 'sass-loader',
-                        // options: {
-                        //     modules: true,
-                        //     localIdentName:
-                        //         '[name]__[local]__[contenthash:base64:5]',
-                        // },
                     },
                 ],
-            },
-            {
-                test: /app\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
             },
             {
                 test: /\.less$/,

@@ -41,7 +41,7 @@ class ContractForm extends React.Component {
         this.formRef.current.validateFields();
     }
 
-    handleSubmit(values) {
+    handleSubmit(values) {        
         this.props.onAddContract(
             values.name,
             values.address,
