@@ -7,3 +7,6 @@
 ~*
 *.zip
 *.LICENSE.txt
+
+/.next
+.env
