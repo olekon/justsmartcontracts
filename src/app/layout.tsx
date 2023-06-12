@@ -1,4 +1,4 @@
-import './globals.css';
+import './globals.scss';
 import { Layout } from '@widgets/layout';
 import { Inter } from 'next/font/google';
 

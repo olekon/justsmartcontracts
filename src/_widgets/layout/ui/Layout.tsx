@@ -2,6 +2,8 @@ import { ReactNode } from 'react';
 import { Header } from './Header';
 import { Footer } from './Footer';
 
+import styles from './Layout.module.scss';
+
 type TProps = {
   children: ReactNode;
 };
@@ -9,10 +11,10 @@ type TProps = {
 export const Layout = ({ children }: TProps) => {
   return (
     <html lang="en">
-      <body>
+      <body className={styles.body}>
         {' '}
         <Header />
-        <div>{children}</div>
+        <div className={styles.content}>{children}</div>
         <Footer />
       </body>
     </html>
