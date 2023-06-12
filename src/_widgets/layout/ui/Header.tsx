@@ -1,4 +1,4 @@
-import { Routes } from '@shared/model/routes';
+import { Routes } from '@shared/config/routes';
 import { Navigation } from './Navigation';
 import styles from './Header.module.scss';
 
