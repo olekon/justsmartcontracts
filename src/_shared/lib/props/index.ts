@@ -1,5 +1,12 @@
 import { ReactNode } from "react";
 
-export type TChildrenProps = {
+export type TWithChildren = {
   children: ReactNode;
+};
+
+export type TValueHandler<T> = (value: T) => void;
+
+export type TValueInput<T> = {
+  onChange: TValueHandler<T>;
+  value: T;
 };

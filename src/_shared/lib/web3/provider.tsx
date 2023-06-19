@@ -4,11 +4,11 @@ import { WagmiConfig, configureChains, createConfig } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 import { infuraProvider } from "wagmi/providers/infura";
 import { InfuraKey } from "../env";
-import { TChildrenProps } from "../props";
+import { TWithChildren } from "../props";
 import { Chain } from "./chains";
 import { toWagmiChain } from "./wagmi";
 
-type TProps = TChildrenProps & {
+type TProps = TWithChildren & {
   chains: Chain[];
 };
 
