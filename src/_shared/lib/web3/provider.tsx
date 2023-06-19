@@ -1,21 +1,22 @@
-import {
-  WagmiConfig,
-  configureChains,
-  createConfig,
-  mainnet,
-  sepolia,
-} from "wagmi";
-import { goerli } from "viem/chains";
+"use client";
+
+import { WagmiConfig, configureChains, createConfig } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 import { infuraProvider } from "wagmi/providers/infura";
 import { InfuraKey } from "../env";
 import { TChildrenProps } from "../props";
+import { Chain } from "./chains";
+import { toWagmiChain } from "./wagmi";
 
-export const Web3Provider = ({ children }: TChildrenProps) => {
-  const { publicClient } = configureChains(
-    [mainnet, goerli, sepolia],
-    [infuraProvider({ apiKey: InfuraKey }), publicProvider()]
-  );
+type TProps = TChildrenProps & {
+  chains: Chain[];
+};
+
+export const Web3Provider = ({ children, chains }: TProps) => {
+  const { publicClient } = configureChains(chains.map(toWagmiChain), [
+    infuraProvider({ apiKey: InfuraKey }),
+    publicProvider(),
+  ]);
 
   const config = createConfig({ publicClient });
 
