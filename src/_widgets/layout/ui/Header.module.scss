@@ -1,4 +1,4 @@
-@import 'styles/utils.scss';
+@import "styles/utils.scss";
 
 .root {
   background: #fdf4e3;
@@ -10,4 +10,8 @@
 
   padding-top: 30px;
   padding-bottom: 30px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
