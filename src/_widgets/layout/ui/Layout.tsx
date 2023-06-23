@@ -14,7 +14,6 @@ export const Layout = ({ children }: TProps) => {
   return (
     <html lang="en">
       <body className={styles.body}>
-        {" "}
         <Header />
         <div className={styles.content}>{children}</div>
         <Footer />

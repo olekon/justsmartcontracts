@@ -31,7 +31,7 @@ export const ChainConfig: Record<Chain, TChainConfig> = {
 
 export const SupportedChains = [Chain.ETHEREUM, Chain.ETH_GOERLI];
 
-const useCurrentChainStore = create<State & Actions>((set) => ({
+const useCurrentChainStore = create<State & Actions>()((set) => ({
   chain: SupportedChains[0],
   update: (chain: Chain) => set(() => ({ chain })),
 }));
