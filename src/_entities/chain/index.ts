@@ -1,1 +1,2 @@
-export { SupportedChains, useCurrentChain } from "./model";
+export * as chainModel from "./model";
+export { ChainSelect } from "./ui/ChainSelect";
