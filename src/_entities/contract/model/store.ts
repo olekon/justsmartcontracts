@@ -7,6 +7,7 @@ import { Chain, TAddress, sameAddress } from "@shared/lib/web3";
 export type TContract = {
   chain: Chain;
   address: TAddress;
+  name: string;
   abi: AbiItem[];
 };
 

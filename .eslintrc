@@ -1,3 +1,6 @@
 {
-  "extends": "next"
+  "extends": [
+    "next",
+    "plugin:react-hooks/recommended"
+  ]
 }

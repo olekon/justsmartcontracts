@@ -28,6 +28,7 @@
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "sass": "^1.62.1"
   }
 }
