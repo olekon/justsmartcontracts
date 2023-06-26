@@ -9,7 +9,9 @@ export const Header = () => {
     <div className={styles.root}>
       <div className={styles.content}>
         <Navigation pages={Routes} />
-        <SetCurrentChain />
+        <div className={styles.chainSelect}>
+          <SetCurrentChain />
+        </div>
       </div>
     </div>
   );

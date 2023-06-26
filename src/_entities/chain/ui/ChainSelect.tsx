@@ -12,6 +12,11 @@ const ChainOptions = SupportedChains.map((chain) => ({
 type TProps = TValueInput<Chain> & {};
 export const ChainSelect = ({ value, onChange }: TProps) => {
   return (
-    <Select defaultValue={value} onChange={onChange} options={ChainOptions} />
+    <Select
+      style={{ width: "100%" }}
+      defaultValue={value}
+      onChange={onChange}
+      options={ChainOptions}
+    />
   );
 };

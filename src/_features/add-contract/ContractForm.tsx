@@ -7,7 +7,12 @@ type TProps = {
 export const ContractForm = ({ onSubmit }: TProps) => {
   //TODO add chain select
   return (
-    <Form name="add-contract" onFinish={onSubmit}>
+    <Form
+      preserve={false}
+      layout="vertical"
+      name="add-contract"
+      onFinish={onSubmit}
+    >
       <Form.Item
         label="Name"
         name="name"
@@ -29,7 +34,7 @@ export const ContractForm = ({ onSubmit }: TProps) => {
         name="abi"
         rules={[{ required: true, message: "Contract ABI missing" }]}
       >
-        <Input.TextArea />
+        <Input.TextArea rows={15} />
       </Form.Item>
 
       <Form.Item>
