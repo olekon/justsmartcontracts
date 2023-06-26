@@ -1,5 +1,3 @@
-"use client";
-
 import { Routes } from "@shared/config/routes";
 import { Navigation } from "./Navigation";
 import { SetCurrentChain } from "@features/set-current-chain";

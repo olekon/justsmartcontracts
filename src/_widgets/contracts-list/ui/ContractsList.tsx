@@ -1,5 +1,3 @@
-"use client";
-
 import { Space } from "antd";
 import { AddContract } from "@features/add-contract";
 

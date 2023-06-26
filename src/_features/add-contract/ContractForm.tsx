@@ -1,5 +1,3 @@
-"use client";
-
 import { Button, Form, Input } from "antd";
 
 type TProps = {

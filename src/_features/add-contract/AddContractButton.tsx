@@ -1,5 +1,3 @@
-"use client";
-
 import { useCallback, useState } from "react";
 import { Modal, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";

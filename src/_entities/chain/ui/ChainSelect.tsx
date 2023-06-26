@@ -1,4 +1,3 @@
-"use client";
 import { Select } from "antd";
 import { Chain } from "@shared/lib/web3";
 import { TValueInput } from "@shared/lib/props";

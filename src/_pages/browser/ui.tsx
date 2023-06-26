@@ -1,5 +1,3 @@
-"use client";
-
 import { Layout } from "antd";
 import { ContractsList } from "@widgets/contracts-list";
 

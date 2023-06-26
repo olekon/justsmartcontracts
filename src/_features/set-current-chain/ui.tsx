@@ -1,5 +1,3 @@
-"use client";
-
 import { chainModel, ChainSelect } from "@entities/chain";
 
 export const SetCurrentChain = () => {

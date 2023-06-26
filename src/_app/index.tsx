@@ -1,5 +1,3 @@
-"use client";
-
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { Web3Provider } from "@shared/lib/web3";
