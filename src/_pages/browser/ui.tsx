@@ -5,7 +5,7 @@ import { ContractsList } from "@widgets/contracts-list";
 
 export const BrowserPage = () => {
   return (
-    <main>
+    <>
       <Layout>
         <Layout.Sider>
           <ContractsList />
@@ -14,6 +14,6 @@ export const BrowserPage = () => {
           <h1>Contracts browser</h1>
         </Layout.Content>
       </Layout>
-    </main>
+    </>
   );
 };

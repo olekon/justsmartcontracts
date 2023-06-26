@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
+
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 
@@ -12,12 +13,10 @@ type TProps = {
 
 export const Layout = ({ children }: TProps) => {
   return (
-    <html lang="en">
-      <body className={styles.body}>
-        <Header />
-        <div className={styles.content}>{children}</div>
-        <Footer />
-      </body>
-    </html>
+    <main className={styles.body}>
+      <Header />
+      <div className={styles.content}>{children}</div>
+      <Footer />
+    </main>
   );
 };
