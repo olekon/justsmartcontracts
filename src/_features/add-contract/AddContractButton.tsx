@@ -6,24 +6,19 @@ import { ContractForm } from "./ContractForm";
 
 export const AddContractButton = () => {
   const [formVisible, setFormVisible] = useState(false);
-  const { add } = contractModel.useContracts();
+  const { add, setCurrent } = contractModel.useContracts();
 
   const showModal = () => setFormVisible(true);
   const hideModal = () => setFormVisible(false);
 
   const onSubmit = useCallback(
-    (values: any) => {
+    (values: contractModel.TContract) => {
       hideModal();
 
-      console.log(values);
-      // add({
-      //   name: values.name,
-      //   abi: values.abi,
-      //   address: values.address,
-      //   chain: values.chain,
-      // });
+      const { id } = add(values.chain, values.address, values.name, values.abi);
+      setCurrent(id);
     },
-    [add]
+    [add, setCurrent]
   );
 
   return (

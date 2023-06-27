@@ -2,9 +2,11 @@ import { AbiItem } from "viem";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { Chain, TAddress, sameAddress } from "@shared/lib/web3";
+import { Chain, TAddress } from "@shared/lib/web3";
+import { TUid, uid } from "@shared/lib/id";
 
 export type TContract = {
+  id: TUid;
   chain: Chain;
   address: TAddress;
   name: string;
@@ -12,38 +14,50 @@ export type TContract = {
 };
 
 type TState = {
-  current: TContract | null;
+  currentId: TUid | null;
   contracts: TContract[];
 };
 
 type TActions = {
-  add: (contract: TContract) => void;
-  remove: (contract: TContract) => void;
-  setCurrent: (contract: TContract) => void;
+  add: (
+    chain: Chain,
+    address: TAddress,
+    name: string,
+    abi: AbiItem[]
+  ) => TContract;
+  remove: (id: TUid) => void;
+  setCurrent: (id: TUid) => void;
 };
 
 const useContractStore = create<TState & TActions>()(
   persist(
     immer((set) => ({
       contracts: [],
-      current: null,
-      add: (contract: TContract) => {
+      currentId: null,
+
+      add: (chain: Chain, address: TAddress, name: string, abi: AbiItem[]) => {
+        const contract = {
+          chain,
+          address,
+          name,
+          abi,
+          id: uid(),
+        };
         set((s: TState) => {
           s.contracts.push(contract);
         });
+        return contract;
       },
-      remove: (contract: TContract) => {
+
+      remove: (id: TUid) => {
         set((s: TState) => {
-          s.contracts = s.contracts.filter(
-            (c) =>
-              c.chain != contract.chain ||
-              !sameAddress(c.address, contract.address)
-          );
+          s.contracts = s.contracts.filter((c) => c.id != id);
         });
       },
-      setCurrent: (contract: TContract) => {
+
+      setCurrent: (id: TUid) => {
         set((s: TState) => {
-          s.current = contract;
+          s.currentId = id;
         });
       },
     })),
