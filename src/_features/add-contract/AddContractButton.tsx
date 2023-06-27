@@ -3,12 +3,10 @@ import { Modal, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { contractModel } from "@entities/contract";
 import { ContractForm } from "./ContractForm";
-import { chainModel } from "@entities/chain";
 
 export const AddContractButton = () => {
   const [formVisible, setFormVisible] = useState(false);
   const { add } = contractModel.useContracts();
-  const { chain } = chainModel.useCurrentChain();
 
   const showModal = () => setFormVisible(true);
   const hideModal = () => setFormVisible(false);
@@ -18,14 +16,14 @@ export const AddContractButton = () => {
       hideModal();
 
       console.log(values);
-      add({
-        name: values.name,
-        abi: values.abi,
-        address: values.address,
-        chain,
-      });
+      // add({
+      //   name: values.name,
+      //   abi: values.abi,
+      //   address: values.address,
+      //   chain: values.chain,
+      // });
     },
-    [add, chain]
+    [add]
   );
 
   return (
