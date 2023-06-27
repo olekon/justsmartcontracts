@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { Web3Provider } from "@shared/lib/web3";
@@ -9,7 +10,7 @@ export const metadata = {
   description: "Your tool to interact with smart contracts",
 };
 
-export const App = ({ Component, pageProps }: AppProps) => {
+const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
@@ -24,3 +25,7 @@ export const App = ({ Component, pageProps }: AppProps) => {
     </>
   );
 };
+
+export default dynamic(() => Promise.resolve(App), {
+  ssr: false,
+});

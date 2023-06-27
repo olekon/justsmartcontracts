@@ -4,6 +4,7 @@ import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { Chain, TAddress } from "@shared/lib/web3";
 import { TUid, uid } from "@shared/lib/id";
+import { useEffect, useState } from "react";
 
 export type TContract = {
   id: TUid;
