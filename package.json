@@ -19,6 +19,7 @@
     "immer": "^10.0.2",
     "next": "13.4.7",
     "react": "18.2.0",
+    "react-blockies": "^1.4.1",
     "react-dom": "18.2.0",
     "typescript": "5.0.4",
     "uuid": "^9.0.0",
@@ -27,6 +28,7 @@
     "zustand": "^4.3.8"
   },
   "devDependencies": {
+    "@types/react-blockies": "^1.4.1",
     "@types/uuid": "^9.0.2",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",

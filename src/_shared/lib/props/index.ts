@@ -8,6 +8,12 @@ export type TWithClassname = {
   className?: string;
 };
 
+export type TSize = "small" | "medium" | "large";
+
+export type TWithSize = {
+  size?: TSize;
+};
+
 export type TValueHandler<T> = (value: T) => void;
 
 export type TValueInput<T> = {
