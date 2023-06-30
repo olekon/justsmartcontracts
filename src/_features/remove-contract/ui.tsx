@@ -27,7 +27,7 @@ export const RemoveContractButton = ({ contract }: TProps) => {
       okText="Yes"
       cancelText="No"
     >
-      <Button size="small" icon={<DeleteOutlined />} danger />;
+      <Button size="small" icon={<DeleteOutlined />} danger />
     </Popconfirm>
   );
 };

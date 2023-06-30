@@ -1,12 +1,12 @@
 import { useCallback, useState } from "react";
 import { Modal, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { contractModel } from "@entities/contract";
-import { ContractForm } from "../../_entities/contract/ui/ContractForm";
+import { ContractForm, contractModel } from "@entities/contract";
+import { useAddContact } from "./model";
 
 export const AddContractButton = () => {
   const [formVisible, setFormVisible] = useState(false);
-  const { add, setCurrent } = contractModel.useContracts();
+  const addContract = useAddContact();
 
   const showModal = () => setFormVisible(true);
   const hideModal = () => setFormVisible(false);
@@ -15,10 +15,9 @@ export const AddContractButton = () => {
     (values: contractModel.TContractWithoutId) => {
       hideModal();
 
-      const { id } = add(values.chain, values.address, values.name, values.abi);
-      setCurrent(id);
+      addContract(values);
     },
-    [add, setCurrent]
+    [addContract]
   );
 
   return (

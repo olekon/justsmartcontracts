@@ -1,1 +1,1 @@
-export { AddContractButton } from "./AddContractButton";
+export { AddContractButton } from "./ui";

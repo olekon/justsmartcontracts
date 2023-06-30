@@ -1,15 +1,17 @@
 import cn from "classnames";
 import { AddContractButton } from "@features/add-contract";
 import { RemoveContractButton } from "@features/remove-contract";
+import { EditContractButton } from "@features/edit-contract";
 import { SmallCard, contractModel } from "@entities/contract";
 
 import styles from "./ContractsList.module.scss";
 
 const EditButtons = ({ contract }: { contract: contractModel.TContract }) => {
   return (
-    <>
+    <div className={styles.editButtons}>
+      <EditContractButton contract={contract} />
       <RemoveContractButton contract={contract} />
-    </>
+    </div>
   );
 };
 
