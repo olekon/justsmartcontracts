@@ -14,6 +14,8 @@ export type TContract = {
   abi: AbiItem[];
 };
 
+export type TContractWithoutId = Omit<TContract, "id">;
+
 type TState = {
   currentId: TUid | null;
   contracts: TContract[];

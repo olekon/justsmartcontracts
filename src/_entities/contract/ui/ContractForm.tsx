@@ -1,8 +1,12 @@
 import { Button, Form, Input } from "antd";
 import { ChainSelect, chainModel } from "@entities/chain";
+import { TContractWithoutId } from "../model";
 
 type TProps = {
-  onSubmit: (values: any) => void;
+  onSubmit: (values: TContractWithoutId) => void;
+
+  buttonText: string;
+  value?: TContractWithoutId;
 };
 
 // @ts-ignore
@@ -15,13 +19,15 @@ const CustomChainInput = ({
 }) =>
   value && onChange ? <ChainSelect value={value} onChange={onChange} /> : null;
 
-export const ContractForm = ({ onSubmit }: TProps) => {
+export const ContractForm = ({ buttonText, value, onSubmit }: TProps) => {
   const { chain } = chainModel.useCurrentChain();
+
+  const initialValue = value || { chain };
 
   return (
     <Form
       preserve={false}
-      initialValues={{ chain }}
+      initialValues={initialValue}
       layout="vertical"
       name="add-contract"
       onFinish={onSubmit}
@@ -56,7 +62,7 @@ export const ContractForm = ({ onSubmit }: TProps) => {
 
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          Add
+          {buttonText}
         </Button>
       </Form.Item>
     </Form>
