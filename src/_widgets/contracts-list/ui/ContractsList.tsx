@@ -1,24 +1,35 @@
-import { AddContract } from "@features/add-contract";
+import cn from "classnames";
+import { AddContractButton } from "@features/add-contract";
+import { RemoveContractButton } from "@features/remove-contract";
 import { SmallCard, contractModel } from "@entities/contract";
 
 import styles from "./ContractsList.module.scss";
-import classNames from "classnames";
+
+const EditButtons = ({ contract }: { contract: contractModel.TContract }) => {
+  return (
+    <>
+      <RemoveContractButton contract={contract} />
+    </>
+  );
+};
 
 export const ContractsList = () => {
-  const { currentId, contracts } = contractModel.useContracts();
-  console.log(contracts);
+  const { currentId, contracts, setCurrent } = contractModel.useContracts();
+  console.log("List of contracts", currentId);
+
   return (
     <div className={styles.root}>
-      <AddContract />
+      <AddContractButton />
 
       {contracts.map((item) => (
         <div
           key={item.id}
-          className={classNames(styles.card, {
+          className={cn(styles.card, {
             [styles.selected]: currentId == item.id,
           })}
+          onClick={(e) => setCurrent(item.id)}
         >
-          <SmallCard contract={item} />
+          <SmallCard contract={item} extra={<EditButtons contract={item} />} />
         </div>
       ))}
     </div>

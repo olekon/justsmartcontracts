@@ -26,8 +26,15 @@ type TActions = {
     name: string,
     abi: AbiItem[]
   ) => TContract;
+  update: (
+    id: TUid,
+    chain?: Chain,
+    address?: TAddress,
+    name?: string,
+    abi?: AbiItem[]
+  ) => void;
   remove: (id: TUid) => void;
-  setCurrent: (id: TUid) => void;
+  setCurrent: (id: TUid | null) => void;
 };
 
 const useContractStore = create<TState & TActions>()(
@@ -50,14 +57,41 @@ const useContractStore = create<TState & TActions>()(
         return contract;
       },
 
+      update: (
+        id: TUid,
+        chain?: Chain,
+        address?: TAddress,
+        name?: string,
+        abi?: AbiItem[]
+      ) => {
+        set((s: TState) => {
+          const contract = s.contracts.find((c) => c.id == id);
+          if (contract) {
+            if (chain) {
+              contract.chain = chain;
+            }
+            if (address) {
+              contract.address = address;
+            }
+            if (name) {
+              contract.name = name;
+            }
+            if (abi) {
+              contract.abi = abi;
+            }
+          }
+        });
+      },
+
       remove: (id: TUid) => {
         set((s: TState) => {
           s.contracts = s.contracts.filter((c) => c.id != id);
         });
       },
 
-      setCurrent: (id: TUid) => {
+      setCurrent: (id: TUid | null) => {
         set((s: TState) => {
+          console.log("set new id to", id);
           s.currentId = id;
         });
       },

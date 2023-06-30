@@ -1,1 +1,1 @@
-export { AddContractButton as AddContract } from "./AddContractButton";
+export { AddContractButton } from "./AddContractButton";
