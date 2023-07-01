@@ -4,7 +4,13 @@ import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { Chain, TAddress } from "@shared/lib/web3";
 import { TUid, uid } from "@shared/lib/id";
+import type {
+  AbiEvent as ViemAbiEvent,
+  AbiFunction as ViemAbiFunction,
+} from "abitype";
 
+export type TAbiEvent = ViemAbiEvent;
+export type TAbiFunction = ViemAbiFunction;
 export type TAbiItem = ViemAbiItem;
 
 export type TContract = {
