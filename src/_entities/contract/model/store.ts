@@ -1,17 +1,18 @@
-import { AbiItem } from "viem";
+import { AbiItem as ViemAbiItem } from "viem";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { Chain, TAddress } from "@shared/lib/web3";
 import { TUid, uid } from "@shared/lib/id";
-import { useEffect, useState } from "react";
+
+export type TAbiItem = ViemAbiItem;
 
 export type TContract = {
   id: TUid;
   chain: Chain;
   address: TAddress;
   name: string;
-  abi: AbiItem[];
+  abi: TAbiItem[];
 };
 
 export type TContractWithoutId = Omit<TContract, "id">;
@@ -26,14 +27,14 @@ type TActions = {
     chain: Chain,
     address: TAddress,
     name: string,
-    abi: AbiItem[]
+    abi: TAbiItem[]
   ) => TContract;
   update: (
     id: TUid,
     chain?: Chain,
     address?: TAddress,
     name?: string,
-    abi?: AbiItem[]
+    abi?: TAbiItem[]
   ) => void;
   remove: (id: TUid) => void;
   setCurrent: (id: TUid | null) => void;
@@ -45,7 +46,7 @@ const useContractStore = create<TState & TActions>()(
       contracts: [],
       currentId: null,
 
-      add: (chain: Chain, address: TAddress, name: string, abi: AbiItem[]) => {
+      add: (chain: Chain, address: TAddress, name: string, abi: TAbiItem[]) => {
         const contract = {
           chain,
           address,
@@ -64,7 +65,7 @@ const useContractStore = create<TState & TActions>()(
         chain?: Chain,
         address?: TAddress,
         name?: string,
-        abi?: AbiItem[]
+        abi?: TAbiItem[]
       ) => {
         set((s: TState) => {
           const contract = s.contracts.find((c) => c.id == id);

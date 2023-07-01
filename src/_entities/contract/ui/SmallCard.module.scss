@@ -11,6 +11,8 @@
 
 .title {
   font-size: large;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .address {

@@ -30,6 +30,7 @@
   "devDependencies": {
     "@types/react-blockies": "^1.4.1",
     "@types/uuid": "^9.0.2",
+    "abitype": "^0.8.11",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
     "eslint-config-prettier": "^8.8.0",
