@@ -9,4 +9,4 @@
 *.LICENSE.txt
 
 /.next
-.env
+.env.local
