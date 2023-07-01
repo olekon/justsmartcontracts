@@ -9,7 +9,6 @@ export const useRemoveContract = ({ chain, id }: contractModel.TContract) => {
 
     // set as current first contract with the same chain or null
     const newCurrent = contracts.find((item) => item.chain == chain);
-    console.log("New current contract", newCurrent);
     setCurrent(newCurrent?.id ?? null);
   }, [chain, contracts, id, remove, setCurrent]);
 };

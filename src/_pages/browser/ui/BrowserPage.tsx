@@ -1,5 +1,7 @@
 import { ContractsList } from "@widgets/contracts-list";
+import { ContractBrowser } from "@widgets/contract-browser";
 import { Sidebar, WithSidebar } from "@shared/ui/Sidebar";
+
 import styles from "./BrowserPage.module.scss";
 
 export const BrowserPage = () => {
@@ -11,7 +13,9 @@ export const BrowserPage = () => {
         </Sidebar>
       }
     >
-      <h1>Contracts browser</h1>
+      <div className={styles.content}>
+        <ContractBrowser />
+      </div>
     </WithSidebar>
   );
 };

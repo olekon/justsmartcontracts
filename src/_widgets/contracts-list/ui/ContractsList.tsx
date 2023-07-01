@@ -3,6 +3,7 @@ import { AddContractButton } from "@features/add-contract";
 import { RemoveContractButton } from "@features/remove-contract";
 import { EditContractButton } from "@features/edit-contract";
 import { SmallCard, contractModel } from "@entities/contract";
+import { useCurrentChainContracts } from "../model";
 
 import styles from "./ContractsList.module.scss";
 
@@ -16,8 +17,8 @@ const EditButtons = ({ contract }: { contract: contractModel.TContract }) => {
 };
 
 export const ContractsList = () => {
-  const { currentId, contracts, setCurrent } = contractModel.useContracts();
-  console.log("List of contracts", currentId);
+  const { currentId, setCurrent } = contractModel.useContracts();
+  const contracts = useCurrentChainContracts();
 
   return (
     <div className={styles.root}>

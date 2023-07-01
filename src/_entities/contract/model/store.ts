@@ -93,7 +93,6 @@ const useContractStore = create<TState & TActions>()(
 
       setCurrent: (id: TUid | null) => {
         set((s: TState) => {
-          console.log("set new id to", id);
           s.currentId = id;
         });
       },
