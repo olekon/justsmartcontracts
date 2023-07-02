@@ -10,6 +10,7 @@
     "ts": "tsc"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.1.4",
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",

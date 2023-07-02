@@ -4,7 +4,7 @@ export type {
   TAbiItem,
   TAbiEvent,
   TAbiFunction,
-} from "./store";
+} from "./types";
 export { useContracts } from "./store";
 export { useCurrentContract } from "./useCurrentContract";
 export * from "./abi";

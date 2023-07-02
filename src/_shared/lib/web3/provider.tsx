@@ -6,8 +6,6 @@ import { TWithChildren } from "../props";
 import { Chain } from "./chains";
 import { toWagmiChain } from "./wagmi";
 
-console.log("!!!!", InfuraKey);
-
 type TProps = TWithChildren & {
   chains: Chain[];
 };
