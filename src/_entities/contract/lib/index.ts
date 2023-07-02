@@ -1,4 +1,4 @@
-import type { TAbiItem } from "../model/store";
+import type { TAbiItem } from "../model/types";
 
 import { AbiEvent, AbiFunction } from "abitype";
 

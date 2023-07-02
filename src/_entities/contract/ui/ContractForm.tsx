@@ -1,6 +1,6 @@
 import { Button, Form, Input } from "antd";
 import { ChainSelect, chainModel } from "@entities/chain";
-import { TAbiItem, TContractWithoutId } from "../model";
+import { TAbiItem, TContractWithoutId } from "../model/types";
 
 type TProps = {
   onSubmit: (values: TContractWithoutId) => void;

@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { TContract } from "../model";
+import { TContract } from "../model/types";
 
 import styles from "./SmallCard.module.scss";
 import { AddressIcon } from "@shared/ui/AddressIcon";

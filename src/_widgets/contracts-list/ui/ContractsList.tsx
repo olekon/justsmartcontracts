@@ -2,12 +2,12 @@ import cn from "classnames";
 import { AddContractButton } from "@features/add-contract";
 import { RemoveContractButton } from "@features/remove-contract";
 import { EditContractButton } from "@features/edit-contract";
-import { SmallCard, contractModel } from "@entities/contract";
+import { SmallCard, TContract, contractModel } from "@entities/contract";
 import { useCurrentChainContracts } from "../model";
 
 import styles from "./ContractsList.module.scss";
 
-const EditButtons = ({ contract }: { contract: contractModel.TContract }) => {
+const EditButtons = ({ contract }: { contract: TContract }) => {
   return (
     <div className={styles.editButtons}>
       <EditContractButton contract={contract} />

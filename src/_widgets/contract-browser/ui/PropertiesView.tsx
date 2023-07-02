@@ -1,11 +1,11 @@
-import { contractModel } from "@entities/contract";
-import { PropertyCall } from "@entities/contract/";
 import { AbiFunction } from "abitype";
 import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
+import { TContract, contractModel } from "@entities/contract";
+import { PropertyCall } from "@features/execute-contract";
 
 type TProps = {
-  contract: contractModel.TContract;
+  contract: TContract;
 };
 
 export const PropertiesView = ({ contract }: TProps) => {

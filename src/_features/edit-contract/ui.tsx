@@ -1,11 +1,15 @@
 import { useCallback, useState } from "react";
 import { Modal, Button } from "antd";
 import { EditOutlined } from "@ant-design/icons";
-import { ContractForm, contractModel } from "@entities/contract";
+import {
+  ContractForm,
+  TContract,
+  TContractWithoutId,
+} from "@entities/contract";
 import { useEditContact } from "./model";
 
 type TProps = {
-  contract: contractModel.TContract;
+  contract: TContract;
 };
 
 export const EditContractButton = ({ contract }: TProps) => {
@@ -16,7 +20,7 @@ export const EditContractButton = ({ contract }: TProps) => {
   const hideModal = () => setFormVisible(false);
 
   const onSubmit = useCallback(
-    (values: contractModel.TContractWithoutId) => {
+    (values: TContractWithoutId) => {
       hideModal();
 
       editContract(values);

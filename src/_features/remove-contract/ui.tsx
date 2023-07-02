@@ -1,11 +1,11 @@
 import { Button, Popconfirm } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
-import { contractModel } from "@entities/contract";
+import { TContract } from "@entities/contract";
 import { useRemoveContract } from "./model";
 import { useCallback } from "react";
 
 type TProps = {
-  contract: contractModel.TContract;
+  contract: TContract;
 };
 
 export const RemoveContractButton = ({ contract }: TProps) => {

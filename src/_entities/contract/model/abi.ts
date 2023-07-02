@@ -5,7 +5,7 @@ import {
   isAbiItemParamCall,
   isAbiItemEvent,
 } from "../lib";
-import { TContract } from "./store";
+import { TContract } from "./types";
 
 export const useContractProperties = (contract: TContract) => {
   return useMemo(() => contract.abi.filter(isAbiItemProperty), [contract.abi]);

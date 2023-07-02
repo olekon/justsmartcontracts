@@ -1,7 +1,7 @@
 import { Spin, Alert } from "antd";
 import { useContractRead } from "wagmi";
-import { TContract, TAbiFunction } from "../model";
-import { FormattedValue } from "./FormattedValue";
+import type { TContract, TAbiFunction } from "@entities/contract";
+import { FormattedValue } from "@entities/contract";
 
 type TProps = {
   contract: TContract;

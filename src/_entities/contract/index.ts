@@ -1,5 +1,13 @@
+export type {
+  TContract,
+  TContractWithoutId,
+  TAbiItem,
+  TAbiEvent,
+  TAbiFunction,
+} from "./model/types";
+
 export * as contractModel from "./model";
 
 export { SmallCard } from "./ui/SmallCard";
 export { ContractForm } from "./ui/ContractForm";
-export { PropertyCall } from "./ui/PropertyCall";
+export { FormattedValue } from "./ui/FormattedValue";

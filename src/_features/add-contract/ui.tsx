@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { Modal, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { ContractForm, contractModel } from "@entities/contract";
+import { ContractForm, TContractWithoutId } from "@entities/contract";
 import { useAddContact } from "./model";
 
 export const AddContractButton = () => {
@@ -12,7 +12,7 @@ export const AddContractButton = () => {
   const hideModal = () => setFormVisible(false);
 
   const onSubmit = useCallback(
-    (values: contractModel.TContractWithoutId) => {
+    (values: TContractWithoutId) => {
       hideModal();
 
       addContract(values);

@@ -1,7 +1,7 @@
-import { contractModel } from "@entities/contract";
+import { TContract, contractModel } from "@entities/contract";
 import { useCallback } from "react";
 
-export const useRemoveContract = ({ chain, id }: contractModel.TContract) => {
+export const useRemoveContract = ({ chain, id }: TContract) => {
   const { remove, contracts, setCurrent } = contractModel.useContracts();
 
   return useCallback(() => {
