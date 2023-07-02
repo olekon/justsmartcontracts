@@ -1,8 +1,10 @@
-import { TAbiFunction, TContract } from "@entities/contract";
-import styles from "./ParamCalls.module.scss";
-import { FunctionInputs } from "./FunctionInputs";
+import { Card } from "antd";
 import { useState } from "react";
+import { TAbiFunction, TContract } from "@entities/contract";
+import { FunctionInputs } from "./FunctionInputs";
 import { FetchCallResult } from "./FetchCallResult";
+
+import styles from "./ParamCalls.module.scss";
 
 type TProps = {
   contract: TContract;
@@ -12,24 +14,25 @@ type TProps = {
 export const GetterCall = ({ contract, abiItem }: TProps) => {
   const [args, setArgs] = useState<string[] | null>(null);
 
-  const onSubmit = (values: string[]) => {
-    console.log("setting values", values);
-    setArgs(values);
-  };
-
   return (
     <div className={styles.root}>
-      <div>
+      <div className={styles.inputs}>
         <FunctionInputs
           abiItem={abiItem}
-          onSubmit={onSubmit}
+          onSubmit={setArgs}
           buttonText="Fetch"
         />
       </div>
 
       {args && (
-        <div>
-          <FetchCallResult contract={contract} abiItem={abiItem} args={args} />
+        <div className={styles.results}>
+          <Card title="Result" size="small">
+            <FetchCallResult
+              contract={contract}
+              abiItem={abiItem}
+              args={args}
+            />
+          </Card>
         </div>
       )}
     </div>

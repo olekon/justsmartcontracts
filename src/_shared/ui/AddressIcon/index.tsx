@@ -1,9 +1,11 @@
+import { isAddress } from "viem";
 import Blockies from "react-blockies";
 import cn from "classnames";
 import { TAddress } from "@shared/lib/web3";
 import { TSize, TWithClassname, TWithSize } from "@shared/lib/props";
 
 import styles from "./AddressIcon.module.scss";
+import { MinusSquareOutlined } from "@ant-design/icons";
 
 type TProps = TWithClassname &
   TWithSize & {
@@ -27,11 +29,13 @@ export const AddressIcon = ({
   size = "medium",
   className,
 }: TProps) => {
-  return (
+  return isAddress(address) ? (
     <Blockies
       seed={address}
       size={toIconSize(size)}
       className={cn(styles.root, className)}
     />
+  ) : (
+    <MinusSquareOutlined />
   );
 };

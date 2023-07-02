@@ -6,7 +6,7 @@ type TProps = {
   value: unknown;
 };
 
-export const FormattedValue = ({ abiType, value }: TProps) => {
+export const ParamValue = ({ abiType, value }: TProps) => {
   if (abiType.type === "bool") {
     return <BooleanValue value={String(value)} />;
   }

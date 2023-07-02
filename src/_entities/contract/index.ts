@@ -11,4 +11,5 @@ export * as contractModel from "./model";
 
 export { SmallCard } from "./ui/SmallCard";
 export { ContractForm } from "./ui/ContractForm";
-export { FormattedValue } from "./ui/FormattedValue";
+export { ParamValue } from "./ui/ParamValue";
+export { ParamInput } from "./ui/ParamInput";

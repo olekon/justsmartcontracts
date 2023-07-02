@@ -1,6 +1,6 @@
 import { Spin, Alert } from "antd";
 import type { TContract, TAbiFunction } from "@entities/contract";
-import { FormattedValue } from "@entities/contract";
+import { ParamValue } from "@entities/contract";
 import { useContractCall } from "../model";
 
 type TProps = {
@@ -19,5 +19,5 @@ export const PropertyCall = ({ contract, abiItem }: TProps) => {
     <Alert message={error.message} type="error" />;
   }
 
-  return <FormattedValue value={data} abiType={abiItem.outputs[0]} />;
+  return <ParamValue value={data} abiType={abiItem.outputs[0]} />;
 };

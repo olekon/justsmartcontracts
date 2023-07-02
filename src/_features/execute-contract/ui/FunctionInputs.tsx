@@ -1,5 +1,6 @@
-import { TAbiFunction, contractUtils } from "@entities/contract";
-import { Button, Form, Input } from "antd";
+import { Button, Form } from "antd";
+import { useCallback } from "react";
+import { ParamInput, TAbiFunction, contractUtils } from "@entities/contract";
 
 type TProps = {
   abiItem: TAbiFunction;
@@ -8,15 +9,18 @@ type TProps = {
 };
 
 export const FunctionInputs = ({ abiItem, onSubmit, buttonText }: TProps) => {
-  const submit = (values: Record<number | string, string>) => {
-    const argsLength = Object.keys(values).length;
+  const submit = useCallback(
+    (values: Record<number | string, string>) => {
+      const argsLength = Object.keys(values).length;
 
-    const result = [...Array(argsLength).keys()].map(
-      (key) => values[String(key)]
-    );
+      const result = [...Array(argsLength).keys()].map(
+        (key) => values[String(key)]
+      );
 
-    onSubmit(result);
-  };
+      onSubmit(result);
+    },
+    [onSubmit]
+  );
 
   return (
     <Form layout="horizontal" onFinish={submit}>
@@ -27,8 +31,8 @@ export const FunctionInputs = ({ abiItem, onSubmit, buttonText }: TProps) => {
           name={index}
           initialValue={contractUtils.getDefaultValue(input)}
         >
-          {/* <CustomInput type={input.type}></CustomInput> */}
-          <Input style={{ width: "400px" }} />
+          {/* @ts-ignore value and onChange props are supplied by Form.Item */}
+          <ParamInput abiParam={input} />
         </Form.Item>
       ))}
 

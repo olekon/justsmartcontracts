@@ -1,3 +1,13 @@
 .root {
   display: flex;
+  gap: 24px;
+}
+
+.inputs {
+  flex: 50% 0;
+  flex-shrink: 0;
+}
+
+.results {
+  flex: 100% 0 1;
 }

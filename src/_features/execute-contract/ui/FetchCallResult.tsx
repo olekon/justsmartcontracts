@@ -1,4 +1,4 @@
-import { FormattedValue, TAbiFunction, TContract } from "@entities/contract";
+import { ParamValue, TAbiFunction, TContract } from "@entities/contract";
 import { useContractCall } from "../model";
 import { Alert, Spin } from "antd";
 
@@ -18,5 +18,5 @@ export const FetchCallResult = ({ contract, abiItem, args }: TProps) => {
     <Alert message={error.message} type="error" />;
   }
 
-  return <FormattedValue value={data} abiType={abiItem.outputs[0]} />;
+  return <ParamValue value={data} abiType={abiItem.outputs[0]} />;
 };
