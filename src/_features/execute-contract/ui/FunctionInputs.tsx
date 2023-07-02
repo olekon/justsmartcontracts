@@ -3,13 +3,19 @@ import { Button, Form, Input } from "antd";
 
 type TProps = {
   abiItem: TAbiFunction;
-  onSubmit: (values: [unknown]) => void;
+  onSubmit: (values: string[]) => void;
   buttonText: string;
 };
 
 export const FunctionInputs = ({ abiItem, onSubmit, buttonText }: TProps) => {
-  const submit = (values: any) => {
-    onSubmit(values);
+  const submit = (values: Record<number | string, string>) => {
+    const argsLength = Object.keys(values).length;
+
+    const result = [...Array(argsLength).keys()].map(
+      (key) => values[String(key)]
+    );
+
+    onSubmit(result);
   };
 
   return (

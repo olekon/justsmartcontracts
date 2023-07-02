@@ -1,15 +1,14 @@
-import { Spin, Alert } from "antd";
-import type { TContract, TAbiFunction } from "@entities/contract";
-import { FormattedValue } from "@entities/contract";
+import { FormattedValue, TAbiFunction, TContract } from "@entities/contract";
 import { useContractCall } from "../model";
+import { Alert, Spin } from "antd";
 
 type TProps = {
   contract: TContract;
   abiItem: TAbiFunction;
+  args: string[];
 };
-
-export const PropertyCall = ({ contract, abiItem }: TProps) => {
-  const { data, error, loading } = useContractCall(contract, abiItem, []);
+export const FetchCallResult = ({ contract, abiItem, args }: TProps) => {
+  const { data, error, loading } = useContractCall(contract, abiItem, args);
 
   if (loading) {
     return <Spin />;
