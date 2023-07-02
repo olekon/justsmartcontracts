@@ -11,7 +11,7 @@ export type TAbiEvent = ViemAbiEvent;
 export type TAbiFunction = ViemAbiFunction;
 export type TAbiItem = ViemAbiItem;
 
-export type TAbiType = ViemAbiParameter;
+export type TAbiParam = ViemAbiParameter;
 
 export type TContract = {
   id: TUid;

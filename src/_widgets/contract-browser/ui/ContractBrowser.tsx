@@ -1,24 +1,25 @@
 import { contractModel } from "@entities/contract";
 import { Empty, Tabs } from "antd";
-import { PropertiesView } from "./PropertiesView";
+import { PropertiesList } from "./PropertiesList";
+import { CallsList } from "./CallsList";
 
 export const ContractBrowser = () => {
   const contract = contractModel.useCurrentContract();
 
   if (!contract) {
-    return <Empty description="No smart-contract selected" />;
+    return <Empty description="No smart contract selected" />;
   }
 
   const TabItems = [
     {
       key: "1",
       label: "Properties",
-      children: <PropertiesView contract={contract} />,
+      children: <PropertiesList contract={contract} />,
     },
     {
       key: "2",
       label: "Calls",
-      children: "Calls",
+      children: <CallsList contract={contract} />,
     },
     {
       key: "3",

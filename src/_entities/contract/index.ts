@@ -6,6 +6,7 @@ export type {
   TAbiFunction,
 } from "./model/types";
 
+export * as contractUtils from "./lib";
 export * as contractModel from "./model";
 
 export { SmallCard } from "./ui/SmallCard";

@@ -1,8 +1,8 @@
 import { BooleanValue } from "@shared/ui/BooleanValue";
-import { TAbiType } from "../model/types";
+import { TAbiParam } from "../model/types";
 
 type TProps = {
-  abiType: TAbiType;
+  abiType: TAbiParam;
   value: unknown;
 };
 

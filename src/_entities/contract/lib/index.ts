@@ -1,4 +1,4 @@
-import type { TAbiItem } from "../model/types";
+import type { TAbiItem, TAbiParam } from "../model/types";
 
 import { AbiEvent, AbiFunction } from "abitype";
 
@@ -20,3 +20,25 @@ export const isAbiItemFunction = (item: TAbiItem): item is AbiFunction =>
 
 export const isAbiItemEvent = (item: TAbiItem): item is AbiEvent =>
   item.type === "event";
+
+const isArrayType = (param: TAbiParam) => param.type.endsWith("]");
+
+export const getArrayItemType = (param: TAbiParam) => param.type.slice(0, -2);
+
+export const getDefaultValue = (param: TAbiParam) => {
+  switch (param.type) {
+    case "bool":
+      return false;
+    case "address":
+      return "0x0000000000000000000000000000000000000000";
+    case "eth":
+    case "ether":
+      return "0";
+    default:
+      if (isArrayType(param)) {
+        return [];
+      } else {
+        return "";
+      }
+  }
+};

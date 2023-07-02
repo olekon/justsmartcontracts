@@ -5,15 +5,15 @@ import { FormattedValue } from "@entities/contract";
 
 type TProps = {
   contract: TContract;
-  abi: TAbiFunction;
+  abiItem: TAbiFunction;
 };
 
-export const PropertyCall = ({ contract, abi }: TProps) => {
+export const PropertyCall = ({ contract, abiItem }: TProps) => {
   const { data, error, isLoading } = useContractRead({
     address: contract.address,
     abi: contract.abi,
     //@ts-ignore somehow TS thinks functionName is of undefined type
-    functionName: abi.name,
+    functionName: abiItem.name,
   });
 
   if (isLoading) {
@@ -24,5 +24,5 @@ export const PropertyCall = ({ contract, abi }: TProps) => {
     <Alert message={error.message} type="error" />;
   }
 
-  return <FormattedValue value={data} abiType={abi.outputs[0]} />;
+  return <FormattedValue value={data} abiType={abiItem.outputs[0]} />;
 };

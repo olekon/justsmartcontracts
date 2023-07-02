@@ -8,8 +8,8 @@ type TProps = {
   contract: TContract;
 };
 
-export const PropertiesView = ({ contract }: TProps) => {
-  const contractProperties = contractModel.useContractProperties(contract);
+export const PropertiesList = ({ contract }: TProps) => {
+  const functions = contractModel.useContractProperties(contract);
 
   const columns: ColumnsType<AbiFunction> = [
     {
@@ -22,16 +22,16 @@ export const PropertiesView = ({ contract }: TProps) => {
       title: "Value",
       dataIndex: "abiItem",
       render: (_, abiItem) => (
-        <PropertyCall contract={contract} abi={abiItem} />
+        <PropertyCall contract={contract} abiItem={abiItem} />
       ),
-      width: "20%",
     },
   ];
 
   return (
     <Table
+      rowKey="name"
       pagination={false}
-      dataSource={contractProperties}
+      dataSource={functions}
       columns={columns}
     ></Table>
   );
