@@ -29,7 +29,11 @@ export const ChainConfig: Record<Chain, TChainConfig> = {
   },
 };
 
-export const SupportedChains = [Chain.ETHEREUM, Chain.ETH_GOERLI];
+export const SupportedChains = [
+  Chain.ETHEREUM,
+  Chain.ETH_GOERLI,
+  Chain.ARBITRUM,
+];
 
 const useCurrentChainStore = create<State & Actions>()((set) => ({
   chain: SupportedChains[0],

@@ -11,6 +11,7 @@ export const useContractCall = (
     abi: contract.abi,
     //@ts-ignore somehow TS thinks functionName is of undefined type
     functionName: abiItem.name,
+    chainId: contract.chain,
     args,
   });
 
