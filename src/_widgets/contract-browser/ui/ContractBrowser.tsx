@@ -2,6 +2,7 @@ import { contractModel } from "@entities/contract";
 import { Empty, Tabs } from "antd";
 import { PropertiesList } from "./PropertiesList";
 import { CallsList } from "./CallsList";
+import { OperationsList } from "./OperationsList";
 
 export const ContractBrowser = () => {
   const contract = contractModel.useCurrentContract();
@@ -24,7 +25,7 @@ export const ContractBrowser = () => {
     {
       key: "3",
       label: "Operations",
-      children: "Operations",
+      children: <OperationsList contract={contract} />,
     },
     {
       key: "4",
