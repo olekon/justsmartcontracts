@@ -1,4 +1,3 @@
-import { walletModel } from "@entities/wallet";
 import { TTransactionParams } from "@shared/lib/tx";
 import { TAddress } from "@shared/lib/web3";
 import { Button, Form, Input } from "antd";
@@ -12,16 +11,10 @@ type TProps = {
 };
 
 export const SignTransactionForm = ({ toAddress, payable, data }: TProps) => {
-  const { form, onValuesChange } = useTransactionParamsForm();
-
-  const { address } = walletModel.useCurrentWallet();
-
-  const initialValues: Partial<TTransactionParams> = {
-    to: toAddress,
-    from: address || undefined,
-    nonce: 0,
+  const { form, initialValues, onValuesChange } = useTransactionParamsForm(
     data,
-  };
+    toAddress
+  );
 
   const onSubmit = (values: TTransactionParams) => {
     console.log(values);
@@ -31,9 +24,7 @@ export const SignTransactionForm = ({ toAddress, payable, data }: TProps) => {
     <Form
       form={form}
       initialValues={initialValues}
-      preserve={false}
       layout="vertical"
-      name="add-contract"
       onFinish={onSubmit}
       onValuesChange={onValuesChange}
     >

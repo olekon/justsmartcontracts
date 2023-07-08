@@ -1,10 +1,11 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { TAbiFunction, TContract } from "@entities/contract";
 import { encodeFunctionData } from "viem";
 import { TTransactionParams } from "@shared/lib/tx";
 import { usePublicClient } from "wagmi";
-import { walletModel } from "@entities/wallet";
 import { Form } from "antd";
+import { TAddress, isEvmAddress } from "@shared/lib/web3";
+import { walletModel } from "@entities/wallet";
 
 export const useEncodeFunctionInputs = (
   contract: TContract,
@@ -29,26 +30,48 @@ export const useEncodeFunctionInputs = (
   };
 };
 
-export const useTransactionParamsForm = () => {
+export const useTransactionParamsForm = (data: string, toAddress?: string) => {
   const publicClient = usePublicClient();
+  const { address } = walletModel.useCurrentWallet();
 
   const [form] = Form.useForm<TTransactionParams>();
 
-  const onValuesChange = useCallback(
-    (changed: Partial<TTransactionParams>, values: TTransactionParams) => {
-      console.log("values changed", changed, values);
-      if (changed.from) {
-        //todo add ETH address validation
-        publicClient
-          .getTransactionCount({ address: changed.from })
-          .then((value) => form.setFieldValue("nonce", value));
-      }
+  const initialValues = {
+    data,
+    to: toAddress,
+  };
+
+  const updateNonce = useCallback(
+    (address: TAddress) => {
+      publicClient
+        .getTransactionCount({ address })
+        .then((value) => form.setFieldValue("nonce", value));
     },
     [form, publicClient]
   );
 
+  // const updateGas
+
+  const onValuesChange = useCallback(
+    (changed: Partial<TTransactionParams>) => {
+      if (changed.from && isEvmAddress(changed.from)) {
+        updateNonce(changed.from);
+        // updateGas
+      }
+    },
+    [updateNonce]
+  );
+
+  useEffect(() => {
+    if (address) {
+      form.setFieldValue("from", address);
+      onValuesChange({ from: address });
+    }
+  }, [address, form, onValuesChange, updateNonce]);
+
   return {
     form,
     onValuesChange,
+    initialValues,
   };
 };
