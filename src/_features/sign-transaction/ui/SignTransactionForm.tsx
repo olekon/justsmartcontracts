@@ -2,6 +2,8 @@ import { walletModel } from "@entities/wallet";
 import { TTransactionParams } from "@shared/lib/tx";
 import { TAddress } from "@shared/lib/web3";
 import { Button, Form, Input } from "antd";
+import { useTransactionParamsForm } from "../model";
+import { AddressInput } from "@shared/ui/AddressInput";
 
 type TProps = {
   toAddress?: TAddress;
@@ -10,6 +12,8 @@ type TProps = {
 };
 
 export const SignTransactionForm = ({ toAddress, payable, data }: TProps) => {
+  const { form, onValuesChange } = useTransactionParamsForm();
+
   const { address } = walletModel.useCurrentWallet();
 
   const initialValues: Partial<TTransactionParams> = {
@@ -19,16 +23,14 @@ export const SignTransactionForm = ({ toAddress, payable, data }: TProps) => {
     data,
   };
 
-  const onSubmit = (values: any) => {
+  const onSubmit = (values: TTransactionParams) => {
     console.log(values);
-  };
-
-  const onValuesChange = (changed: any, values: any) => {
-    console.log("values changed", changed, values);
   };
 
   return (
     <Form
+      form={form}
+      initialValues={initialValues}
       preserve={false}
       layout="vertical"
       name="add-contract"
@@ -40,7 +42,8 @@ export const SignTransactionForm = ({ toAddress, payable, data }: TProps) => {
         name="from"
         rules={[{ required: true, message: "From address missing" }]}
       >
-        <Input />
+        {/* @ts-ignore value and onChange props are supplied by Form.Item */}
+        <AddressInput />
       </Form.Item>
 
       <Form.Item
@@ -52,7 +55,8 @@ export const SignTransactionForm = ({ toAddress, payable, data }: TProps) => {
       </Form.Item>
 
       <Form.Item label="To address" name="to">
-        <Input disabled />
+        {/* @ts-ignore value and onChange props are supplied by Form.Item */}
+        <AddressInput />
       </Form.Item>
 
       <Form.Item label="ETH value" name="value">

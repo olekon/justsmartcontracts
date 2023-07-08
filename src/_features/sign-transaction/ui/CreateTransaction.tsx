@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { FunctionInputs, TAbiFunction, TContract } from "@entities/contract";
-import { TxGenerator } from "./TxGenerator";
+import { useEncodeFunctionInputs } from "../model";
+import { SignTransactionForm } from "./SignTransactionForm";
 
 type TProps = {
   contract: TContract;
@@ -8,21 +8,28 @@ type TProps = {
 };
 
 export const CreateTransaction = ({ contract, abiItem }: TProps) => {
-  const [args, setArgs] = useState<string[] | null>(null);
+  const { updateArgs, encodedData } = useEncodeFunctionInputs(
+    contract,
+    abiItem
+  );
 
   return (
     <div>
       <div>
         <FunctionInputs
           abiItem={abiItem}
-          onSubmit={setArgs}
+          onSubmit={updateArgs}
           buttonText="Create transaction"
         />
       </div>
 
-      {args && (
+      {encodedData && (
         <div>
-          <TxGenerator contract={contract} abiItem={abiItem} args={args} />
+          <SignTransactionForm
+            toAddress={contract.address}
+            payable={abiItem.stateMutability == "payable"}
+            data={encodedData}
+          />
         </div>
       )}
     </div>
