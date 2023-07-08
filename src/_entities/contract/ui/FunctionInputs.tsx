@@ -1,6 +1,8 @@
 import { Button, Form } from "antd";
 import { useCallback } from "react";
-import { ParamInput, TAbiFunction, contractUtils } from "@entities/contract";
+import { getDefaultValue } from "../lib";
+import { TAbiFunction } from "../model/types";
+import { ParamInput } from "./ParamInput";
 
 type TProps = {
   abiItem: TAbiFunction;
@@ -29,7 +31,7 @@ export const FunctionInputs = ({ abiItem, onSubmit, buttonText }: TProps) => {
           key={index}
           label={`${input.name} (${input.type})`}
           name={index}
-          initialValue={contractUtils.getDefaultValue(input)}
+          initialValue={getDefaultValue(input)}
         >
           {/* @ts-ignore value and onChange props are supplied by Form.Item */}
           <ParamInput abiParam={input} />

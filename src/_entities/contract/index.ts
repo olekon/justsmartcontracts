@@ -13,3 +13,4 @@ export { SmallCard } from "./ui/SmallCard";
 export { ContractForm } from "./ui/ContractForm";
 export { ParamValue } from "./ui/ParamValue";
 export { ParamInput } from "./ui/ParamInput";
+export { FunctionInputs } from "./ui/FunctionInputs";

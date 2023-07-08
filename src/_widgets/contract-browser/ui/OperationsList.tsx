@@ -1,6 +1,6 @@
 import { Collapse } from "antd";
 import { TContract, contractModel } from "@entities/contract";
-import { OperationCall } from "@features/execute-contract";
+import { CreateTransaction } from "@features/sign-transaction";
 
 type TProps = {
   contract: TContract;
@@ -12,7 +12,7 @@ export const OperationsList = ({ contract }: TProps) => {
   const items = functions.map((item, index) => ({
     label: item.name,
     key: index,
-    children: <OperationCall contract={contract} abiItem={item} />,
+    children: <CreateTransaction contract={contract} abiItem={item} />,
   }));
 
   return <Collapse items={items} />;

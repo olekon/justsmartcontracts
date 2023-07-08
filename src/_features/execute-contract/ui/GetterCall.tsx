@@ -1,7 +1,6 @@
 import { Card } from "antd";
 import { useState } from "react";
-import { TAbiFunction, TContract } from "@entities/contract";
-import { FunctionInputs } from "./FunctionInputs";
+import { FunctionInputs, TAbiFunction, TContract } from "@entities/contract";
 import { FetchCallResult } from "./FetchCallResult";
 
 import styles from "./ParamCalls.module.scss";
