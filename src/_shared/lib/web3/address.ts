@@ -1,6 +1,8 @@
 import { isAddress } from "viem";
 
-export type TAddress = `0x${string}`;
+export type THexString = `0x${string}`;
+
+export type TAddress = THexString;
 
 export const sameAddress = (a: TAddress, b: TAddress) =>
   a.toLowerCase() === b.toLowerCase();

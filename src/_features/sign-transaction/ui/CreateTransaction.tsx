@@ -1,6 +1,6 @@
 import { FunctionInputs, TAbiFunction, TContract } from "@entities/contract";
-import { useEncodeFunctionInputs } from "../model";
 import { SignTransactionForm } from "./SignTransactionForm";
+import { useEncodeFunctionInputs } from "../model/useEncodeFunctionInput";
 
 type TProps = {
   contract: TContract;
