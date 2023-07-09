@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect } from "react";
 import { usePublicClient } from "wagmi";
 import { Form } from "antd";
 import { walletModel } from "@entities/wallet";
 import { TAddress, isEvmAddress } from "@shared/lib/web3";
 import { TTransactionParams } from "@shared/lib/tx";
-import { encodeFunctionData } from "viem";
 import { TAbiFunction, TContract } from "@entities/contract";
+import { useInitialTransactionParams } from "./useInitialTransactionParams";
 
 export const useTransactionParamsForm = (
   contract: TContract,
@@ -17,17 +17,7 @@ export const useTransactionParamsForm = (
 
   const [form] = Form.useForm<TTransactionParams>();
 
-  const initialValues = useMemo(
-    () => ({
-      data: encodeFunctionData({
-        abi: contract.abi,
-        args: args,
-        functionName: abiItem.name,
-      }),
-      to: contract.address,
-    }),
-    [abiItem.name, args, contract.abi, contract.address]
-  );
+  const initialValues = useInitialTransactionParams(contract, abiItem, args);
 
   const updateNonce = useCallback(
     (address: TAddress) => {
