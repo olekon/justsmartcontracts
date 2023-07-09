@@ -1,7 +1,7 @@
 import { Button, Form, Input } from "antd";
 import { TTransactionParams } from "@shared/lib/tx";
 import { AddressInput } from "@shared/ui/AddressInput";
-import { Row, Col2, Col3 } from "@shared/ui/Grid";
+import { Row, Col2, Col3, Col1 } from "@shared/ui/Grid";
 import { useTransactionParamsForm } from "../model";
 import { TAbiFunction, TContract } from "@entities/contract";
 
@@ -96,9 +96,17 @@ export const SignTransactionForm = ({
         </Col3>
       </Row>
 
+      <Row>
+        <Col1>
+          <Form.Item label="Data" name="data">
+            <Input.TextArea rows={5} />
+          </Form.Item>
+        </Col1>
+      </Row>
+
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          Sign
+          Next
         </Button>
       </Form.Item>
     </Form>

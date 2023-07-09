@@ -21,7 +21,12 @@ export const CreateTransaction = ({ contract, abiItem }: TProps) => {
 
       {args && (
         <div>
-          <SignTransaction contract={contract} abiItem={abiItem} args={args} />
+          <SignTransaction
+            key={args.join("")}
+            contract={contract}
+            abiItem={abiItem}
+            args={args}
+          />
         </div>
       )}
     </div>
