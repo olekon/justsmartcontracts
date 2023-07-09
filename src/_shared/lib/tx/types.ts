@@ -1,14 +1,14 @@
-import { TAddress } from "@shared/lib/web3";
+import { TAddress, THexString } from "@shared/lib/web3";
 
-export type NativeValue = string;
+export type TNativeValue = string;
 
 export type TTransactionParams = {
   from: TAddress;
   to?: TAddress;
   nonce: number;
-  value: NativeValue;
+  value: TNativeValue;
   gas: number;
-  maxFee: NativeValue;
-  maxPriorityFee: NativeValue;
-  data: string;
+  maxFee: TNativeValue;
+  maxPriorityFee: TNativeValue;
+  data: THexString;
 };

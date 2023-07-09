@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { TAbiFunction, TContract } from "@entities/contract";
 import { encodeFunctionData } from "viem";
 
+//TODO remove unused
 export const useEncodeFunctionInputs = (
   contract: TContract,
   abiItem: TAbiFunction

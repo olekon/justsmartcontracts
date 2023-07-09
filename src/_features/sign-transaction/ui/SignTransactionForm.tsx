@@ -1,25 +1,25 @@
 import { Button, Form, Input } from "antd";
 import { TTransactionParams } from "@shared/lib/tx";
-import { TAddress, THexString } from "@shared/lib/web3";
 import { AddressInput } from "@shared/ui/AddressInput";
-import { useTransactionParamsForm } from "../model/useTransactionParamsForm";
 import { Row, Col2, Col3 } from "@shared/ui/Grid";
+import { useTransactionParamsForm } from "../model";
+import { TAbiFunction, TContract } from "@entities/contract";
 
 type TProps = {
-  toAddress?: TAddress;
-  payable?: boolean;
-  data: THexString;
+  contract: TContract;
+  abiItem: TAbiFunction;
+  args: string[];
+  onSubmit: (values: TTransactionParams) => void;
 };
 
-export const SignTransactionForm = ({ toAddress, payable, data }: TProps) => {
-  const { form, initialValues, onValuesChange } = useTransactionParamsForm(
-    data,
-    toAddress
-  );
-
-  const onSubmit = (values: TTransactionParams) => {
-    console.log(values);
-  };
+export const SignTransactionForm = ({
+  contract,
+  abiItem,
+  args,
+  onSubmit,
+}: TProps) => {
+  const { form, initialValues, payable, onValuesChange } =
+    useTransactionParamsForm(contract, abiItem, args);
 
   return (
     <Form

@@ -1,23 +1,33 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { usePublicClient } from "wagmi";
 import { Form } from "antd";
 import { walletModel } from "@entities/wallet";
-import { TAddress, THexString, isEvmAddress } from "@shared/lib/web3";
+import { TAddress, isEvmAddress } from "@shared/lib/web3";
 import { TTransactionParams } from "@shared/lib/tx";
+import { encodeFunctionData } from "viem";
+import { TAbiFunction, TContract } from "@entities/contract";
 
 export const useTransactionParamsForm = (
-  data: THexString,
-  toAddress?: TAddress
+  contract: TContract,
+  abiItem: TAbiFunction,
+  args: string[]
 ) => {
   const publicClient = usePublicClient();
   const { address } = walletModel.useCurrentWallet();
 
   const [form] = Form.useForm<TTransactionParams>();
 
-  const initialValues = {
-    data,
-    to: toAddress,
-  };
+  const initialValues = useMemo(
+    () => ({
+      data: encodeFunctionData({
+        abi: contract.abi,
+        args: args,
+        functionName: abiItem.name,
+      }),
+      to: contract.address,
+    }),
+    [abiItem.name, args, contract.abi, contract.address]
+  );
 
   const updateNonce = useCallback(
     (address: TAddress) => {
@@ -33,13 +43,13 @@ export const useTransactionParamsForm = (
       publicClient
         .estimateGas({
           account: address,
-          to: toAddress,
-          data: data as TAddress,
+          to: initialValues.to,
+          data: initialValues.data,
         })
         .then((value) => form.setFieldValue("gas", value.toString()))
         .catch(() => form.setFieldValue("gas", "0"));
     },
-    [data, form, publicClient, toAddress]
+    [form, initialValues.data, initialValues.to, publicClient]
   );
 
   const onValuesChange = useCallback(
@@ -63,5 +73,6 @@ export const useTransactionParamsForm = (
     form,
     onValuesChange,
     initialValues,
+    payable: abiItem.stateMutability == "payable",
   };
 };
