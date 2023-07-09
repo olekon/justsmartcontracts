@@ -1,68 +1,51 @@
 import { useEffect } from "react";
+import { Button, Space } from "antd";
 import { TTransactionParams } from "@shared/lib/tx";
+import { download } from "@shared/lib/download";
+import { useNotifications } from "@shared/lib/notify";
 import { useTransactionSend } from "../model";
-import { Button, Space, notification } from "antd";
 
 type TProps = {
   tx: TTransactionParams;
 };
 
 export const ExecuteTransaction = ({ tx }: TProps) => {
-  //TODO add download function
   const { send, hash, inProgress, success } = useTransactionSend(tx);
-  const [notify, context] = notification.useNotification();
+  const notify = useNotifications();
 
   const onSignClick = () => {
     send();
   };
 
   const onDownloadClick = () => {
-    console.log("download", tx);
-
-    const text = JSON.stringify(tx, null, "\t");
-    var element = document.createElement("a");
-    var file = new Blob([text], { type: "text/plain" });
-    element.href = URL.createObjectURL(file);
-    element.download = "tx.txt";
-    element.click();
-
-    notify.info({
-      message: `Downloaded`,
-    });
+    download(JSON.stringify(tx, null, "\t"), "tx.json");
   };
 
   useEffect(() => {
     if (hash) {
-      notify.info({
-        message: `Tx ${hash} in progress`,
-      });
+      notify(`Tx ${hash} in progress`);
     }
   }, [hash, notify]);
 
   useEffect(() => {
     if (success && hash) {
-      notify.info({
-        message: `Tx ${hash} confirmed`,
-      });
+      notify(`Tx ${hash} confirmed`);
     }
   }, [hash, notify, success]);
 
   return (
-    <>
-      {context}
-      <Space>
-        <Button
-          type="primary"
-          size="large"
-          onClick={onSignClick}
-          loading={inProgress}
-        >
-          Sign now
-        </Button>
-        <Button type="text" size="large" onClick={onDownloadClick}>
-          Download
-        </Button>
-      </Space>
-    </>
+    <Space>
+      <Button
+        type="primary"
+        size="large"
+        onClick={onSignClick}
+        loading={inProgress}
+      >
+        Sign now
+      </Button>
+      <Button type="text" size="large" onClick={onDownloadClick}>
+        Download
+      </Button>
+    </Space>
   );
 };

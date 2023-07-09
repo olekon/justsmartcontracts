@@ -4,6 +4,7 @@ import Head from "next/head";
 import { Web3Provider } from "@shared/lib/web3";
 import { Layout } from "@widgets/layout";
 import { chainModel } from "@entities/chain";
+import { NotificationsProvider } from "@shared/lib/notify";
 
 export const metadata = {
   title: "JustSmartContracts",
@@ -18,9 +19,11 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta name="description" content={metadata.description} />
       </Head>
       <Web3Provider chains={chainModel.SupportedChains}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <NotificationsProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </NotificationsProvider>
       </Web3Provider>
     </>
   );
