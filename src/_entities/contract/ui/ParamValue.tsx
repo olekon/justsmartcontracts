@@ -1,5 +1,7 @@
 import { BooleanValue } from "@shared/ui/BooleanValue";
 import { TAbiParam } from "../model/types";
+import { AddressValue } from "@shared/ui/AddressValue";
+import { TAddress } from "@shared/lib/web3";
 
 type TProps = {
   abiType: TAbiParam;
@@ -12,7 +14,7 @@ export const ParamValue = ({ abiType, value }: TProps) => {
   }
 
   if (abiType.type === "address") {
-    return <>{String(value)}</>;
+    return <AddressValue value={value as TAddress} />;
   }
 
   if (abiType.type === "uint256") {

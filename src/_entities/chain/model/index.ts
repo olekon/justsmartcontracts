@@ -1,5 +1,5 @@
 import { create } from "zustand";
-
+import { persist } from "zustand/middleware";
 import { Chain } from "@shared/lib/web3";
 
 type State = {
@@ -35,9 +35,14 @@ export const SupportedChains = [
   Chain.ARBITRUM,
 ];
 
-const useCurrentChainStore = create<State & Actions>()((set) => ({
-  chain: SupportedChains[0],
-  update: (chain: Chain) => set(() => ({ chain })),
-}));
+const useCurrentChainStore = create<State & Actions>()(
+  persist(
+    (set) => ({
+      chain: SupportedChains[0],
+      update: (chain: Chain) => set(() => ({ chain })),
+    }),
+    { name: "chain" }
+  )
+);
 
 export const useCurrentChain = () => useCurrentChainStore((state) => state);

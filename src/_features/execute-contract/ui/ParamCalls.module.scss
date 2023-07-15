@@ -1,13 +1,13 @@
 .root {
   display: flex;
+  flex-direction: column;
   gap: 24px;
 }
 
 .inputs {
-  flex: 50% 0;
-  flex-shrink: 0;
+  flex: 100%;
 }
 
 .results {
-  flex: 100% 0 1;
+  flex: 100%;
 }

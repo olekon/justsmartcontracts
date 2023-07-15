@@ -1,9 +1,14 @@
-import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
+import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
+import { Tooltip } from "antd";
 
 export const BooleanValue = ({ value }: { value: boolean | string }) => {
   return value === true || value === "true" ? (
-    <PlusOutlined />
+    <Tooltip title="true">
+      <CheckOutlined />
+    </Tooltip>
   ) : (
-    <MinusOutlined />
+    <Tooltip title="false">
+      <CloseOutlined />
+    </Tooltip>
   );
 };
