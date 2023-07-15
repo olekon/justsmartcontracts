@@ -1,9 +1,11 @@
+import { Input } from "antd";
 import { TValueInput } from "@shared/lib/props";
-import { TAbiParam } from "../model/types";
 import { AddressInput } from "@shared/ui/AddressInput";
 import { TAddress } from "@shared/lib/web3";
-import { Input } from "antd";
 import { BoolInput } from "@shared/ui/BoolInput";
+import { AmountInput } from "@shared/ui/AmountInput";
+
+import { TAbiParam } from "../model/types";
 
 type TProps = TValueInput<string> & {
   abiParam: TAbiParam;
@@ -21,6 +23,10 @@ export const ParamInput = ({ value, onChange, abiParam }: TProps) => {
         onChange={(value) => onChange(value ? "1" : "0")}
       />
     );
+  }
+
+  if (abiParam.type == "uint256") {
+    return <AmountInput value={String(value)} onChange={onChange} />;
   }
 
   return <Input value={value} onChange={(e) => onChange(e.target.value)} />;

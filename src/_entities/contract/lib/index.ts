@@ -33,6 +33,12 @@ export const getDefaultValue = (param: TAbiParam) => {
       return "0x0000000000000000000000000000000000000000";
     case "eth":
     case "ether":
+    case "uint256":
+    case "uint128":
+    case "uint64":
+    case "uint32":
+    case "uint16":
+    case "uint8":
       return "0";
     default:
       if (isArrayType(param)) {
