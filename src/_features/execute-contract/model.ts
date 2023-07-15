@@ -6,7 +6,7 @@ export const useContractCall = (
   abiItem: TAbiItem,
   args: string[]
 ) => {
-  const { data, error, isLoading } = useContractRead({
+  const { data, error, isLoading, refetch } = useContractRead({
     address: contract.address,
     abi: contract.abi,
     //@ts-ignore somehow TS thinks functionName is of undefined type
@@ -19,5 +19,6 @@ export const useContractCall = (
     data,
     error,
     loading: isLoading,
+    refetch,
   };
 };
