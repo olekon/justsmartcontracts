@@ -3,7 +3,7 @@ import { usePublicClient } from "wagmi";
 import { Form } from "antd";
 import { walletModel } from "@entities/wallet";
 import { TAddress, isEvmAddress } from "@shared/lib/web3";
-import { TTransactionParams } from "@shared/lib/tx";
+import { TNativeValue, TTransactionParams } from "@shared/lib/tx";
 import { TAbiFunction, TContract } from "@entities/contract";
 import { useInitialTransactionParams } from "./useInitialTransactionParams";
 
@@ -29,12 +29,13 @@ export const useTransactionParamsForm = (
   );
 
   const updateGasLimit = useCallback(
-    (address: TAddress) => {
+    (address: TAddress, value?: TNativeValue) => {
       publicClient
         .estimateGas({
           account: address,
           to: initialValues.to,
           data: initialValues.data,
+          value: BigInt(value || 0),
         })
         .then((value) => form.setFieldValue("gas", value.toString()))
         .catch(() => form.setFieldValue("gas", "0"));
@@ -48,8 +49,12 @@ export const useTransactionParamsForm = (
         updateNonce(changed.from);
         updateGasLimit(changed.from);
       }
+
+      if (changed.value) {
+        updateGasLimit(form.getFieldValue("from"), changed.value);
+      }
     },
-    [updateGasLimit, updateNonce]
+    [form, updateGasLimit, updateNonce]
   );
 
   useEffect(() => {

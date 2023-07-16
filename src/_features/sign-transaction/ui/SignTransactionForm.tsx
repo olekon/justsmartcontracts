@@ -2,13 +2,15 @@ import { Button, Form, Input } from "antd";
 import { TTransactionParams } from "@shared/lib/tx";
 import { AddressInput } from "@shared/ui/AddressInput";
 import { Row, Col2, Col3, Col1 } from "@shared/ui/Grid";
-import { useTransactionParamsForm } from "../model";
 import { TAbiFunction, TContract } from "@entities/contract";
+import { AmountInput, Mode } from "@shared/ui/AmountInput";
+import { useTransactionParamsForm } from "../model";
 
 type TProps = {
   contract: TContract;
   abiItem: TAbiFunction;
   args: string[];
+  disabled?: boolean;
   onSubmit: (values: TTransactionParams) => void;
 };
 
@@ -16,6 +18,7 @@ export const SignTransactionForm = ({
   contract,
   abiItem,
   args,
+  disabled,
   onSubmit,
 }: TProps) => {
   const { form, initialValues, payable, onValuesChange } =
@@ -28,6 +31,7 @@ export const SignTransactionForm = ({
       layout="vertical"
       onFinish={onSubmit}
       onValuesChange={onValuesChange}
+      disabled={disabled}
     >
       <Row>
         <Col2>
@@ -37,7 +41,7 @@ export const SignTransactionForm = ({
             rules={[{ required: true, message: "From address missing" }]}
           >
             {/* @ts-ignore value and onChange props are supplied by Form.Item */}
-            <AddressInput />
+            <AddressInput disabled={disabled} />
           </Form.Item>
         </Col2>
         <Col2>
@@ -51,7 +55,11 @@ export const SignTransactionForm = ({
       <Row>
         <Col3>
           <Form.Item label="ETH value" name="value">
-            <Input disabled={!payable} />
+            {/* @ts-ignore value and onChange props are supplied by Form.Item */}
+            <AmountInput
+              disabled={!payable || disabled}
+              defaultMode={Mode.ETH}
+            />
           </Form.Item>
         </Col3>
 
@@ -61,7 +69,7 @@ export const SignTransactionForm = ({
             name="nonce"
             rules={[{ required: true, message: "Nonce missing" }]}
           >
-            <Input />
+            <Input type="number" />
           </Form.Item>
         </Col3>
       </Row>
@@ -73,7 +81,7 @@ export const SignTransactionForm = ({
             name="gas"
             rules={[{ required: true, message: "Gas limit missing" }]}
           >
-            <Input />
+            <Input type="number" />
           </Form.Item>
         </Col3>
         <Col3>
@@ -82,7 +90,8 @@ export const SignTransactionForm = ({
             name="maxFee"
             rules={[{ required: true, message: "Max fee missing" }]}
           >
-            <Input />
+            {/* @ts-ignore value and onChange props are supplied by Form.Item */}
+            <AmountInput disabled={disabled} defaultMode={Mode.GWEI} />
           </Form.Item>
         </Col3>
         <Col3>
@@ -91,7 +100,8 @@ export const SignTransactionForm = ({
             name="maxPriorityFee"
             rules={[{ required: true, message: "Max priority fee missing" }]}
           >
-            <Input />
+            {/* @ts-ignore value and onChange props are supplied by Form.Item */}
+            <AmountInput disabled={disabled} defaultMode={Mode.GWEI} />
           </Form.Item>
         </Col3>
       </Row>

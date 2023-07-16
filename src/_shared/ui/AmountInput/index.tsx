@@ -3,13 +3,16 @@ import { useState } from "react";
 import { formatUnits, parseUnits } from "viem";
 import { TValueInput } from "@shared/lib/props";
 
-type TProps = TValueInput<string>;
-
-enum Mode {
+export enum Mode {
   WEI = 0,
   GWEI = 9,
   ETH = 18,
 }
+
+type TProps = TValueInput<string> & {
+  disabled?: boolean;
+  defaultMode?: Mode;
+};
 
 const options = [
   {
@@ -46,12 +49,15 @@ const convertToWei = (mode: Mode, value: string) => {
 };
 
 const convertFromWei = (mode: Mode, value: string) => {
-  return String(formatUnits(BigInt(value), mode));
+  return String(formatUnits(BigInt(value || "0"), mode));
 };
 
-export const AmountInput = ({ value, onChange }: TProps) => {
-  const defaultMode = Mode.WEI;
-
+export const AmountInput = ({
+  value,
+  disabled,
+  onChange,
+  defaultMode = Mode.WEI,
+}: TProps) => {
   const [formatted, setFormatted] = useState(
     convertFromWei(defaultMode, value)
   );
@@ -87,6 +93,7 @@ export const AmountInput = ({ value, onChange }: TProps) => {
 
   return (
     <Input
+      disabled={disabled}
       addonAfter={modeSelect}
       value={formatted}
       onChange={(e) => handleValueChange(e.target.value)}

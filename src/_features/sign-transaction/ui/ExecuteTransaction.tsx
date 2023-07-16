@@ -1,17 +1,19 @@
-import { useEffect } from "react";
 import { Button, Space } from "antd";
 import { TTransactionParams } from "@shared/lib/tx";
 import { download } from "@shared/lib/download";
-import { useNotifications } from "@shared/lib/notify";
-import { useTransactionSend } from "../model";
+import { Chain } from "@shared/lib/web3";
+import { useTransactionSend } from "../model/useTransactionSend";
+import { useWatchTxNotification } from "../model/useTxNotification";
 
 type TProps = {
   tx: TTransactionParams;
+  chain: Chain;
 };
 
-export const ExecuteTransaction = ({ tx }: TProps) => {
+export const ExecuteTransaction = ({ tx, chain }: TProps) => {
   const { send, hash, inProgress, success } = useTransactionSend(tx);
-  const notify = useNotifications();
+
+  useWatchTxNotification(chain, hash);
 
   const onSignClick = () => {
     send();
@@ -20,18 +22,6 @@ export const ExecuteTransaction = ({ tx }: TProps) => {
   const onDownloadClick = () => {
     download(JSON.stringify(tx, null, "\t"), "tx.json");
   };
-
-  useEffect(() => {
-    if (hash) {
-      notify(`Tx ${hash} in progress`);
-    }
-  }, [hash, notify]);
-
-  useEffect(() => {
-    if (success && hash) {
-      notify(`Tx ${hash} confirmed`);
-    }
-  }, [hash, notify, success]);
 
   return (
     <Space>

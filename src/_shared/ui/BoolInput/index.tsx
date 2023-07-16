@@ -22,7 +22,6 @@ export const BoolInput = ({ value, onChange }: TProps) => {
       options={options}
       value={value}
       onChange={(e) => {
-        console.log(e.target.value);
         onChange(e.target.value);
       }}
     />

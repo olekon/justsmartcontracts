@@ -1,9 +1,9 @@
-import { createContext, useCallback } from "react";
+import { ReactNode, createContext, useCallback } from "react";
 import { notification } from "antd";
 import { TWithChildren } from "../props";
 
 type TNotificationContext = {
-  notify: (text: string) => void;
+  notify: (text: ReactNode, isError?: boolean) => void;
 };
 
 export const NotificationsContext = createContext<TNotificationContext>({
@@ -14,8 +14,9 @@ export const NotificationsProvider = ({ children }: TWithChildren) => {
   const [api, context] = notification.useNotification();
 
   const notify = useCallback(
-    (text: string) => {
-      api.info({ placement: "topRight", message: text });
+    (text: ReactNode, isError?: boolean) => {
+      const method = isError ? "error" : "info";
+      api[method]({ placement: "topRight", message: text, duration: 5 });
     },
     [api]
   );

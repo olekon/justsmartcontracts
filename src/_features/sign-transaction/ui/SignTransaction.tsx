@@ -19,16 +19,13 @@ export const SignTransaction = ({ contract, abiItem, args }: TProps) => {
 
   return (
     <>
-      {txParams ? (
-        <ExecuteTransaction tx={txParams} />
-      ) : (
-        <SignTransactionForm
-          contract={contract}
-          abiItem={abiItem}
-          args={args}
-          onSubmit={onSubmit}
-        />
-      )}
+      <SignTransactionForm
+        contract={contract}
+        abiItem={abiItem}
+        args={args}
+        onSubmit={onSubmit}
+      />
+      {txParams && <ExecuteTransaction tx={txParams} chain={contract.chain} />}
     </>
   );
 };

@@ -12,20 +12,25 @@ type Actions = {
 
 type TChainConfig = {
   name: string;
+  explorer: string;
 };
 
 export const ChainConfig: Record<Chain, TChainConfig> = {
   [Chain.ETHEREUM]: {
     name: "Ethereum",
+    explorer: "https://etherscan.io/",
   },
   [Chain.ARBITRUM]: {
     name: "Arbitrum",
+    explorer: "https://arbiscan.io/",
   },
   [Chain.ETH_GOERLI]: {
     name: "Goerli",
+    explorer: "https://goerli.etherscan.io/",
   },
   [Chain.ETH_SEPOLIA]: {
     name: "Sepolia",
+    explorer: "https://sepolia.etherscan.io/",
   },
 };
 
