@@ -1,10 +1,11 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Space } from "antd";
 import { TTransactionParams } from "@shared/lib/tx";
 import { AddressInput } from "@shared/ui/AddressInput";
 import { Row, Col2, Col3, Col1 } from "@shared/ui/Grid";
 import { TAbiFunction, TContract } from "@entities/contract";
 import { AmountInput, Mode } from "@shared/ui/AmountInput";
 import { useTransactionParamsForm } from "../model";
+import { DownloadTransaction } from "./DownloadTransaction";
 
 type TProps = {
   contract: TContract;
@@ -115,9 +116,13 @@ export const SignTransactionForm = ({
       </Row>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Next
-        </Button>
+        <Space align="center">
+          <Button type="primary" htmlType="submit">
+            Sign
+          </Button>
+
+          <DownloadTransaction fetchTxFields={() => form.getFieldsValue()} />
+        </Space>
       </Form.Item>
     </Form>
   );

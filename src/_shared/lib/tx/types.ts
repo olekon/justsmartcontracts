@@ -4,7 +4,7 @@ export type TNativeValue = string;
 
 export type TTransactionParams = {
   from: TAddress;
-  to?: TAddress;
+  to: TAddress;
   nonce: number;
   value: TNativeValue;
   gas: number;

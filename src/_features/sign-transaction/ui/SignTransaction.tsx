@@ -1,8 +1,7 @@
 import { TAbiFunction, TContract } from "@entities/contract";
 import { SignTransactionForm } from "./SignTransactionForm";
 import { TTransactionParams } from "@shared/lib/tx";
-import { useState } from "react";
-import { ExecuteTransaction } from "./ExecuteTransaction";
+import { useTransactionSend } from "../model/useTransactionSend";
 
 type TProps = {
   contract: TContract;
@@ -11,21 +10,18 @@ type TProps = {
 };
 
 export const SignTransaction = ({ contract, abiItem, args }: TProps) => {
-  const [txParams, setTxParams] = useState<TTransactionParams | null>(null);
+  const { send, hash } = useTransactionSend(contract.chain);
 
   const onSubmit = (values: TTransactionParams) => {
-    setTxParams(values);
+    send(values);
   };
 
   return (
-    <>
-      <SignTransactionForm
-        contract={contract}
-        abiItem={abiItem}
-        args={args}
-        onSubmit={onSubmit}
-      />
-      {txParams && <ExecuteTransaction tx={txParams} chain={contract.chain} />}
-    </>
+    <SignTransactionForm
+      contract={contract}
+      abiItem={abiItem}
+      args={args}
+      onSubmit={onSubmit}
+    />
   );
 };
