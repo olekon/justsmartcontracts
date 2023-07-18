@@ -17,6 +17,7 @@ export const AddressInput = ({
   return (
     <Input
       width="100%"
+      maxLength={42}
       className={className}
       value={value}
       onChange={(e) => onChange(e.target.value as TAddress)}
