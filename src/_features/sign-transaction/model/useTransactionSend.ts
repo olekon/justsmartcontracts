@@ -28,8 +28,12 @@ export const useTransactionSend = (chain: Chain) => {
   const [txHash, setTxHash] = useState("");
 
   const send = useCallback(async (tx: TTransactionParams) => {
-    const { hash } = await sendTransaction(convertTx(tx));
-    setTxHash(hash);
+    try {
+      const { hash } = await sendTransaction(convertTx(tx));
+      setTxHash(hash);
+    } catch (e) {
+      console.log(e);
+    }
   }, []);
 
   useWatchTxNotification(chain, txHash as THexString);

@@ -10,7 +10,7 @@ type TProps = {
 };
 
 export const SignTransaction = ({ contract, abiItem, args }: TProps) => {
-  const { send, hash } = useTransactionSend(contract.chain);
+  const { send } = useTransactionSend(contract.chain);
 
   const onSubmit = (values: TTransactionParams) => {
     send(values);
