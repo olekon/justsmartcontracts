@@ -16,6 +16,7 @@
 }
 
 .address {
-  font-size: smaller;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-family: monospace;
 }

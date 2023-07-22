@@ -1,11 +1,19 @@
 import { useCallback, useEffect } from "react";
-import { chainUtils } from "@entities/chain";
-import { useNotifications } from "@shared/lib/notify";
-import { Chain, THexString } from "@shared/lib/web3";
+import {
+  useNotifications,
+  Status as NotififcationStatus,
+} from "@shared/lib/notify";
+import { Chain, THexString, getTxUrl } from "@shared/lib/web3";
 import { ExternalLink } from "@shared/ui/ExternalLink";
 import { useWaitForTransaction } from "wagmi";
 
 type Status = "pending" | "confirmed" | "failed";
+
+const NotificationStatus: Record<Status, NotififcationStatus> = {
+  pending: "info",
+  confirmed: "success",
+  failed: "error",
+};
 
 export const useTxNotification = () => {
   const notify = useNotifications();
@@ -17,12 +25,10 @@ export const useTxNotification = () => {
       notify(
         <span>
           Transaction{" "}
-          <ExternalLink href={chainUtils.getTxUrl(chain, txHash)}>
-            {txShort}
-          </ExternalLink>{" "}
+          <ExternalLink href={getTxUrl(chain, txHash)}>{txShort}</ExternalLink>{" "}
           {status}
         </span>,
-        status === "failed"
+        NotificationStatus[status]
       );
     },
     [notify]

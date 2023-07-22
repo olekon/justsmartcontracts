@@ -1,14 +1,16 @@
-import { TWithChildren } from "@shared/lib/props";
+import cx from "classnames";
+import { TWithChildren, TWithClassname } from "@shared/lib/props";
 import styles from "./ExternalLink.module.scss";
 
-type TProps = TWithChildren & {
-  href: string;
-};
+type TProps = TWithChildren &
+  TWithClassname & {
+    href: string;
+  };
 
-export const ExternalLink = ({ children, href }: TProps) => {
+export const ExternalLink = ({ children, className, href }: TProps) => {
   return (
     <a
-      className={styles.root}
+      className={cx(styles.root, className)}
       href={href}
       target="_blank"
       rel="noopener noreferrer"

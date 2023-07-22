@@ -1,8 +1,7 @@
 import { Select } from "antd";
-import { Chain } from "@shared/lib/web3";
+import { Chain, getChainConfig } from "@shared/lib/web3";
 import { TValueInput } from "@shared/lib/props";
-
-import { SupportedChains, ChainConfig } from "../model";
+import { SupportedChains } from "../model";
 
 type TChainOption = {
   value: Chain;
@@ -21,19 +20,23 @@ const compareItems = (a: TChainOption, b: TChainOption) => {
 const ChainOptions: TChainOption[] = [...SupportedChains]
   .map((chain) => ({
     value: chain,
-    label: ChainConfig[chain].name,
-    testnet: ChainConfig[chain].testnet ? 1 : 0,
+    label: getChainConfig(chain).name,
+    testnet: getChainConfig(chain).testnet ? 1 : 0,
   }))
   .sort(compareItems);
 
 type TProps = TValueInput<Chain> & {};
+
 export const ChainSelect = ({ value, onChange }: TProps) => {
+  const options = ChainOptions.filter(({ testnet }) => !testnet);
+  const testnetOptions = ChainOptions.filter(({ testnet }) => testnet);
+
   return (
     <Select
       style={{ width: "100%" }}
       defaultValue={value}
       onChange={onChange}
-      options={ChainOptions}
+      options={[...options, { label: "Testnets", options: testnetOptions }]}
     />
   );
 };
