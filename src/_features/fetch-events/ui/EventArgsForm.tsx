@@ -1,22 +1,29 @@
-import { Button, Form, Input, Space } from "antd";
+import { Button, Form, Input } from "antd";
 import { Col2, FlexVertical, Row } from "@shared/ui/Grid";
 import { TAbiEvent } from "@entities/contract";
-
-import { TEventArgs } from "../model/types";
-import { useEventFilters } from "../model/useEventFilters";
 import { EventFilterInput } from "./EventFilterInput";
+import { TEventBlockFilter, TEventQuery } from "../model/types";
+import { useEventFilters } from "../model/useEventFilters";
 
 type TProps = {
   event: TAbiEvent;
-  onSubmit: (values: TEventArgs) => void;
+  loading?: boolean;
+  onSubmit: (values: TEventQuery) => void;
 };
 
-export const EventArgsForm = ({ event, onSubmit }: TProps) => {
+export const EventArgsForm = ({ event, loading, onSubmit }: TProps) => {
   const { filters, add, remove, update, enable } = useEventFilters(event);
 
-  const submit = (values: any) => {
-    console.log(values);
-    console.log(filters);
+  const submit = ({ fromBlock, toBlock }: TEventBlockFilter) => {
+    const topics = Object.fromEntries(
+      Object.entries(filters).filter(([, value]) => value.active)
+    );
+
+    onSubmit({
+      ...(fromBlock && { fromBlock: Number(fromBlock) }),
+      ...(toBlock && { toBlock: Number(toBlock) }),
+      topics,
+    });
   };
 
   return (
@@ -24,13 +31,13 @@ export const EventArgsForm = ({ event, onSubmit }: TProps) => {
       <FlexVertical size="large">
         <Row>
           <Col2>
-            <Form.Item name="formBlock" label="From block">
+            <Form.Item name="fromBlock" label="From block">
               <Input type="number" />
             </Form.Item>
           </Col2>
           <Col2>
             <Form.Item name="toBlock" label="To block">
-              <Input />
+              <Input type="number" />
             </Form.Item>
           </Col2>
         </Row>
@@ -53,7 +60,7 @@ export const EventArgsForm = ({ event, onSubmit }: TProps) => {
           </Col2>
         </Row>
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" loading={loading}>
             Fetch
           </Button>
         </Form.Item>

@@ -24,24 +24,18 @@ export const EventFilterInput = ({
   return (
     <FlexVertical>
       <FlexHorizontal>
-        <p>{`${name} (${filter.type})`}</p>
-        <span>
-          <Switch onChange={enable} />
-        </span>
-        <span>
-          <Button size="small" onClick={add}>
-            <PlusOutlined />
-          </Button>
-        </span>
-        <span>
-          <Button
-            size="small"
-            disabled={filter.values.length <= 1}
-            onClick={remove}
-          >
-            <MinusOutlined />
-          </Button>
-        </span>
+        <span>{`${name} (${filter.type})`}</span>
+        <Switch onChange={enable} />
+        <Button size="small" onClick={add}>
+          <PlusOutlined />
+        </Button>
+        <Button
+          size="small"
+          disabled={filter.values.length <= 1}
+          onClick={remove}
+        >
+          <MinusOutlined />
+        </Button>
       </FlexHorizontal>
       <FlexVertical size="small">
         {filter.values.map((item, index) => (

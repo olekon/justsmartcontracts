@@ -1,8 +1,8 @@
 import { TAbiParamType } from "@entities/contract";
 
-export type TEventArgs = {
-  fromBlock?: number;
-  toBlock?: number;
+export type TEventBlockFilter = {
+  fromBlock?: string | number;
+  toBlock?: string | number;
 };
 
 export type TEventFilter = {
@@ -12,3 +12,5 @@ export type TEventFilter = {
 };
 
 export type TEventFilters = Record<string, TEventFilter>;
+
+export type TEventQuery = TEventBlockFilter & { topics: TEventFilters };

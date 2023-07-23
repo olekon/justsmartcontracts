@@ -5,7 +5,7 @@ import { TWithChildren } from "../props";
 export type Status = "success" | "error" | "info";
 
 type TNotificationContext = {
-  notify: (text: ReactNode, status?: Status) => void;
+  notify: (text: ReactNode, status?: Status, seconds?: number) => void;
 };
 
 export const NotificationsContext = createContext<TNotificationContext>({
@@ -16,9 +16,13 @@ export const NotificationsProvider = ({ children }: TWithChildren) => {
   const [api, context] = notification.useNotification();
 
   const notify = useCallback(
-    (text: ReactNode, status?: Status) => {
+    (text: ReactNode, status?: Status, seconds?: number) => {
       const method = status || "info";
-      api[method]({ placement: "topRight", message: text, duration: 5 });
+      api[method]({
+        placement: "topRight",
+        message: text,
+        duration: seconds || 5,
+      });
     },
     [api]
   );
