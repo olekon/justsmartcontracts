@@ -15,17 +15,25 @@ export const useFetchEvents = (contract: TContract, event: TAbiEvent) => {
     ({ fromBlock, toBlock, topics }: TEventQuery) => {
       setLoading(true);
 
-      client
-        .getLogs({
-          address: contract.address,
-          event: event,
-          fromBlock: fromBlock ? BigInt(fromBlock) : "earliest",
-          toBlock: toBlock ? BigInt(toBlock) : "latest",
-          // @ts-ignore: no way I am going to make it properly typescript-compatible
+      const hasTopics = Object.values(topics).length > 0;
+
+      const config = {
+        address: contract.address,
+        event: event,
+        fromBlock: fromBlock ? BigInt(fromBlock) : "earliest",
+        toBlock: toBlock ? BigInt(toBlock) : "latest",
+        // @ts-ignore: no way I am going to make it properly typescript-compatible
+        ...(hasTopics && {
           args: Object.fromEntries(
             Object.entries(topics).map(([key, value]) => [key, value.values])
           ),
-        })
+        }),
+      };
+
+      console.log("fetching", config);
+
+      client
+        .getLogs(config)
         .then((result) => {
           setEvents(result);
         })

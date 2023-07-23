@@ -1,4 +1,4 @@
-import { Button, Form, Input } from "antd";
+import { Button, Divider, Form, Input } from "antd";
 import { Col2, FlexVertical, Row } from "@shared/ui/Grid";
 import { TAbiEvent } from "@entities/contract";
 import { EventFilterInput } from "./EventFilterInput";
@@ -42,6 +42,9 @@ export const EventArgsForm = ({ event, loading, onSubmit }: TProps) => {
           </Col2>
         </Row>
 
+        <Divider orientation="left" style={{ margin: 0 }}>
+          Filter by
+        </Divider>
         <Row>
           <Col2>
             <FlexVertical size="large">

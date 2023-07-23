@@ -24,14 +24,14 @@ export const EventFilterInput = ({
   return (
     <FlexVertical>
       <FlexHorizontal>
-        <span>{`${name} (${filter.type})`}</span>
+        <b>{`${name} (${filter.type})`}</b>
         <Switch onChange={enable} />
-        <Button size="small" onClick={add}>
+        <Button size="small" onClick={add} disabled={!filter.active}>
           <PlusOutlined />
         </Button>
         <Button
           size="small"
-          disabled={filter.values.length <= 1}
+          disabled={filter.values.length <= 1 || !filter.active}
           onClick={remove}
         >
           <MinusOutlined />
