@@ -18,5 +18,5 @@ export const FetchCallResult = ({ contract, abiItem, args }: TProps) => {
     <Alert message={error.message} type="error" />;
   }
 
-  return <ParamValue value={data} abiType={abiItem.outputs[0]} />;
+  return <ParamValue value={data} abiType={abiItem.outputs[0].type} />;
 };

@@ -1,5 +1,5 @@
 import { TUid } from "@shared/lib/id";
-import { AbiItem as ViemAbiItem } from "viem";
+import { GetLogsReturnType, AbiItem as ViemAbiItem } from "viem";
 import type {
   AbiParameter as ViemAbiParameter,
   AbiEvent as ViemAbiEvent,
@@ -13,6 +13,8 @@ export type TAbiItem = ViemAbiItem;
 
 export type TAbiParam = ViemAbiParameter;
 export type TAbiParamType = TAbiParam["type"];
+
+export type TEventLogs = GetLogsReturnType<ViemAbiEvent>;
 
 export type TContract = {
   id: TUid;

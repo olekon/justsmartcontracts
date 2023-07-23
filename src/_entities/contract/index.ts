@@ -6,6 +6,7 @@ export type {
   TAbiParamType,
   TAbiEvent,
   TAbiFunction,
+  TEventLogs,
 } from "./model/types";
 
 export * as contractUtils from "./lib";

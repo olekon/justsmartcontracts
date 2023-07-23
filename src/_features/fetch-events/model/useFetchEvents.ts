@@ -27,7 +27,6 @@ export const useFetchEvents = (contract: TContract, event: TAbiEvent) => {
           ),
         })
         .then((result) => {
-          console.log(result);
           setEvents(result);
         })
         .catch((e) => {
