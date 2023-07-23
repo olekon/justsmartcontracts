@@ -2,6 +2,8 @@ export type {
   TContract,
   TContractWithoutId,
   TAbiItem,
+  TAbiParam,
+  TAbiParamType,
   TAbiEvent,
   TAbiFunction,
 } from "./model/types";

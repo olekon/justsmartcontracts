@@ -8,15 +8,15 @@ import { AmountInput } from "@shared/ui/AmountInput";
 import { TAbiParam } from "../model/types";
 
 type TProps = TValueInput<string> & {
-  abiParam: TAbiParam;
+  abiParam: TAbiParam["type"];
 };
 
 export const ParamInput = ({ value, onChange, abiParam }: TProps) => {
-  if (abiParam.type == "address") {
+  if (abiParam == "address") {
     return <AddressInput value={value as TAddress} onChange={onChange} />;
   }
 
-  if (abiParam.type == "bool") {
+  if (abiParam == "bool") {
     return (
       <BoolInput
         value={value == "1"}
@@ -25,7 +25,7 @@ export const ParamInput = ({ value, onChange, abiParam }: TProps) => {
     );
   }
 
-  if (abiParam.type == "uint256") {
+  if (abiParam == "uint256") {
     return <AmountInput value={String(value)} onChange={onChange} />;
   }
 

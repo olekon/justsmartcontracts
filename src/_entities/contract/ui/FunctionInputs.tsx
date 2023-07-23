@@ -31,10 +31,10 @@ export const FunctionInputs = ({ abiItem, onSubmit, buttonText }: TProps) => {
           key={index}
           label={`${input.name} (${input.type})`}
           name={index}
-          initialValue={getDefaultValue(input)}
+          initialValue={getDefaultValue(input.type)}
         >
           {/* @ts-ignore value and onChange props are supplied by Form.Item */}
-          <ParamInput abiParam={input} />
+          <ParamInput abiParam={input.type} />
         </Form.Item>
       ))}
 

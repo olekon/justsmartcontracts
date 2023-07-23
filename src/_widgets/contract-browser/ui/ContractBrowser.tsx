@@ -3,6 +3,7 @@ import { Empty, Tabs } from "antd";
 import { PropertiesList } from "./PropertiesList";
 import { CallsList } from "./CallsList";
 import { OperationsList } from "./OperationsList";
+import { EventsList } from "./EventsList";
 
 export const ContractBrowser = () => {
   const contract = contractModel.useCurrentContract();
@@ -30,7 +31,7 @@ export const ContractBrowser = () => {
     {
       key: "4",
       label: "Events",
-      children: "Events",
+      children: <EventsList contract={contract} />,
     },
   ];
 
