@@ -6,7 +6,7 @@ import { ParamInput } from "./ParamInput";
 
 type TProps = {
   abiItem: TAbiFunction;
-  onSubmit: (values: string[]) => void;
+  onSubmit: (_values: string[]) => void;
   buttonText: string;
 };
 

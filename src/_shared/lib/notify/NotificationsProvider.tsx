@@ -5,7 +5,7 @@ import { TWithChildren } from "../props";
 export type Status = "success" | "error" | "info";
 
 type TNotificationContext = {
-  notify: (text: ReactNode, status?: Status, seconds?: number) => void;
+  notify: (_text: ReactNode, _status?: Status, _seconds?: number) => void;
 };
 
 export const NotificationsContext = createContext<TNotificationContext>({

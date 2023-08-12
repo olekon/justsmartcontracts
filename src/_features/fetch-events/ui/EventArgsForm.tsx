@@ -8,7 +8,7 @@ import { useEventFilters } from "../model/useEventFilters";
 type TProps = {
   event: TAbiEvent;
   loading?: boolean;
-  onSubmit: (values: TEventQuery) => void;
+  onSubmit: (_values: TEventQuery) => void;
 };
 
 export const EventArgsForm = ({ event, loading, onSubmit }: TProps) => {

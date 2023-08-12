@@ -1,14 +1,12 @@
 import { Button, Form, Input } from "antd";
 import { ChainSelect, chainModel } from "@entities/chain";
-import { TAbiItem, TContractWithoutId } from "../model/types";
+import { TContractWithoutId } from "../model/types";
 
 type TProps = {
-  onSubmit: (values: TContractWithoutId) => void;
+  onSubmit: (_values: TContractWithoutId) => void;
   buttonText: string;
   value?: TContractWithoutId;
 };
-
-const abiTransformer = (value: string) => JSON.parse(value) as TAbiItem[];
 
 // @ts-ignore
 const CustomChainInput = ({
@@ -23,7 +21,12 @@ const CustomChainInput = ({
 export const ContractForm = ({ buttonText, value, onSubmit }: TProps) => {
   const { chain } = chainModel.useCurrentChain();
 
-  const initialValue = value || { chain };
+  const initialValue = value || { chain, abi: [] };
+
+  const textFormValues = {
+    ...initialValue,
+    abi: JSON.stringify(initialValue.abi, null, 2),
+  };
 
   const submitHandler = (formValues: any) => {
     onSubmit({
@@ -35,7 +38,7 @@ export const ContractForm = ({ buttonText, value, onSubmit }: TProps) => {
   return (
     <Form
       preserve={false}
-      initialValues={initialValue}
+      initialValues={textFormValues}
       layout="vertical"
       name="add-contract"
       onFinish={submitHandler}

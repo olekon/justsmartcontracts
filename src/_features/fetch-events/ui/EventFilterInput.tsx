@@ -7,10 +7,10 @@ import { FlexHorizontal, FlexVertical } from "@shared/ui/Grid";
 type TProps = {
   name: string;
   filter: TEventFilter;
-  enable: (value: boolean) => void;
+  enable: (_value: boolean) => void;
   add: () => void;
   remove: () => void;
-  update: (index: number, value: string) => void;
+  update: (_index: number, _value: string) => void;
 };
 
 export const EventFilterInput = ({

@@ -12,20 +12,20 @@ type TState = {
 
 type TActions = {
   add: (
-    chain: Chain,
-    address: TAddress,
-    name: string,
-    abi: TAbiItem[]
+    _chain: Chain,
+    _address: TAddress,
+    _name: string,
+    _abi: TAbiItem[]
   ) => TContract;
   update: (
-    id: TUid,
-    chain?: Chain,
-    address?: TAddress,
-    name?: string,
-    abi?: TAbiItem[]
+    _id: TUid,
+    _chain?: Chain,
+    _address?: TAddress,
+    _name?: string,
+    _abi?: TAbiItem[]
   ) => void;
-  remove: (id: TUid) => void;
-  setCurrent: (id: TUid | null) => void;
+  remove: (_id: TUid) => void;
+  setCurrent: (_id: TUid | null) => void;
 };
 
 const useContractStore = create<TState & TActions>()(

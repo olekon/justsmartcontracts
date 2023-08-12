@@ -12,7 +12,7 @@ type TProps = {
   abiItem: TAbiFunction;
   args: string[];
   disabled?: boolean;
-  onSubmit: (values: TTransactionParams) => void;
+  onSubmit: (_values: TTransactionParams) => void;
 };
 
 export const SignTransactionForm = ({

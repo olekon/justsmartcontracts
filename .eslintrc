@@ -4,6 +4,11 @@
     "plugin:react-hooks/recommended"
   ],
   "rules": {
-    "no-unused-vars": "warn"
+    "no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ]
   }
 }

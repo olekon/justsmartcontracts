@@ -7,7 +7,7 @@ type State = {
 };
 
 type Actions = {
-  update: (chain: Chain) => void;
+  update: (_chain: Chain) => void;
 };
 
 export const SupportedChains = [
