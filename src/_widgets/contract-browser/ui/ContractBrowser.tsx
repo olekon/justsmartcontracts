@@ -12,26 +12,28 @@ export const ContractBrowser = () => {
     return <Empty description="No smart contract selected" />;
   }
 
+  const key = `${contract.address}${contract.chain}`;
+
   const TabItems = [
     {
       key: "1",
       label: "Properties",
-      children: <PropertiesList contract={contract} />,
+      children: <PropertiesList contract={contract} key={key} />,
     },
     {
       key: "2",
       label: "Calls",
-      children: <CallsList contract={contract} />,
+      children: <CallsList contract={contract} key={key} />,
     },
     {
       key: "3",
       label: "Operations",
-      children: <OperationsList contract={contract} />,
+      children: <OperationsList contract={contract} key={key} />,
     },
     {
       key: "4",
       label: "Events",
-      children: <EventsList contract={contract} />,
+      children: <EventsList contract={contract} key={key} />,
     },
   ];
 
