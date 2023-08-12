@@ -7,8 +7,8 @@ type TProps = {
   pages: TPageLink[];
 };
 
-import Link from 'next/link';
-import styles from './Navigation.module.scss';
+import Link from "next/link";
+import styles from "./Navigation.module.scss";
 
 export const Navigation = ({ pages }: TProps) => {
   return (

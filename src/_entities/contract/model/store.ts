@@ -86,7 +86,7 @@ const useContractStore = create<TState & TActions>()(
         });
       },
     })),
-    { name: "contracts" }
+    { name: "contracts_" }
   )
 );
 

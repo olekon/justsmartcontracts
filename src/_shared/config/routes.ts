@@ -5,15 +5,15 @@ type TRouteInfo = {
 
 export const Routes: TRouteInfo[] = [
   {
-    title: 'Home',
-    path: '/',
+    title: "Home",
+    path: "/",
   },
   {
-    title: 'Deploy',
-    path: '/deploy',
+    title: "Deploy",
+    path: "/deploy",
   },
-  {
-    title: 'Sign',
-    path: '/sign',
-  },
+  // {
+  //   title: 'Sign',
+  //   path: '/sign',
+  // },
 ];
