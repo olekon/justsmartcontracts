@@ -7,14 +7,14 @@ import { Chain } from "./chains";
 import { toWagmiChain } from "./wagmi";
 
 type TProps = TWithChildren & {
-  chains: Chain[];
+  chain: Chain;
 };
 
-export const Web3Provider = ({ children, chains }: TProps) => {
-  const { publicClient } = configureChains(chains.map(toWagmiChain), [
-    alchemyProvider({ apiKey: AlchemyKey }),
-    publicProvider(),
-  ]);
+export const Web3Provider = ({ children, chain }: TProps) => {
+  const { publicClient } = configureChains(
+    [toWagmiChain(chain)],
+    [alchemyProvider({ apiKey: AlchemyKey }), publicProvider()]
+  );
 
   const config = createConfig({ publicClient });
 

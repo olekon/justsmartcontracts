@@ -12,13 +12,15 @@ export const metadata = {
 };
 
 const App = ({ Component, pageProps }: AppProps) => {
+  const { chain } = chainModel.useCurrentChain();
+
   return (
     <>
       <Head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
       </Head>
-      <Web3Provider chains={chainModel.SupportedChains}>
+      <Web3Provider chain={chain}>
         <NotificationsProvider>
           <Layout>
             <Component {...pageProps} />

@@ -6,6 +6,7 @@ import { useNotifications } from "@shared/lib/notify";
 
 export const useFetchEvents = (contract: TContract, event: TAbiEvent) => {
   const notify = useNotifications();
+
   const client = usePublicClient();
 
   const [events, setEvents] = useState<any[]>([]);
@@ -22,17 +23,15 @@ export const useFetchEvents = (contract: TContract, event: TAbiEvent) => {
         event: event,
         fromBlock: fromBlock ? BigInt(fromBlock) : "earliest",
         toBlock: toBlock ? BigInt(toBlock) : "latest",
-        // @ts-ignore: no way I am going to make it properly typescript-compatible
         ...(hasTopics && {
           args: Object.fromEntries(
-            Object.entries(topics).map(([key, value]) => [key, value.values])
+            Object.entries(topics).map(([key, value]) => [key, value.values[0]])
           ),
         }),
       };
 
-      console.log("fetching", config);
-
       client
+        // @ts-ignore: no way I am going to make it properly typescript-compatible
         .getLogs(config)
         .then((result) => {
           setEvents(result);
