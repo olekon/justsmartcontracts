@@ -1,11 +1,11 @@
 import { Button, Form } from "antd";
 import { useCallback } from "react";
 import { getDefaultValue } from "../lib";
-import { TAbiFunction } from "../model/types";
+import { TAbiConstructor, TAbiFunction } from "../model/types";
 import { ParamInput } from "./ParamInput";
 
 type TProps = {
-  abiItem: TAbiFunction;
+  abiItem: TAbiFunction | TAbiConstructor;
   onSubmit: (_values: string[]) => void;
   buttonText: string;
 };

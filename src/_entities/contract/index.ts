@@ -6,6 +6,7 @@ export type {
   TAbiParamType,
   TAbiEvent,
   TAbiFunction,
+  TAbiConstructor,
   TEventLogs,
 } from "./model/types";
 

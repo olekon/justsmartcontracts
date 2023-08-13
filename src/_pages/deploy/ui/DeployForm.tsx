@@ -1,11 +1,17 @@
 import { TAbiItem } from "@entities/contract";
+import { THexString } from "@shared/lib/web3";
 import { Row, Col2, FlexVertical } from "@shared/ui/Grid";
 import { Input, Upload } from "antd";
 import { RcFile } from "antd/es/upload";
 import { useState } from "react";
+import { isHex } from "viem";
 
 type TProps = {
-  onChange: (_abi: TAbiItem[], _byteCode: string) => void;
+  onChange: (_abi: TAbiItem[], _byteCode: THexString) => void;
+};
+
+const validateHexString = (value: string): THexString => {
+  return isHex(value) ? value : `0x${value}`;
 };
 
 export const DeployForm = ({ onChange }: TProps) => {
@@ -26,13 +32,13 @@ export const DeployForm = ({ onChange }: TProps) => {
   const handleAbiChange = (value: string) => {
     setAbi(value);
 
-    onChange(getAbiObject(value), byteCode);
+    onChange(getAbiObject(value), validateHexString(byteCode));
   };
 
   const handleByteCodeChange = (value: string) => {
     setByteCode(value);
 
-    onChange(getAbiObject(abi), value);
+    onChange(getAbiObject(abi), validateHexString(value));
   };
 
   const handleBeforeUpload = (file: RcFile) => {

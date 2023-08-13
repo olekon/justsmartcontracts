@@ -1,13 +1,11 @@
-const path = require('path');
+const path = require("path");
 /** @type {import('next').NextConfig} */
-
-console.log(__dirname);
 
 const nextConfig = {
   webpack: (config) => {
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
-      styles: path.join(__dirname, 'src/_shared/ui/styles'),
+      styles: path.join(__dirname, "src/_shared/ui/styles"),
     };
     return config;
   },

@@ -3,10 +3,12 @@ import { GetLogsReturnType, AbiItem as ViemAbiItem } from "viem";
 import type {
   AbiParameter as ViemAbiParameter,
   AbiEvent as ViemAbiEvent,
+  AbiConstructor as ViemAbiConstructor,
   AbiFunction as ViemAbiFunction,
 } from "abitype";
 import { Chain, TAddress } from "@shared/lib/web3";
 
+export type TAbiConstructor = ViemAbiConstructor;
 export type TAbiEvent = ViemAbiEvent;
 export type TAbiFunction = ViemAbiFunction;
 export type TAbiItem = ViemAbiItem;

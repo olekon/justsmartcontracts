@@ -1,6 +1,6 @@
 import type { TAbiItem, TAbiParamType } from "../model/types";
 
-import { AbiEvent, AbiFunction } from "abitype";
+import { AbiConstructor, AbiEvent, AbiFunction } from "abitype";
 
 const isReadonlyFunction = (item: TAbiItem): item is AbiFunction =>
   item.type == "function" &&
@@ -20,6 +20,9 @@ export const isAbiItemOperation = (item: TAbiItem): item is AbiFunction =>
 
 export const isAbiItemEvent = (item: TAbiItem): item is AbiEvent =>
   item.type === "event";
+
+export const isAbiItemConstructor = (item: TAbiItem): item is AbiConstructor =>
+  item.type === "constructor";
 
 const isArrayType = (param: TAbiParamType) => param.endsWith("]");
 
