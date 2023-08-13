@@ -1,6 +1,7 @@
 import { TAbiItem } from "@entities/contract";
-import { Row, Col2 } from "@shared/ui/Grid";
-import { Input } from "antd";
+import { Row, Col2, FlexVertical } from "@shared/ui/Grid";
+import { Input, Upload } from "antd";
+import { RcFile } from "antd/es/upload";
 import { useState } from "react";
 
 type TProps = {
@@ -14,6 +15,7 @@ export const DeployForm = ({ onChange }: TProps) => {
 
   const getAbiObject = (value: string) => {
     try {
+      setAbiError("");
       return JSON.parse(value) as TAbiItem[];
     } catch {
       setAbiError("Invalid ABI");
@@ -33,8 +35,41 @@ export const DeployForm = ({ onChange }: TProps) => {
     onChange(getAbiObject(abi), value);
   };
 
+  const handleBeforeUpload = (file: RcFile) => {
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      if (fileReader.result) {
+        try {
+          setAbiError("");
+
+          const data = JSON.parse(fileReader.result.toString());
+
+          setAbi(JSON.stringify(data.abi, null, 2));
+          setByteCode(data.bytecode);
+
+          onChange(data.abi, data.bytecode);
+        } catch {
+          setAbiError("Invalid file");
+        }
+      }
+    };
+    fileReader.readAsText(file);
+    return false;
+  };
+
   return (
-    <div>
+    <FlexVertical>
+      <Row>
+        <Col2>
+          <Upload.Dragger
+            multiple={false}
+            beforeUpload={handleBeforeUpload}
+            showUploadList={false}
+          >
+            Upload JSON artifact
+          </Upload.Dragger>
+        </Col2>
+      </Row>
       <Row>
         <Col2>
           <Input.TextArea
@@ -52,6 +87,6 @@ export const DeployForm = ({ onChange }: TProps) => {
           />
         </Col2>
       </Row>
-    </div>
+    </FlexVertical>
   );
 };
