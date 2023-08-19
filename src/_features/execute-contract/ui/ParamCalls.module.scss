@@ -1,0 +1,13 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.inputs {
+  flex: 100%;
+}
+
+.results {
+  flex: 100%;
+}

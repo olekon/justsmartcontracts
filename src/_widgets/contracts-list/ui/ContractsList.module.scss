@@ -1,0 +1,21 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  cursor: pointer;
+  padding: 8px;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+
+  &.selected {
+    border-color: black;
+  }
+}
+
+.editButtons {
+  display: flex;
+  gap: 8px;
+}

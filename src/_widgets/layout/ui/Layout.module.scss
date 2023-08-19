@@ -1,0 +1,20 @@
+@import "styles/utils.scss";
+
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  min-height: 100vh;
+}
+
+.content {
+  @include container;
+  @include content;
+
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+  width: 100%;
+  flex: 1;
+}

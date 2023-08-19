@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "next",
+    "plugin:react-hooks/recommended"
+  ],
+  "rules": {
+    "no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ]
+  }
+}

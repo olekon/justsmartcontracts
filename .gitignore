@@ -6,4 +6,9 @@
 /tmp
 ~*
 *.zip
-*.LICENSE.txt
+.DS_Store
+
+/.next
+.env.local
+
+*.tsbuildinfo

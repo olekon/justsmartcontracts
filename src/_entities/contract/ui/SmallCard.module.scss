@@ -1,0 +1,22 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: large;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.address {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: monospace;
+}

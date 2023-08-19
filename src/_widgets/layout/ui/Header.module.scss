@@ -1,0 +1,29 @@
+@import "styles/utils.scss";
+
+.root {
+  background: #fdf4e3;
+}
+
+.content {
+  @include container;
+  @include content;
+
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.chainSelect {
+  min-width: 150px;
+}
+
+.wallet {
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
