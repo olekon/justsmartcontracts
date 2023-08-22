@@ -1,18 +1,3 @@
-## Important
-
-There is good news and bad news.
-
-Good news is now I am rewriting JustSmartContracts.dev completely with up-to-date frameworks. So finally several current issues will be addressed and future ones could be resolved quickly.
-
-Bad news is a current hosting subscription expires on the 7th of June and I don't plan to prolong it for the next year.
-Instead I will try to find something free (like Netlify).
-
-So for some time after said date (June 7th, 2023) the website will be unavailable. I will try to make the migration (both in code and in hosting) as quick as possible. However it is still possible to run a local copy of website using instructions below.
-
-This README will be updated as soon as migration is finished.
-
-See you.
-
 ## Description
 
 This is source code of [justsmartcontracts.dev](https://justsmartcontracts.dev) website.
