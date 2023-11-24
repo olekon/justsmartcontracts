@@ -7,6 +7,7 @@ import {
   polygon,
   zkSync,
   avalanche,
+  polygonMumbai,
 } from "viem/chains";
 
 import { Chain } from "./chains";
@@ -21,6 +22,7 @@ const ChainWagmiMap: Record<Chain, WagmiChain> = {
   [Chain.ETHEREUM]: mainnet,
   [Chain.ETH_GOERLI]: goerli,
   [Chain.ETH_SEPOLIA]: sepolia,
+  [Chain.POLYGON_MUMBAI]: polygonMumbai,
 };
 
 export const toWagmiChain = (chain: Chain) => ChainWagmiMap[chain];
