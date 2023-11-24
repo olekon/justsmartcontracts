@@ -20,6 +20,7 @@ export const SupportedChains = [
   Chain.OPTIMISM,
   Chain.POLYGON,
   Chain.ZKSYNC,
+  Chain.POLYGON_MUMBAI,
 ];
 
 const useCurrentChainStore = create<State & Actions>()(

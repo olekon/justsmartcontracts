@@ -8,6 +8,7 @@ export enum Chain {
   ARBITRUM = 42161,
   AVALANCHE = 43114,
   ETH_SEPOLIA = 11155111,
+  POLYGON_MUMBAI = 80001,
 }
 
 type TChainConfig = {
@@ -55,6 +56,11 @@ const ChainConfig: Record<Chain, TChainConfig> = {
   [Chain.ETH_SEPOLIA]: {
     name: "Sepolia",
     explorer: "https://sepolia.etherscan.io/",
+    testnet: true,
+  },
+  [Chain.POLYGON_MUMBAI]: {
+    name: "Polygon Mumbai",
+    explorer: "https://mumbai.polygonscan.com/",
     testnet: true,
   },
 };
