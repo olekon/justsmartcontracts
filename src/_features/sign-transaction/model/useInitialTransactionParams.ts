@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useFeeData } from "wagmi";
 import { TTransactionParams } from "@shared/lib/tx";
 import { encodeFunctionData } from "viem";
-import { TAbiFunction, TContract } from "@entities/contract";
+import { TAbiFunction, TContract, contractUtils } from "@entities/contract";
 
 export const useInitialTransactionParams = (
   contract: TContract,
@@ -12,10 +12,16 @@ export const useInitialTransactionParams = (
   const { data: feeData } = useFeeData();
 
   return useMemo(() => {
+    const wrappedArraysArgs = args.map((arg, index) => {
+      return contractUtils.isArrayType(abiItem.inputs[index].type)
+        ? arg.split(",").map((item) => item.trim())
+        : arg;
+    });
+
     const values: Partial<TTransactionParams> = {
       data: encodeFunctionData({
         abi: contract.abi,
-        args: args,
+        args: wrappedArraysArgs,
         functionName: abiItem.name,
       }),
       to: contract.address,
@@ -33,6 +39,7 @@ export const useInitialTransactionParams = (
 
     return values;
   }, [
+    abiItem.inputs,
     abiItem.name,
     args,
     contract.abi,

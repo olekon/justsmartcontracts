@@ -24,7 +24,7 @@ export const isAbiItemEvent = (item: TAbiItem): item is AbiEvent =>
 export const isAbiItemConstructor = (item: TAbiItem): item is AbiConstructor =>
   item.type === "constructor";
 
-const isArrayType = (param: TAbiParamType) => param.endsWith("]");
+export const isArrayType = (param: TAbiParamType) => param.endsWith("]");
 
 export const getArrayItemType = (param: TAbiParamType) => param.slice(0, -2);
 
