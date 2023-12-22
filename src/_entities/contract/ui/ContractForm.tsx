@@ -1,6 +1,7 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Select } from "antd";
 import { ChainSelect, chainModel } from "@entities/chain";
 import { TContractWithoutId } from "../model/types";
+import { ABI_LIST } from "../abi";
 
 type TProps = {
   onSubmit: (_values: TContractWithoutId) => void;
@@ -20,6 +21,7 @@ const CustomChainInput = ({
 
 export const ContractForm = ({ buttonText, value, onSubmit }: TProps) => {
   const { chain } = chainModel.useCurrentChain();
+  const [form] = Form.useForm();
 
   const initialValue = value || { chain, abi: [] };
 
@@ -37,6 +39,7 @@ export const ContractForm = ({ buttonText, value, onSubmit }: TProps) => {
 
   return (
     <Form
+      form={form}
       preserve={false}
       initialValues={textFormValues}
       layout="vertical"
@@ -61,6 +64,21 @@ export const ContractForm = ({ buttonText, value, onSubmit }: TProps) => {
         rules={[{ required: true, message: "Contract address missing" }]}
       >
         <Input />
+      </Form.Item>
+
+      <Form.Item label="Pendle ABI" name="pendle-abi">
+        <Select
+          options={ABI_LIST.map((item) => ({
+            value: item.name,
+            label: item.name,
+          }))}
+          onSelect={(value) => {
+            const abi = ABI_LIST.find((item) => item.name === value);
+            if (abi) {
+              void form.setFieldValue("abi", JSON.stringify(abi.abi, null, 2));
+            }
+          }}
+        />
       </Form.Item>
 
       <Form.Item
