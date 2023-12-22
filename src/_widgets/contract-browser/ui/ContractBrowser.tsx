@@ -1,9 +1,10 @@
 import { contractModel } from "@entities/contract";
 import { Empty, Tabs } from "antd";
 import { PropertiesList } from "./PropertiesList";
-import { CallsList } from "./CallsList";
+import { ReadonlyCallsList } from "./ReadonlyCallsList";
 import { OperationsList } from "./OperationsList";
 import { EventsList } from "./EventsList";
+import { StaticCallsList } from "./StaticCallsList";
 
 export const ContractBrowser = () => {
   const contract = contractModel.useCurrentContract();
@@ -22,16 +23,21 @@ export const ContractBrowser = () => {
     },
     {
       key: "2",
-      label: "Calls",
-      children: <CallsList contract={contract} key={key} />,
+      label: "Readonly calls",
+      children: <ReadonlyCallsList contract={contract} key={key} />,
     },
     {
       key: "3",
+      label: "Static calls",
+      children: <StaticCallsList contract={contract} key={key} />,
+    },
+    {
+      key: "4",
       label: "Operations",
       children: <OperationsList contract={contract} key={key} />,
     },
     {
-      key: "4",
+      key: "5",
       label: "Events",
       children: <EventsList contract={contract} key={key} />,
     },

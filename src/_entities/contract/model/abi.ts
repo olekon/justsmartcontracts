@@ -5,6 +5,7 @@ import {
   isAbiItemParamCall,
   isAbiItemEvent,
   isAbiItemConstructor,
+  isAbiItemParamStaticCall,
 } from "../lib";
 import { TAbiItem, TContract } from "./types";
 
@@ -14,6 +15,13 @@ export const useContractProperties = (contract: TContract) => {
 
 export const useContractParamCalls = (contract: TContract) => {
   return useMemo(() => contract.abi.filter(isAbiItemParamCall), [contract.abi]);
+};
+
+export const useContractParamStaticCalls = (contract: TContract) => {
+  return useMemo(
+    () => contract.abi.filter(isAbiItemParamStaticCall),
+    [contract.abi]
+  );
 };
 
 export const useContractOperations = (contract: TContract) => {

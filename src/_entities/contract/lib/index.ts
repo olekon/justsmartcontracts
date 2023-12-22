@@ -2,18 +2,24 @@ import type { TAbiItem, TAbiParamType } from "../model/types";
 
 import { AbiConstructor, AbiEvent, AbiFunction } from "abitype";
 
+const isFunction = (item: TAbiItem): item is AbiFunction =>
+  item.type == "function";
+
 const isReadonlyFunction = (item: TAbiItem): item is AbiFunction =>
-  item.type == "function" &&
+  isFunction(item) &&
   (item.stateMutability == "pure" || item.stateMutability == "view");
 
 const isWriteFunction = (item: TAbiItem): item is AbiFunction =>
-  item.type == "function" && !isReadonlyFunction(item);
+  isFunction(item) && !isReadonlyFunction(item);
 
 export const isAbiItemProperty = (item: TAbiItem): item is AbiFunction =>
   isReadonlyFunction(item) && item.inputs.length == 0;
 
 export const isAbiItemParamCall = (item: TAbiItem): item is AbiFunction =>
   isReadonlyFunction(item) && item.inputs.length !== 0;
+
+export const isAbiItemParamStaticCall = (item: TAbiItem): item is AbiFunction =>
+  isFunction(item);
 
 export const isAbiItemOperation = (item: TAbiItem): item is AbiFunction =>
   isWriteFunction(item);

@@ -6,7 +6,7 @@ type TProps = {
   contract: TContract;
 };
 
-export const CallsList = ({ contract }: TProps) => {
+export const ReadonlyCallsList = ({ contract }: TProps) => {
   const functions = contractModel.useContractParamCalls(contract);
 
   const items = functions.map((item, index) => ({
