@@ -15,8 +15,8 @@ const isWriteFunction = (item: TAbiItem): item is AbiFunction =>
 export const isAbiItemProperty = (item: TAbiItem): item is AbiFunction =>
   isReadonlyFunction(item) && item.inputs.length == 0;
 
-export const isAbiItemParamCall = (item: TAbiItem): item is AbiFunction =>
-  isReadonlyFunction(item) && item.inputs.length !== 0;
+export const isAbiItemParamRead = (item: TAbiItem): item is AbiFunction =>
+  isReadonlyFunction(item);
 
 export const isAbiItemParamStaticCall = (item: TAbiItem): item is AbiFunction =>
   isFunction(item);

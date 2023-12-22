@@ -16,11 +16,11 @@ export const ContractBrowser = () => {
   const key = `${contract.address}${contract.chain}`;
 
   const TabItems = [
-    {
-      key: "1",
-      label: "Properties",
-      children: <PropertiesList contract={contract} key={key} />,
-    },
+    // {
+    //   key: "1",
+    //   label: "Properties",
+    //   children: <PropertiesList contract={contract} key={key} />,
+    // },
     {
       key: "2",
       label: "Read",

@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import {
   isAbiItemProperty,
   isAbiItemOperation,
-  isAbiItemParamCall,
+  isAbiItemParamRead,
   isAbiItemEvent,
   isAbiItemConstructor,
   isAbiItemParamStaticCall,
@@ -14,7 +14,7 @@ export const useContractProperties = (contract: TContract) => {
 };
 
 export const useContractParamCalls = (contract: TContract) => {
-  return useMemo(() => contract.abi.filter(isAbiItemParamCall), [contract.abi]);
+  return useMemo(() => contract.abi.filter(isAbiItemParamRead), [contract.abi]);
 };
 
 export const useContractParamStaticCalls = (contract: TContract) => {

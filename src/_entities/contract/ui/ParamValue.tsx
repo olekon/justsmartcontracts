@@ -7,23 +7,28 @@ import JSONbig from "json-bigint";
 type TProps = {
   abiType: TAbiParamType;
   value: unknown;
+  name?: string;
 };
 
-export const ParamValue = ({ abiType, value }: TProps) => {
+export const ParamValue = ({ abiType, value, name }: TProps) => {
+  let resultTag = null;
   if (abiType === "bool") {
-    return <BooleanValue value={String(value)} />;
-  }
-
-  if (abiType === "address") {
-    return <AddressValue value={value as TAddress} />;
-  }
-
-  if (abiType === "uint256") {
-    return <>{String(value)}</>;
+    resultTag = <BooleanValue value={String(value)} />;
+  } else if (abiType === "address") {
+    resultTag = <AddressValue value={value as TAddress} />;
+  } else if (abiType === "uint256") {
+    resultTag = <>{String(value)}</>;
+  } else {
+    resultTag = (
+      <span style={{ whiteSpace: "preserve" }}>
+        {JSONbig.stringify(value, null, 2)}
+      </span>
+    );
   }
   return (
-    <span style={{ whiteSpace: "preserve" }}>
-      {JSONbig.stringify(value, null, 2)}
-    </span>
+    <div style={{ display: "flex", gap: "10px" }}>
+      <span style={{ color: "gray", fontStyle: "italic" }}>{name ?? ""}</span>
+      {resultTag}
+    </div>
   );
 };
