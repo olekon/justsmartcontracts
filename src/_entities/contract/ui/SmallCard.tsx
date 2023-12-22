@@ -29,9 +29,9 @@ export const SmallCard = ({ contract, extra }: TProps) => {
     <div className={styles.root}>
       <div className={styles.top}>
         <AddressIcon address={contract.address} size="small" />
+        <p className={styles.title}>{contract.name}</p>
         {extra && <div>{extra}</div>}
       </div>
-      <p className={styles.title}>{contract.name}</p>
       {address}
     </div>
   );

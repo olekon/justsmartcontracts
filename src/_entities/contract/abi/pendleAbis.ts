@@ -14,6 +14,8 @@ import { abi as IApeStakingABI } from "@pendle/core-v2/build/artifacts/contracts
 import { abi as PendleFeeDistributorV2ABI } from "@pendle/core-v2/build/artifacts/contracts/LiquidityMining/VeDistributor/PendleFeeDistributorV2.sol/PendleFeeDistributorV2.json";
 import { abi as IWETH_ABI } from "@pendle/core-v2/build/artifacts/contracts/interfaces/IWETH.sol/IWETH.json";
 import { abi as PendleRouterHelperABI } from "@pendle/core-v2/build/artifacts/contracts/router/PendleRouterHelper.sol/PendleRouterHelper.json";
+import { abi as PendleRouterV3ABI } from "@pendle/core-v2/build/artifacts/contracts/interfaces/IPAllActionV3.sol/IPAllActionV3.json";
+import { abi as PendleLimitRouterABI } from "@pendle/core-v2/build/artifacts/contracts/limit/PendleLimitRouter.sol/PendleLimitRouter.json";
 
 import { abi as Multicall2Abi } from "@pendle/core-v2/build/artifacts/contracts/offchain-helpers/Multicall2.sol/Multicall2.json";
 import { abi as PendleMulticallV1Abi } from "@pendle/core-v2/build/artifacts/contracts/offchain-helpers/PendleMulticallV1.sol/PendleMulticallV1.json";
@@ -21,6 +23,14 @@ import { abi as PendleMulticallV2Abi } from "@pendle/core-v2/build/artifacts/con
 import { abi as PendleMerkleDistributorABI } from "@pendle/core-v2/build/artifacts/contracts/LiquidityMining/PendleMerkleDistributor.sol/PendleMerkleDistributor.json";
 
 export const ABI_LIST = [
+  // Router related
+  { name: "PendleRouterV3", abi: PendleRouterV3ABI },
+  { name: "PendleLimitRouter", abi: PendleLimitRouterABI },
+  { name: "PendleFeeDistributorV2", abi: PendleFeeDistributorV2ABI },
+  { name: "PendleRouterHelper", abi: PendleRouterHelperABI },
+  { name: "RouterStatic", abi: RouterStaticABI },
+
+  // token related
   { name: "PendleERC20", abi: PendleERC20ABI },
   { name: "PendleMarket", abi: PendleMarketABI },
   { name: "PendleMarketFactory", abi: PendleMarketFactoryABI },
@@ -28,16 +38,11 @@ export const ABI_LIST = [
   { name: "SYBase", abi: SYBaseABI },
   { name: "VotingEscrowTokenBase", abi: VotingEscrowTokenBaseABI },
   { name: "VotingEscrowPendleMainchain", abi: VotingEscrowPendleMainchainABI },
-  { name: "PendleVotingControllerUpg", abi: PendleVotingControllerUpgABI },
   { name: "PendleYieldContractFactory", abi: PendleYieldContractFactoryABI },
   { name: "PendleYieldToken", abi: PendleYieldTokenABI },
-  { name: "RouterStatic", abi: RouterStaticABI },
-  { name: "IApeStaking", abi: IApeStakingABI },
-
-  { name: "PendleFeeDistributorV2", abi: PendleFeeDistributorV2ABI },
   { name: "IWETH", abi: IWETH_ABI },
-  { name: "PendleRouterHelper", abi: PendleRouterHelperABI },
 
+  // multicall
   { name: "Multicall2", abi: Multicall2Abi },
   { name: "PendleMulticallV1", abi: PendleMulticallV1Abi },
   { name: "PendleMulticallV2", abi: PendleMulticallV2Abi },
