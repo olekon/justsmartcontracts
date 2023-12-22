@@ -5,6 +5,7 @@ import { getAddressUrl } from "@shared/lib/web3";
 import { TContract } from "../model/types";
 
 import styles from "./SmallCard.module.scss";
+import { truncateAddress } from "../helper/address";
 
 type TProps = {
   contract: TContract;
@@ -22,7 +23,7 @@ export const SmallCard = ({ contract, extra }: TProps) => {
       {contract.address}
     </ExternalLink>
   ) : (
-    <p className={styles.address}>{contract.address}</p>
+    <p className={styles.address}>{truncateAddress(contract.address)}</p>
   );
 
   return (

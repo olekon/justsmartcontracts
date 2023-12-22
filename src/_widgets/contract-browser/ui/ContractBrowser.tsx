@@ -23,7 +23,7 @@ export const ContractBrowser = () => {
     },
     {
       key: "2",
-      label: "Readonly calls",
+      label: "Read",
       children: <ReadonlyCallsList contract={contract} key={key} />,
     },
     {
@@ -33,7 +33,7 @@ export const ContractBrowser = () => {
     },
     {
       key: "4",
-      label: "Operations",
+      label: "Write",
       children: <OperationsList contract={contract} key={key} />,
     },
     {

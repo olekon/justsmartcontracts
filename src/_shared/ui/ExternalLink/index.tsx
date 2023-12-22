@@ -1,11 +1,12 @@
 import cx from "classnames";
-import { TWithChildren, TWithClassname } from "@shared/lib/props";
+import { TWithClassname } from "@shared/lib/props";
 import styles from "./ExternalLink.module.scss";
+import { truncateAddress } from "@entities/contract/helper/address";
 
-type TProps = TWithChildren &
-  TWithClassname & {
-    href: string;
-  };
+type TProps = TWithClassname & {
+  href: string;
+  children: string;
+};
 
 export const ExternalLink = ({ children, className, href }: TProps) => {
   return (
@@ -15,7 +16,7 @@ export const ExternalLink = ({ children, className, href }: TProps) => {
       target="_blank"
       rel="noopener noreferrer"
     >
-      {children}
+      {truncateAddress(children)}
     </a>
   );
 };
