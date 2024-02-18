@@ -1,3 +1,4 @@
+// TODO DELETE
 /* eslint-disable no-unused-vars */
 export enum Chain {
   ETHEREUM = 1,
@@ -29,3 +30,5 @@ export enum Chain {
   MOONRIVER = 1285,
   BOBA = 288,
 }
+
+export type TChainId = number;

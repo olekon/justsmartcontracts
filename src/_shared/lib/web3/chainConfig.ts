@@ -1,12 +1,14 @@
 import { Chain } from "./chains";
 import { toWagmiChain } from "./wagmi";
 
+// TODO DELETE
 type TChainConfig = {
   name: string;
   explorer: string;
   testnet?: boolean;
 };
 
+// TODO DELETE
 export const getChainConfig = (chain: Chain): TChainConfig => {
   const wagmiChain = toWagmiChain(chain);
   return {

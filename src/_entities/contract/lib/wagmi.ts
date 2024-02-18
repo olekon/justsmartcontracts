@@ -1,3 +1,5 @@
+// TODO DELETE
+
 import { mainnet, sepolia, Chain as WagmiChain } from "wagmi";
 import {
   arbitrum,
