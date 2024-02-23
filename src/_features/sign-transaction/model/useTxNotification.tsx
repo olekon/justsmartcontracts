@@ -3,9 +3,10 @@ import {
   useNotifications,
   Status as NotififcationStatus,
 } from "@shared/lib/notify";
-import { Chain, THexString, getTxUrl } from "@shared/lib/web3";
+import { Chain, TChainId, THexString } from "@shared/lib/web3";
 import { ExternalLink } from "@shared/ui/ExternalLink";
 import { useWaitForTransaction } from "wagmi";
+import { chainModel } from "@entities/chain";
 
 type Status = "pending" | "confirmed" | "failed";
 
@@ -15,23 +16,24 @@ const NotificationStatus: Record<Status, NotififcationStatus> = {
   failed: "error",
 };
 
-export const useTxNotification = () => {
+export const useTxNotification = (chain: TChainId) => {
+  const { getTxUrl } = chainModel.useChainExplorer(chain);
   const notify = useNotifications();
 
   return useCallback(
-    (txHash: string, chain: Chain, status: Status) => {
+    (txHash: string, status: Status) => {
       const txShort = `${txHash.slice(0, 10)}...`;
 
       notify(
         <span>
           Transaction{" "}
-          <ExternalLink href={getTxUrl(chain, txHash)}>{txShort}</ExternalLink>{" "}
+          <ExternalLink href={getTxUrl(txHash)}>{txShort}</ExternalLink>{" "}
           {status}
         </span>,
         NotificationStatus[status]
       );
     },
-    [notify]
+    [getTxUrl, notify]
   );
 };
 
@@ -39,7 +41,7 @@ export const useWatchTxNotification = (
   chain: Chain,
   hash: THexString | undefined
 ) => {
-  const notify = useTxNotification();
+  const notify = useTxNotification(chain);
 
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash,
@@ -53,7 +55,7 @@ export const useWatchTxNotification = (
         ? "confirmed"
         : "failed";
 
-      notify(hash, chain, status);
+      notify(hash, status);
     }
   }, [chain, hash, isLoading, isSuccess, notify]);
 };

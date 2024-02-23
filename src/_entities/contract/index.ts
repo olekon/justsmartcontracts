@@ -13,7 +13,6 @@ export type {
 export * as contractUtils from "./lib";
 export * as contractModel from "./model";
 
-export { SmallCard } from "./ui/SmallCard";
 export { ContractForm } from "./ui/ContractForm";
 export { ParamValue } from "./ui/ParamValue";
 export { ParamInput } from "./ui/ParamInput";

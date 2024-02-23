@@ -2,8 +2,9 @@ import cn from "classnames";
 import { AddContractButton } from "@features/add-contract";
 import { RemoveContractButton } from "@features/remove-contract";
 import { EditContractButton } from "@features/edit-contract";
-import { SmallCard, TContract, contractModel } from "@entities/contract";
+import { TContract, contractModel } from "@entities/contract";
 import { useCurrentChainContracts } from "../model";
+import { SmallCard } from "./SmallCard";
 
 import styles from "./ContractsList.module.scss";
 
@@ -30,7 +31,7 @@ export const ContractsList = () => {
           className={cn(styles.card, {
             [styles.selected]: currentId == item.id,
           })}
-          onClick={(e) => setCurrent(item.id)}
+          onClick={() => setCurrent(item.id)}
         >
           <SmallCard contract={item} extra={<EditButtons contract={item} />} />
         </div>

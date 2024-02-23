@@ -1,10 +1,9 @@
 import useSWRImmutable from "swr/immutable";
 import { TChain } from "./types";
-
 import DefaultChainsRaw from "./defaultChains.json";
-import { useCurrentChain } from "./useCurrentChain";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { TChainId } from "@shared/lib/web3";
+import urlJoin from "url-join";
 
 const Endpoint = "https://chainid.network/chains.json";
 
@@ -56,4 +55,29 @@ export const useChainConfig = (chain: TChainId) => {
   }
 
   return config;
+};
+
+export const useChainExplorer = (chain: TChainId) => {
+  const config = useChainConfig(chain);
+
+  const url = config.explorers[0].url;
+
+  const getTxUrl = useCallback(
+    (txHash: string) => {
+      return url ? urlJoin(url, `tx/${txHash}`) : "";
+    },
+    [url]
+  );
+
+  const getAddressUrl = useCallback(
+    (address: string) => {
+      return url ? urlJoin(url, `address/${address}`) : "";
+    },
+    [url]
+  );
+
+  return {
+    getTxUrl,
+    getAddressUrl,
+  };
 };

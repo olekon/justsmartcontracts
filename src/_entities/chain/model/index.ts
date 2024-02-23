@@ -1,2 +1,2 @@
 export { SupportedChains, useCurrentChain } from "./useCurrentChain";
-export { useChainConfig } from "./useChainList";
+export { useChainConfig, useChainExplorer } from "./useChainList";
