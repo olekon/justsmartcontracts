@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { Chain, TAddress } from "@shared/lib/web3";
+import { TChainId, TAddress } from "@shared/lib/web3";
 import { TUid, uid } from "@shared/lib/id";
 import { TAbiItem, TContract } from "./types";
 
@@ -12,14 +12,14 @@ type TState = {
 
 type TActions = {
   add: (
-    _chain: Chain,
+    _chain: TChainId,
     _address: TAddress,
     _name: string,
     _abi: TAbiItem[]
   ) => TContract;
   update: (
     _id: TUid,
-    _chain?: Chain,
+    _chain?: TChainId,
     _address?: TAddress,
     _name?: string,
     _abi?: TAbiItem[]
@@ -34,7 +34,12 @@ const useContractStore = create<TState & TActions>()(
       contracts: [],
       currentId: null,
 
-      add: (chain: Chain, address: TAddress, name: string, abi: TAbiItem[]) => {
+      add: (
+        chain: TChainId,
+        address: TAddress,
+        name: string,
+        abi: TAbiItem[]
+      ) => {
         const contract = {
           chain,
           address,
@@ -50,7 +55,7 @@ const useContractStore = create<TState & TActions>()(
 
       update: (
         id: TUid,
-        chain?: Chain,
+        chain?: TChainId,
         address?: TAddress,
         name?: string,
         abi?: TAbiItem[]

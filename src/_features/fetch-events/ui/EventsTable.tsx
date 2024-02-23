@@ -1,11 +1,11 @@
 import { ParamValue, TAbiEvent, TEventLogs } from "@entities/contract";
-import { Chain } from "@shared/lib/web3";
+import { TChainId } from "@shared/lib/web3";
 import { ExternalLink } from "@shared/ui/ExternalLink";
 import { Table } from "antd";
 import { chainModel } from "@entities/chain";
 
 type TProps = {
-  chain: Chain;
+  chain: TChainId;
   event: TAbiEvent;
   items: TEventLogs;
   loading?: boolean;

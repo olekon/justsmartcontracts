@@ -1,4 +1,4 @@
-import { Chain, TAddress } from "@shared/lib/web3";
+import { TChainId, TAddress } from "@shared/lib/web3";
 import { useCallback } from "react";
 import { useWalletClient, useAccount } from "wagmi";
 
@@ -11,7 +11,7 @@ export const useCurrentWallet = (): TWalletModel => {
   return { address: address || null };
 };
 
-export const useSwitchWalletChain = (chain: Chain) => {
+export const useSwitchWalletChain = (chain: TChainId) => {
   const { data: walletClient } = useWalletClient();
 
   const switchIfNeeded = useCallback(async () => {

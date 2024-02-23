@@ -1,6 +1,6 @@
 import { chainModel } from "@entities/chain";
 import { contractModel } from "@entities/contract";
-import { Chain } from "@shared/lib/web3";
+import { TChainId } from "@shared/lib/web3";
 import { useCallback } from "react";
 
 export const useUpdateChain = () => {
@@ -8,7 +8,7 @@ export const useUpdateChain = () => {
   const { setCurrent, contracts } = contractModel.useContracts();
 
   return useCallback(
-    (newChain: Chain) => {
+    (newChain: TChainId) => {
       if (newChain != chain) {
         const newCurrent = contracts.find((item) => item.chain == newChain);
         setCurrent(newCurrent?.id ?? null);

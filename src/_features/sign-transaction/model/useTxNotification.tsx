@@ -3,7 +3,7 @@ import {
   useNotifications,
   Status as NotififcationStatus,
 } from "@shared/lib/notify";
-import { Chain, TChainId, THexString } from "@shared/lib/web3";
+import { TChainId, THexString } from "@shared/lib/web3";
 import { ExternalLink } from "@shared/ui/ExternalLink";
 import { useWaitForTransaction } from "wagmi";
 import { chainModel } from "@entities/chain";
@@ -38,7 +38,7 @@ export const useTxNotification = (chain: TChainId) => {
 };
 
 export const useWatchTxNotification = (
-  chain: Chain,
+  chain: TChainId,
   hash: THexString | undefined
 ) => {
   const notify = useTxNotification(chain);
