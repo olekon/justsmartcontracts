@@ -21,10 +21,12 @@ export const ChainSelect = ({ value, onChange }: TProps) => {
 
   return (
     <Select
+      showSearch
       style={{ width: "100%" }}
       defaultValue={value}
       onChange={onChange}
       options={chainOptions}
+      optionFilterProp="label"
     />
   );
 };

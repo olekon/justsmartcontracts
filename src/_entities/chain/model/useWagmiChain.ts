@@ -6,7 +6,9 @@ import { getAlchemyUrl } from "../lib/alchemy";
 export const useWagmiChain = (chainConfig: TChain) => {
   const defaultRpc = useMemo(() => {
     return (
-      chainConfig.rpc.find((item) => !item.includes("${")) || chainConfig.rpc[0]
+      chainConfig.rpc.find((item) => !item.includes("${")) ||
+      chainConfig.rpc[0] ||
+      ""
     );
   }, [chainConfig]);
 
@@ -23,8 +25,8 @@ export const useWagmiChain = (chainConfig: TChain) => {
       },
       blockExplorers: {
         default: {
-          name: chainConfig.explorers[0].name,
-          url: chainConfig.explorers[0].url,
+          name: chainConfig.explorers[0]?.name,
+          url: chainConfig.explorers[0]?.url,
         },
       },
       nativeCurrency: chainConfig.nativeCurrency,
