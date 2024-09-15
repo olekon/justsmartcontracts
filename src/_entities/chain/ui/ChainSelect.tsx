@@ -1,7 +1,7 @@
 import { Select } from "antd";
 import { TChainId } from "@shared/lib/web3";
 import { TValueInput } from "@shared/lib/props";
-import { useChainList } from "../model/useChainList";
+import { useChainListSafe } from "../model/useChainList";
 import { useMemo } from "react";
 
 type TChainOption = {
@@ -13,7 +13,7 @@ type TChainOption = {
 type TProps = TValueInput<TChainId> & {};
 
 export const ChainSelect = ({ value, onChange }: TProps) => {
-  const list = useChainList();
+  const list = useChainListSafe();
 
   const chainOptions: TChainOption[] = useMemo(() => {
     return list.map((item) => ({ value: item.chainId, label: item.name }));

@@ -1,9 +1,6 @@
 import useSWRImmutable from "swr/immutable";
 import { TChain } from "./types";
 import DefaultChainsRaw from "./defaultChains.json";
-import { useCallback, useMemo } from "react";
-import { TChainId } from "@shared/lib/web3";
-import urlJoin from "url-join";
 
 const Endpoint = "https://chainid.network/chains.json";
 
@@ -32,52 +29,39 @@ const fetcher = async (endpoint: string) => {
   }
 };
 
-export const useChainList = () => {
+type TChainListContext =
+  | {
+      loading: true;
+      chains: null;
+    }
+  | {
+      loading: false;
+      chains: TChain[];
+    };
+
+export const useChainList = (): TChainListContext => {
   const response = useSWRImmutable(Endpoint, fetcher);
 
-  if (response.isLoading || !response.data) {
-    return DefaultChains;
+  if (response.isLoading) {
+    return {
+      loading: true,
+      chains: null,
+    };
   }
 
-  return response.data;
-};
-
-export const useChainConfig = (chain: TChainId) => {
-  const list = useChainList();
-
-  const config = useMemo(
-    () => list.find((item) => item.chainId === chain),
-    [chain, list]
-  );
-
-  if (!config) {
-    throw new Error(`Unsuported chain ${chain}`);
+  if (!response.data) {
+    return { loading: false, chains: DefaultChains };
   }
 
-  return config;
+  return { loading: false, chains: response.data };
 };
 
-export const useChainExplorer = (chain: TChainId) => {
-  const config = useChainConfig(chain);
+export const useChainListSafe = () => {
+  const response = useChainList();
 
-  const url = config.explorers[0].url;
+  if (!response.chains) {
+    throw new Error("Unexpected missing chains");
+  }
 
-  const getTxUrl = useCallback(
-    (txHash: string) => {
-      return url ? urlJoin(url, `tx/${txHash}`) : "";
-    },
-    [url]
-  );
-
-  const getAddressUrl = useCallback(
-    (address: string) => {
-      return url ? urlJoin(url, `address/${address}`) : "";
-    },
-    [url]
-  );
-
-  return {
-    getTxUrl,
-    getAddressUrl,
-  };
+  return response.chains;
 };
