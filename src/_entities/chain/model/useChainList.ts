@@ -7,7 +7,7 @@ import urlJoin from "url-join";
 
 const Endpoint = "https://chainid.network/chains.json";
 
-const mapper = (item: any): TChain => {
+const rawToTChain = (item: any): TChain => {
   return {
     chain: item.chain,
     chainId: item.chainId,
@@ -18,14 +18,14 @@ const mapper = (item: any): TChain => {
   };
 };
 
-const DefaultChains = DefaultChainsRaw.map(mapper);
+const DefaultChains = DefaultChainsRaw.map(rawToTChain);
 
 const fetcher = async (endpoint: string) => {
   try {
     const response = await fetch(endpoint);
     const data = (await response.json()) as any[];
 
-    return data.map(mapper);
+    return data.map(rawToTChain);
   } catch (e) {
     console.log(e);
     return DefaultChains;
