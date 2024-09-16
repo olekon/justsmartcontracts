@@ -25,8 +25,8 @@ export const useWagmiChain = (chainConfig: TChain) => {
       },
       blockExplorers: {
         default: {
-          name: chainConfig.explorers[0]?.name,
-          url: chainConfig.explorers[0]?.url,
+          name: chainConfig.explorers[0].name,
+          url: chainConfig.explorers[0].url,
         },
       },
       nativeCurrency: chainConfig.nativeCurrency,
