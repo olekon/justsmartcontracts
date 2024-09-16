@@ -4,13 +4,15 @@ import { publicProvider } from "wagmi/providers/public";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { AlchemyKey } from "@shared/lib/env";
 import { TWithChildren } from "@shared/lib//props";
-import { useChainConfig, useCurrentChain } from "../model";
+import { useChainConfig } from "../model";
 import { useWagmiChain } from "../model/useWagmiChain";
+import { TChainId } from "@shared/lib/web3";
 
-type TProps = TWithChildren & {};
+type TProps = TWithChildren & {
+  chain: TChainId;
+};
 
-export const Web3Provider = ({ children }: TProps) => {
-  const { chain } = useCurrentChain();
+export const Web3Provider = ({ chain, children }: TProps) => {
   const chainConfig = useChainConfig(chain);
 
   const wagmiChain = useWagmiChain(chainConfig);

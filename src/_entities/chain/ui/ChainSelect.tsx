@@ -21,6 +21,7 @@ export const ChainSelect = ({ value, onChange }: TProps) => {
 
   return (
     <Select
+      key={value}
       showSearch
       style={{ width: "100%" }}
       defaultValue={value}

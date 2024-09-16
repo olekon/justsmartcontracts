@@ -1,3 +1,3 @@
 export { useCurrentChain } from "./useCurrentChain";
 export { useChainConfig, useChainExplorer } from "./useChainConfig";
-export { useChainList } from "./useChainList";
+export { useChainList, useChainListSafe } from "./useChainList";

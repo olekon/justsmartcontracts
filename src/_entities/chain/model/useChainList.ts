@@ -22,7 +22,7 @@ const fetcher = async (endpoint: string) => {
     const response = await fetch(endpoint);
     const data = (await response.json()) as any[];
 
-    return data.map(rawToTChain);
+    return data.map(rawToTChain).filter(({ rpc }) => rpc.length > 0);
   } catch (e) {
     console.log(e);
     return DefaultChains;
