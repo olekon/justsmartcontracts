@@ -28,7 +28,7 @@ const fetcher = async (endpoint: string) => {
           item.rpc &&
           item.rpc.length > 0 &&
           item.explorers &&
-          item.explorers.length > 1
+          item.explorers.length > 0
       )
       .map(rawToTChain);
   } catch (e) {
