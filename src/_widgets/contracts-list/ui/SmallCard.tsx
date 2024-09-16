@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 import { AddressIcon } from "@shared/ui/AddressIcon";
 import { ExternalLink } from "@shared/ui/ExternalLink";
-import { getAddressUrl } from "@shared/lib/web3";
-import { TContract } from "../model/types";
+import { TContract } from "@entities/contract";
+import { chainModel } from "@entities/chain";
 
 import styles from "./SmallCard.module.scss";
 
@@ -12,13 +12,12 @@ type TProps = {
 };
 
 export const SmallCard = ({ contract, extra }: TProps) => {
-  const url = getAddressUrl(contract.chain, contract.address);
+  const { getAddressUrl } = chainModel.useChainExplorer(contract.chain);
+
+  const url = getAddressUrl(contract.address);
 
   const address = url ? (
-    <ExternalLink
-      href={getAddressUrl(contract.chain, contract.address)}
-      className={styles.address}
-    >
+    <ExternalLink href={url} className={styles.address}>
       {contract.address}
     </ExternalLink>
   ) : (

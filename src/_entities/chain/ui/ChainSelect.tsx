@@ -1,42 +1,33 @@
 import { Select } from "antd";
-import { Chain, getChainConfig } from "@shared/lib/web3";
+import { TChainId } from "@shared/lib/web3";
 import { TValueInput } from "@shared/lib/props";
-import { SupportedChains } from "../model";
+import { useChainListSafe } from "../model/useChainList";
+import { useMemo } from "react";
 
 type TChainOption = {
-  value: Chain;
+  value: TChainId;
   label: string;
-  testnet: number;
+  testnet?: number;
 };
 
-const compareItems = (a: TChainOption, b: TChainOption) => {
-  if (a.testnet === b.testnet) {
-    return Number(a.value) - Number(b.value);
-  }
-
-  return a.testnet - b.testnet;
-};
-
-const ChainOptions: TChainOption[] = [...SupportedChains]
-  .map((chain) => ({
-    value: chain,
-    label: getChainConfig(chain).name,
-    testnet: getChainConfig(chain).testnet ? 1 : 0,
-  }))
-  .sort(compareItems);
-
-type TProps = TValueInput<Chain> & {};
+type TProps = TValueInput<TChainId> & {};
 
 export const ChainSelect = ({ value, onChange }: TProps) => {
-  const options = ChainOptions.filter(({ testnet }) => !testnet);
-  const testnetOptions = ChainOptions.filter(({ testnet }) => testnet);
+  const list = useChainListSafe();
+
+  const chainOptions: TChainOption[] = useMemo(() => {
+    return list.map((item) => ({ value: item.chainId, label: item.name }));
+  }, [list]);
 
   return (
     <Select
+      key={value}
+      showSearch
       style={{ width: "100%" }}
       defaultValue={value}
       onChange={onChange}
-      options={[...options, { label: "Testnets", options: testnetOptions }]}
+      options={chainOptions}
+      optionFilterProp="label"
     />
   );
 };

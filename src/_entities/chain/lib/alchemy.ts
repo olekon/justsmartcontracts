@@ -1,0 +1,46 @@
+import { TChain } from "../model/types";
+
+const alchemyUrls: Map<number, string> = new Map([
+  [1, "https://eth-mainnet.g.alchemy.com/v2"],
+  [11155111, "https://eth-sepolia.g.alchemy.com/v2"],
+  [17000, "https://eth-holesky.g.alchemy.com/v2"],
+  [10, "https://opt-mainnet.g.alchemy.com/v2"],
+  [11155420, "https://opt-sepolia.g.alchemy.com/v2"],
+  [42170, "https://arbnova-mainnet.g.alchemy.com/v2"],
+  [1101, "https://polygonzkevm-mainnet.g.alchemy.com/v2"],
+  [2424, "https://polygonzkevm-cardona.g.alchemy.com/v2"],
+  [250, "https://fantom-mainnet.g.alchemy.com/v2"],
+  [4002, "https://fantom-testnet.g.alchemy.com/v2"],
+  [80084, "https://berachain-bartio.g.alchemy.com/v2"],
+  [59144, "https://linea-mainnet.g.alchemy.com/v2"],
+  [59141, "https://linea-sepolia.g.alchemy.com/v2"],
+  [8008, "https://polynomial-mainnet.g.alchemy.com/v2"],
+  [80008, "https://polynomial-sepolia.g.alchemy.com/v2"],
+  [534352, "https://scroll-mainnet.g.alchemy.com/v2"],
+  [534351, "https://scroll-sepolia.g.alchemy.com/v2"],
+  [252, "https://frax-mainnet.g.alchemy.com/v2"],
+  [2522, "https://frax-sepolia.g.alchemy.com/v2"],
+  [4157, "https://crossfi-testnet.g.alchemy.com/v2"],
+  [11011, "https://shape-sepolia.g.alchemy.com/v2"],
+  [300, "https://zksync-sepolia.g.alchemy.com/v2"],
+  [324, "https://zksync-mainnet.g.alchemy.com/v2"],
+  [137, "https://polygon-mainnet.g.alchemy.com/v2"],
+  [80002, "https://polygon-amoy.g.alchemy.com/v2"],
+  [42161, "https://arb-mainnet.g.alchemy.com/v2"],
+  [421614, "https://arb-sepolia.g.alchemy.com/v2"],
+  [592, "https://astar-mainnet.g.alchemy.com/v2"],
+  [7000, "https://zetachain-mainnet.g.alchemy.com/v2"],
+  [7001, "https://zetachain-testnet.g.alchemy.com/v2"],
+  [5000, "https://mantle-mainnet.g.alchemy.com/v2"],
+  [81457, "https://blast-mainnet.g.alchemy.com/v2"],
+  [168587773, "https://blast-sepolia.g.alchemy.com/v2"],
+  [7777777, "https://zora-mainnet.g.alchemy.com/v2"],
+  [999999999, "https://zora-sepolia.g.alchemy.com/v2"],
+  [8453, "https://base-mainnet.g.alchemy.com/v2"],
+  [84532, "https://base-sepolia.g.alchemy.com/v2"],
+  [545, "https://flow-testnet.g.alchemy.com/v2"],
+]);
+
+export const getAlchemyUrl = (chainId: number): string | null => {
+  return alchemyUrls.get(chainId) || null;
+};

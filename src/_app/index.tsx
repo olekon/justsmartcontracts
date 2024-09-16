@@ -2,11 +2,10 @@ import dynamic from "next/dynamic";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { ErrorBoundary } from "react-error-boundary";
-import { Web3Provider } from "@shared/lib/web3";
 import { ErrorPage } from "@pages/error";
 import { Layout } from "@widgets/layout";
-import { chainModel } from "@entities/chain";
 import { NotificationsProvider } from "@shared/lib/notify";
+import { Web3LoadingGuard } from "./Web3LoadingGuard";
 
 export const metadata = {
   title: "JustSmartContracts",
@@ -14,8 +13,6 @@ export const metadata = {
 };
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const { chain } = chainModel.useCurrentChain();
-
   return (
     <>
       <Head>
@@ -23,13 +20,13 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta name="description" content={metadata.description} />
       </Head>
       <ErrorBoundary fallback={<ErrorPage />}>
-        <Web3Provider chain={chain}>
+        <Web3LoadingGuard>
           <NotificationsProvider>
             <Layout>
               <Component {...pageProps} />
             </Layout>
           </NotificationsProvider>
-        </Web3Provider>
+        </Web3LoadingGuard>
       </ErrorBoundary>
     </>
   );

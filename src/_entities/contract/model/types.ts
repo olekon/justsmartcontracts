@@ -6,7 +6,7 @@ import type {
   AbiConstructor as ViemAbiConstructor,
   AbiFunction as ViemAbiFunction,
 } from "abitype";
-import { Chain, TAddress } from "@shared/lib/web3";
+import { TChainId, TAddress } from "@shared/lib/web3";
 
 export type TAbiConstructor = ViemAbiConstructor;
 export type TAbiEvent = ViemAbiEvent;
@@ -20,7 +20,7 @@ export type TEventLogs = GetLogsReturnType<ViemAbiEvent>;
 
 export type TContract = {
   id: TUid;
-  chain: Chain;
+  chain: TChainId;
   address: TAddress;
   name: string;
   abi: TAbiItem[];

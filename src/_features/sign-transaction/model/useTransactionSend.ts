@@ -2,7 +2,7 @@ import { TTransactionParams, stringToNative } from "@shared/lib/tx";
 import { useCallback, useState } from "react";
 import { useSendTransaction } from "wagmi";
 import { sendTransaction } from "@wagmi/core";
-import { Chain, THexString } from "@shared/lib/web3";
+import { TChainId, THexString } from "@shared/lib/web3";
 import { walletModel } from "@entities/wallet";
 
 import { useWatchTxNotification } from "./useTxNotification";
@@ -26,7 +26,7 @@ export const usePrepareTransactionSend = (tx?: TTransactionParams) => {
   };
 };
 
-export const useTransactionSend = (chain: Chain) => {
+export const useTransactionSend = (chain: TChainId) => {
   const [txHash, setTxHash] = useState("");
 
   const switchChain = walletModel.useSwitchWalletChain(chain);
